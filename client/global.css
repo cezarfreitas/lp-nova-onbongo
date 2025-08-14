@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Definir fontes locais com font-display */
+@font-face {
+  font-family: 'Inter-fallback';
+  src: local('Inter'), local('system-ui'), local('-apple-system');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Oswald-fallback';
+  src: local('Oswald'), local('Impact'), local('Arial Black');
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -18,6 +31,8 @@
     margin: 0;
     font-family:
       "Inter",
+      "Inter-fallback",
+      system-ui,
       -apple-system,
       BlinkMacSystemFont,
       "Segoe UI",
@@ -35,18 +50,26 @@
       "liga" 1,
       "kern" 1;
     text-rendering: optimizeLegibility;
+    font-display: swap;
   }
 
-  /* Enhanced text rendering */
+  /* Enhanced text rendering com fallbacks */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
+    font-family: 
+      "Oswald",
+      "Oswald-fallback", 
+      Impact,
+      "Arial Black",
+      sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-display: swap;
   }
 }
 
@@ -62,4 +85,24 @@
   .text-shadow-lg {
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
+
+  /* Utility para controle de font loading */
+  .font-loading * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Loading animation suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fonts-loaded body {
+  animation: fadeIn 0.3s ease-in-out;
 }
