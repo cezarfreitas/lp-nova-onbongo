@@ -121,10 +121,11 @@ class WebhookService {
       });
 
       // Salvar log de erro
+      const errorConfig = await this.getConfig();
       statements.insertWebhookLog.run(
         lead.id,
-        this.getConfig().endpoint,
-        this.getConfig().method,
+        errorConfig.endpoint,
+        errorConfig.method,
         JSON.stringify(this.formatLeadData(lead)),
         error.response?.status || null,
         error.response?.data ? JSON.stringify(error.response.data) : null,
@@ -180,7 +181,7 @@ class WebhookService {
         }
       };
 
-      console.log(`��� Testando webhook: ${config.endpoint}`);
+      console.log(`🧪 Testando webhook: ${config.endpoint}`);
 
       const response = await axios({
         method: config.method as any,
