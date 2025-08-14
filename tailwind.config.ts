@@ -32,7 +32,7 @@ export default {
         light: "#ffffff",
 
         // 3. Laranja - accent, CTAs, marca
-        accent: "#ff6b35",
+        accent: "#FF6B00",
 
         // 4. Cinza - texto secundário, elementos muted
         muted: "#6b7280",
@@ -57,13 +57,13 @@ export default {
         },
       },
       fontWeight: {
-        black: "900",
+        'black': '900',
       },
       dropShadow: {
-        text: "0 2px 4px rgba(0, 0, 0, 0.8)",
-        "text-lg": "0 4px 8px rgba(0, 0, 0, 0.8)",
-        "text-xl": "0 8px 16px rgba(0, 0, 0, 0.8)",
-      },
+        'text': '0 2px 4px rgba(0, 0, 0, 0.8)',
+        'text-lg': '0 4px 8px rgba(0, 0, 0, 0.8)',
+        'text-xl': '0 8px 16px rgba(0, 0, 0, 0.8)',
+      }
     },
   },
   plugins: [],
