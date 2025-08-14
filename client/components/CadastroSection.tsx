@@ -18,7 +18,7 @@ export default function CadastroSection() {
   const [formData, setFormData] = useState<FormData>({
     nomeCompleto: "",
     whatsapp: "",
-    tipoCadastro: "lojista",
+    tipoCadastro: "" as any,
     cnpj: "",
   });
 
