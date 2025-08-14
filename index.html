@@ -3,73 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
     <!-- SEO Básico -->
-    <title>
-      ONBONGO - Seja um Lojista Oficial | Maior Marca de Streetwear do Brasil
-    </title>
-    <meta
-      name="description"
-      content="Torne-se um lojista oficial ONBONGO e venda uma das maiores marcas de streetwear do Brasil. Acesso exclusivo à plataforma digital com preços especiais para lojistas."
-    />
-    <meta
-      name="keywords"
-      content="ONBONGO, lojista oficial, streetwear, marca brasileira, revenda, roupas urbanas, moda masculina, surf wear"
-    />
+    <title>ONBONGO - Seja um Lojista Oficial | Maior Marca de Streetwear do Brasil</title>
+    <meta name="description" content="Torne-se um lojista oficial ONBONGO e venda uma das maiores marcas de streetwear do Brasil. Acesso exclusivo à plataforma digital com preços especiais para lojistas." />
+    <meta name="keywords" content="ONBONGO, lojista oficial, streetwear, marca brasileira, revenda, roupas urbanas, moda masculina, surf wear" />
     <meta name="author" content="ONBONGO" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://lojista.onbongo.com.br" />
-
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lojista.onbongo.com.br" />
-    <meta
-      property="og:title"
-      content="ONBONGO - Seja um Lojista Oficial | Maior Marca de Streetwear do Brasil"
-    />
-    <meta
-      property="og:description"
-      content="Torne-se um lojista oficial ONBONGO e venda uma das maiores marcas de streetwear do Brasil. Acesso exclusivo à plataforma digital com preços especiais para lojistas."
-    />
-    <meta
-      property="og:image"
-      content="https://lojista.onbongo.com.br/og-image.jpg"
-    />
+    <meta property="og:title" content="ONBONGO - Seja um Lojista Oficial | Maior Marca de Streetwear do Brasil" />
+    <meta property="og:description" content="Torne-se um lojista oficial ONBONGO e venda uma das maiores marcas de streetwear do Brasil. Acesso exclusivo à plataforma digital com preços especiais para lojistas." />
+    <meta property="og:image" content="https://lojista.onbongo.com.br/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="ONBONGO Lojistas" />
-
+    
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://lojista.onbongo.com.br" />
     <meta name="twitter:title" content="ONBONGO - Seja um Lojista Oficial" />
-    <meta
-      name="twitter:description"
-      content="Torne-se um lojista oficial ONBONGO e venda uma das maiores marcas de streetwear do Brasil."
-    />
-    <meta
-      name="twitter:image"
-      content="https://lojista.onbongo.com.br/og-image.jpg"
-    />
-
+    <meta name="twitter:description" content="Torne-se um lojista oficial ONBONGO e venda uma das maiores marcas de streetwear do Brasil." />
+    <meta name="twitter:image" content="https://lojista.onbongo.com.br/og-image.jpg" />
+    
     <!-- Favicon otimizado -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#ff6b35" />
-
+    <meta name="theme-color" content="#FF6B00" />
+    
     <!-- Performance: DNS Prefetch -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="dns-prefetch" href="https://cdn.builder.io" />
-
+    
     <!-- Performance: Preconnect para fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
+    
     <!-- Performance: Preload fontes críticas -->
     <link
       rel="preload"
@@ -77,7 +54,7 @@
       as="style"
       onload="this.onload=null;this.rel='stylesheet'"
     />
-
+    
     <!-- Performance: Preload imagem hero -->
     <link
       rel="preload"
@@ -85,7 +62,7 @@
       as="image"
       type="image/webp"
     />
-
+    
     <!-- Fallback para fontes -->
     <noscript>
       <link
@@ -112,22 +89,22 @@
         color: #fff;
         overflow-x: hidden;
       }
-
+      
       /* Evitar layout shift */
       #root {
         min-height: 100vh;
         background-color: #000;
       }
-
+      
       /* Loading states */
       .font-loading body {
         visibility: hidden;
       }
-
+      
       .fonts-loaded body {
         visibility: visible;
       }
-
+      
       /* Performance: will-change para elementos animados */
       .hero-button {
         will-change: transform;
@@ -137,8 +114,8 @@
     <!-- Performance: Font loading otimizado -->
     <script>
       // Performance timing
-      performance.mark("font-load-start");
-
+      performance.mark('font-load-start');
+      
       document.documentElement.classList.add("font-loading");
 
       if ("fonts" in document) {
@@ -148,12 +125,8 @@
         ]).then(() => {
           document.documentElement.classList.remove("font-loading");
           document.documentElement.classList.add("fonts-loaded");
-          performance.mark("font-load-end");
-          performance.measure(
-            "font-load-duration",
-            "font-load-start",
-            "font-load-end",
-          );
+          performance.mark('font-load-end');
+          performance.measure('font-load-duration', 'font-load-start', 'font-load-end');
         });
       } else {
         // Fallback para navegadores antigos
@@ -163,26 +136,26 @@
         }, 2000);
       }
     </script>
-
+    
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "ONBONGO",
-        "url": "https://lojista.onbongo.com.br",
-        "logo": "https://lojista.onbongo.com.br/logo.svg",
-        "description": "Maior marca de streetwear do Brasil oferecendo programa oficial para lojistas",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "customer service",
-          "availableLanguage": "Portuguese"
-        },
-        "sameAs": [
-          "https://www.instagram.com/onbongo",
-          "https://www.facebook.com/onbongo"
-        ]
-      }
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ONBONGO",
+      "url": "https://lojista.onbongo.com.br",
+      "logo": "https://lojista.onbongo.com.br/logo.svg",
+      "description": "Maior marca de streetwear do Brasil oferecendo programa oficial para lojistas",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": "Portuguese"
+      },
+      "sameAs": [
+        "https://www.instagram.com/onbongo",
+        "https://www.facebook.com/onbongo"
+      ]
+    }
     </script>
   </head>
   <body>
