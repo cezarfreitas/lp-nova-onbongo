@@ -64,5 +64,9 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Rotas da aplicação
+  app.use("/api/leads", leadsRouter);
+  app.use("/api/admin", adminRouter);
+
   return app;
 }
