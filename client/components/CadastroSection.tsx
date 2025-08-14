@@ -578,17 +578,6 @@ export default function CadastroSection() {
                 )}
               </form>
 
-              {/* Termos - sempre visível */}
-              <p className="text-light/70 text-xs text-center leading-relaxed mt-4">
-                Ao se cadastrar, você concorda com nossos{" "}
-                <a href="/termos" className="underline hover:text-light">
-                  Termos de Uso
-                </a>{" "}
-                e{" "}
-                <a href="/privacidade" className="underline hover:text-light">
-                  Política de Privacidade
-                </a>
-              </p>
             </div>
           </div>
         </div>
