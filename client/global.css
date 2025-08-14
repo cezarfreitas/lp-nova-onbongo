@@ -16,10 +16,12 @@
 }
 
 @layer base {
+  /* Sistema de 4 cores CSS variables */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    --color-dark: #000000;
+    --color-light: #ffffff;
+    --color-accent: #ff6b35;
+    --color-muted: #6b7280;
   }
 
   * {
@@ -27,8 +29,9 @@
   }
 
   body {
-    @apply bg-background text-foreground;
     margin: 0;
+    background-color: var(--color-light);
+    color: var(--color-dark);
     font-family:
       "Inter",
       "Inter-fallback",
