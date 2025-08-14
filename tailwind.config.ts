@@ -23,18 +23,24 @@ export default {
           "sans-serif",
         ],
       },
+      // Sistema de 4 cores padrão
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        orange: {
-          500: "#ff6b35",
-          600: "#e55a2e",
-        },
+        // 1. Preto - backgrounds, overlay
+        dark: "#000000",
+        
+        // 2. Branco - texto principal, elementos claros
+        light: "#ffffff",
+        
+        // 3. Laranja - accent, CTAs, marca
+        accent: "#ff6b35",
+        
+        // 4. Cinza - texto secundário, elementos muted
+        muted: "#6b7280",
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "8px",
+        md: "6px",
+        sm: "4px",
       },
       letterSpacing: {
         "extra-wide": "0.2em",
