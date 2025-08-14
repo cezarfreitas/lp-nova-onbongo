@@ -234,6 +234,8 @@ export default function CadastroSection() {
         tracking: trackingData
       };
 
+      console.log('📤 Enviando payload:', JSON.stringify(payload, null, 2));
+
       // Enviar para API
       const response = await fetch('/api/leads', {
         method: 'POST',
