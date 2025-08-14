@@ -204,7 +204,7 @@ export default function CadastroSection() {
           <div className="bg-accent/20 p-3 rounded-lg">
             <p className="text-light/70 text-xs">
               {formData.tipoCadastro === "lojista" 
-                ? "⏱️ Resposta em até 2 horas úteis"
+                ? "⏱�� Resposta em até 2 horas úteis"
                 : "🎁 Use o código: ONBONGO10"
               }
             </p>
@@ -441,7 +441,7 @@ export default function CadastroSection() {
                         onClick={handleNextStep}
                         className="flex-2 bg-dark hover:bg-dark/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm"
                       >
-                        Próximo →
+                        Avançar para Finalizar →
                       </button>
                     </div>
                   </div>
