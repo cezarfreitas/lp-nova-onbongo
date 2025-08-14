@@ -54,6 +54,8 @@
       "kern" 1;
     text-rendering: optimizeLegibility;
     font-display: swap;
+    /* Performance: prevenir horizontal scroll */
+    overflow-x: hidden;
   }
 
   /* Enhanced text rendering com fallbacks */
@@ -68,6 +70,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-display: swap;
+  }
+
+  /* Performance: otimizar imagens */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Performance: otimizar videos */
+  video {
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -84,10 +99,28 @@
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
+  /* Performance: GPU acceleration para elementos animados */
+  .hero-button {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
   /* Utility para controle de font loading */
   .font-loading * {
     animation: none !important;
     transition: none !important;
+  }
+
+  /* Performance: reduce motion para acessibilidade */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
@@ -103,4 +136,11 @@
 
 .fonts-loaded body {
   animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Performance: Critical CSS para above-the-fold */
+@media (min-width: 768px) {
+  .hero-content {
+    contain: layout style paint;
+  }
 }
