@@ -14,10 +14,10 @@ interface ConversionConfig {
 }
 
 class ConversionsService {
-  private getConfig(): ConversionConfig {
+  private async getConfig(): Promise<ConversionConfig> {
     const keys = [
       'meta_pixel_id',
-      'meta_access_token', 
+      'meta_access_token',
       'meta_test_event_code',
       'tiktok_pixel_id',
       'tiktok_access_token',
@@ -26,9 +26,9 @@ class ConversionsService {
     ];
 
     const config: ConversionConfig = {};
-    
+
     for (const key of keys) {
-      const setting = statements.getSetting.get(key);
+      const setting = await statements.getSetting.get(key);
       if (setting && setting.value) {
         config[key as keyof ConversionConfig] = setting.value;
       }
