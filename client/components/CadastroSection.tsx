@@ -121,8 +121,10 @@ export default function CadastroSection() {
     if (currentStep === 1 && validateStep1()) {
       setCurrentStep(2);
     } else if (currentStep === 2) {
-      // Sempre avança da etapa 2 para 3, independente do tipo
-      setCurrentStep(3);
+      // Validar se um tipo foi selecionado
+      if (formData.tipoCadastro) {
+        setCurrentStep(3);
+      }
     }
   };
 
