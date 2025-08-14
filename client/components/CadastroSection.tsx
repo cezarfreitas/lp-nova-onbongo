@@ -168,10 +168,18 @@ export default function CadastroSection() {
       ...prev,
       tipoCadastro: tipo,
     }));
-    
+
+    // Track tipo selecionado
+    trackEvent.all('lead_type_selected', {
+      event_category: 'engagement',
+      lead_type: tipo,
+      step: 2
+    });
+
     // Avançar automaticamente para a próxima etapa
     setTimeout(() => {
       setCurrentStep(3);
+      conversionEvents.formStep(3);
     }, 300); // Pequeno delay para mostrar a seleção
   };
 
