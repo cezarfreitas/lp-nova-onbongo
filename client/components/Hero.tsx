@@ -3,7 +3,7 @@ export default function Hero() {
     <section 
       className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
       style={{
-        backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2F1f3eb1c3a8294b5c80dc9e6a9c631a47?format=webp&width=1920')`,
+        backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2F42ac2ec840624b249706d0cad3540fd8?format=webp&width=1920')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
