@@ -1,9 +1,13 @@
 import Hero from "@/components/Hero";
+import SEO from "@/components/SEO";
 
 export default function Index() {
   return (
-    <div className="min-h-screen">
-      <Hero />
-    </div>
+    <>
+      <SEO />
+      <main className="min-h-screen">
+        <Hero />
+      </main>
+    </>
   );
 }
