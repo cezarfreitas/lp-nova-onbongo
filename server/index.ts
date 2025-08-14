@@ -2,21 +2,9 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
-import { initDatabase } from "./database/index.js";
-import leadsRouter from "./routes/leads.js";
-import adminRouter from "./routes/admin.js";
-import trackingRouter from "./routes/tracking.js";
 
 export function createServer() {
   const app = express();
-
-  // Inicializar banco de dados
-  try {
-    initDatabase();
-    console.log('✅ Banco de dados inicializado com sucesso');
-  } catch (error) {
-    console.error('❌ Erro ao inicializar banco de dados:', error);
-  }
 
   // Cache headers para assets estáticos
   app.use((req, res, next) => {
@@ -42,12 +30,6 @@ export function createServer() {
   app.use(express.json({ limit: "10mb" }));
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-  // Compression middleware em produção
-  if (process.env.NODE_ENV === "production") {
-    // Note: compression seria adicionado aqui se necessário
-    // app.use(compression());
-  }
-
   // Health check
   app.get("/health", (_req, res) => {
     res.status(200).json({
@@ -64,11 +46,6 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
-
-  // Rotas da aplicação
-  app.use("/api/leads", leadsRouter);
-  app.use("/api/admin", adminRouter);
-  app.use("/api/tracking", trackingRouter);
 
   return app;
 }
