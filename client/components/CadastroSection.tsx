@@ -115,7 +115,7 @@ export default function CadastroSection() {
       ...prev,
       tipoCadastro: tipo,
     }));
-
+    
     // Avançar automaticamente para a próxima etapa
     setTimeout(() => {
       setCurrentStep(3);
@@ -125,11 +125,6 @@ export default function CadastroSection() {
   const handleNextStep = () => {
     if (currentStep === 1 && validateStep1()) {
       setCurrentStep(2);
-    } else if (currentStep === 2) {
-      // Validar se um tipo foi selecionado
-      if (formData.tipoCadastro) {
-        setCurrentStep(3);
-      }
     }
   };
 
@@ -171,23 +166,22 @@ export default function CadastroSection() {
     }
   };
 
-
   if (isSubmitted) {
     return (
-      <section className="bg-dark py-16 px-4 flex items-center justify-center">
-        <div className="text-center text-light max-w-sm">
+      <section className="bg-accent py-16 px-4 flex items-center justify-center">
+        <div className="text-center text-dark max-w-sm">
           <div className="text-5xl mb-4">🎉</div>
-          <h2 className="font-display text-2xl font-bold text-accent mb-3">
+          <h2 className="font-display text-2xl font-bold text-dark mb-3">
             {formData.tipoCadastro === "lojista" ? "Cadastro Realizado!" : "Cupom Gerado!"}
           </h2>
-          <p className="text-light/80 mb-4 text-sm">
+          <p className="text-dark/80 mb-4 text-sm">
             {formData.tipoCadastro === "lojista" 
               ? "Nossa equipe entrará em contato via WhatsApp em breve."
               : "Seu cupom de 10% foi gerado com sucesso!"
             }
           </p>
-          <div className="bg-accent/20 p-3 rounded-lg">
-            <p className="text-light/70 text-xs">
+          <div className="bg-dark/20 p-3 rounded-lg">
+            <p className="text-dark/70 text-xs">
               {formData.tipoCadastro === "lojista" 
                 ? "⏱️ Resposta em até 2 horas úteis"
                 : "🎁 Use o código: ONBONGO10"
@@ -200,20 +194,20 @@ export default function CadastroSection() {
   }
 
   return (
-    <section className="bg-dark py-16 px-4">
+    <section className="bg-accent py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
-          {/* Lado Esquerdo - Benefícios */}
-          <div className="text-light">
+          {/* Lado Esquerdo - Título */}
+          <div className="text-dark">
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-              <span className="text-light">SEJA UM</span>
+              <span className="text-dark">SEJA UM</span>
               <br />
-              <span className="text-accent">LOJISTA OFICIAL</span>
+              <span className="text-light">LOJISTA OFICIAL</span>
               <br />
-              <span className="text-light">ONBONGO</span>
+              <span className="text-dark">ONBONGO</span>
             </h2>
 
-            <p className="text-light/80 text-base leading-relaxed">
+            <p className="text-dark/80 text-base leading-relaxed">
               Junte-se aos melhores lojistas do Brasil e tenha acesso exclusivo
               aos produtos da marca líder em streetwear.
             </p>
@@ -221,7 +215,7 @@ export default function CadastroSection() {
 
           {/* Lado Direito - Formulário */}
           <div className="lg:pl-6">
-            <div className="bg-accent rounded-2xl p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl">
+            <div className="bg-dark rounded-2xl p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl">
               {/* Header do formulário */}
               <div className="text-center mb-6">
                 <h3 className="text-light font-bold text-xl mb-1">
@@ -251,11 +245,11 @@ export default function CadastroSection() {
                         value={formData.nomeCompleto}
                         onChange={handleInputChange}
                         placeholder="Seu nome completo"
-                        className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-dark text-sm"
+                        className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
                         autoFocus
                       />
                       {errors.nomeCompleto && (
-                        <p className="text-red-200 text-xs mt-1">
+                        <p className="text-red-300 text-xs mt-1">
                           {errors.nomeCompleto}
                         </p>
                       )}
@@ -276,10 +270,10 @@ export default function CadastroSection() {
                         value={formData.whatsapp}
                         onChange={handleInputChange}
                         placeholder="(11) 99999-9999"
-                        className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-dark text-sm"
+                        className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
                       />
                       {errors.whatsapp && (
-                        <p className="text-red-200 text-xs mt-1">
+                        <p className="text-red-300 text-xs mt-1">
                           {errors.whatsapp}
                         </p>
                       )}
@@ -289,7 +283,7 @@ export default function CadastroSection() {
                     <button
                       type="button"
                       onClick={handleNextStep}
-                      className="w-full bg-dark hover:bg-dark/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm mt-6"
+                      className="w-full bg-accent hover:bg-accent/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm mt-6"
                     >
                       Próximo →
                     </button>
@@ -309,8 +303,8 @@ export default function CadastroSection() {
                           <div
                             className={`p-3 rounded-xl transition-all duration-300 ${
                               formData.tipoCadastro === "lojista"
-                                ? "bg-dark/30 border border-light/20"
-                                : "bg-dark/20 border border-transparent hover:bg-dark/25"
+                                ? "bg-accent/30 border border-light/20"
+                                : "bg-accent/20 border border-transparent hover:bg-accent/25"
                             }`}
                           >
                             <div className="flex items-center">
@@ -331,7 +325,7 @@ export default function CadastroSection() {
                                   }`}
                                 >
                                   {formData.tipoCadastro === "lojista" && (
-                                    <div className="w-full h-full rounded-full bg-accent scale-50"></div>
+                                    <div className="w-full h-full rounded-full bg-dark scale-50"></div>
                                   )}
                                 </div>
                               </div>
@@ -351,8 +345,8 @@ export default function CadastroSection() {
                           <div
                             className={`p-3 rounded-xl transition-all duration-300 ${
                               formData.tipoCadastro === "consumidor"
-                                ? "bg-dark/30 border border-light/20"
-                                : "bg-dark/20 border border-transparent hover:bg-dark/25"
+                                ? "bg-accent/30 border border-light/20"
+                                : "bg-accent/20 border border-transparent hover:bg-accent/25"
                             }`}
                           >
                             <div className="flex items-center">
@@ -373,7 +367,7 @@ export default function CadastroSection() {
                                   }`}
                                 >
                                   {formData.tipoCadastro === "consumidor" && (
-                                    <div className="w-full h-full rounded-full bg-accent scale-50"></div>
+                                    <div className="w-full h-full rounded-full bg-dark scale-50"></div>
                                   )}
                                 </div>
                               </div>
@@ -396,7 +390,7 @@ export default function CadastroSection() {
                       <button
                         type="button"
                         onClick={handlePrevStep}
-                        className="bg-dark/50 hover:bg-dark/70 text-light font-medium py-3 px-6 rounded-xl transition-all duration-300 text-sm"
+                        className="bg-accent/50 hover:bg-accent/70 text-light font-medium py-3 px-6 rounded-xl transition-all duration-300 text-sm"
                       >
                         ← Voltar
                       </button>
@@ -424,11 +418,11 @@ export default function CadastroSection() {
                             value={formData.cnpj}
                             onChange={handleInputChange}
                             placeholder="00.000.000/0001-00"
-                            className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-dark text-sm"
+                            className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
                             autoFocus
                           />
                           {errors.cnpj && (
-                            <p className="text-red-200 text-xs mt-1">
+                            <p className="text-red-300 text-xs mt-1">
                               {errors.cnpj}
                             </p>
                           )}
@@ -439,14 +433,14 @@ export default function CadastroSection() {
                           <button
                             type="button"
                             onClick={handlePrevStep}
-                            className="flex-1 bg-dark/50 hover:bg-dark/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
+                            className="flex-1 bg-accent/50 hover:bg-accent/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                           >
                             ← Voltar
                           </button>
                           <button
                             type="submit"
                             disabled={isLoading}
-                            className="flex-2 bg-dark hover:bg-dark/90 disabled:bg-dark/50 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 text-sm"
+                            className="flex-2 bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 text-sm"
                           >
                             {isLoading ? (
                               <>
@@ -472,8 +466,8 @@ export default function CadastroSection() {
                           <p className="text-light/80 text-xs mb-3">
                             <strong>Ganhe 10% OFF no site oficial!</strong>
                           </p>
-
-                          <div className="bg-dark/30 p-3 rounded-xl mb-3">
+                          
+                          <div className="bg-accent/30 p-3 rounded-xl mb-3">
                             <div className="bg-light text-dark px-2 py-2 rounded-lg font-mono text-sm font-bold">
                               ONBONGO10
                             </div>
@@ -485,7 +479,7 @@ export default function CadastroSection() {
                           <button
                             type="button"
                             onClick={handlePrevStep}
-                            className="flex-1 bg-dark/50 hover:bg-dark/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
+                            className="flex-1 bg-accent/50 hover:bg-accent/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                           >
                             ← Voltar
                           </button>
@@ -495,7 +489,7 @@ export default function CadastroSection() {
                               window.open('https://www.onbongo.com.br', '_blank');
                               handleSubmit(new Event('submit') as any);
                             }}
-                            className="flex-2 bg-dark hover:bg-dark/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm"
+                            className="flex-2 bg-accent hover:bg-accent/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm"
                           >
                             🛒 Ir para Site Oficial
                           </button>
