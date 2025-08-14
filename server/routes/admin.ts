@@ -301,4 +301,91 @@ router.get('/dashboard', authenticateToken, (req, res) => {
   }
 });
 
+// POST /api/admin/webhook/test - Testar configuração do webhook
+router.post('/webhook/test', authenticateToken, async (req, res) => {
+  try {
+    const result = await webhookService.testWebhook();
+
+    res.json({
+      success: result.success,
+      data: result.response,
+      message: result.success ? 'Webhook testado com sucesso' : 'Falha no teste do webhook',
+      error: result.error
+    } as ApiResponse);
+
+  } catch (error) {
+    console.error('Erro ao testar webhook:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro interno do servidor'
+    } as ApiResponse);
+  }
+});
+
+// POST /api/admin/webhook/retry/:leadId - Reenviar webhook para um lead
+router.post('/webhook/retry/:leadId', authenticateToken, async (req, res) => {
+  try {
+    const leadId = parseInt(req.params.leadId);
+
+    if (isNaN(leadId)) {
+      return res.status(400).json({
+        success: false,
+        error: 'ID do lead inválido'
+      } as ApiResponse);
+    }
+
+    const result = await webhookService.retryWebhook(leadId);
+
+    res.json({
+      success: result.success,
+      message: result.success ? 'Webhook reenviado com sucesso' : 'Falha ao reenviar webhook',
+      error: result.error
+    } as ApiResponse);
+
+  } catch (error) {
+    console.error('Erro ao reenviar webhook:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro interno do servidor'
+    } as ApiResponse);
+  }
+});
+
+// POST /api/admin/conversions/retry/:leadId - Reenviar conversões para um lead
+router.post('/conversions/retry/:leadId', authenticateToken, async (req, res) => {
+  try {
+    const leadId = parseInt(req.params.leadId);
+
+    if (isNaN(leadId)) {
+      return res.status(400).json({
+        success: false,
+        error: 'ID do lead inválido'
+      } as ApiResponse);
+    }
+
+    const lead = statements.getLeadById.get(leadId);
+
+    if (!lead) {
+      return res.status(404).json({
+        success: false,
+        error: 'Lead não encontrado'
+      } as ApiResponse);
+    }
+
+    await conversionsService.sendAllConversions(lead);
+
+    res.json({
+      success: true,
+      message: 'Conversões reenviadas com sucesso'
+    } as ApiResponse);
+
+  } catch (error) {
+    console.error('Erro ao reenviar conversões:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro interno do servidor'
+    } as ApiResponse);
+  }
+});
+
 export default router;
