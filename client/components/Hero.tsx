@@ -12,56 +12,63 @@ const Hero = memo(function Hero() {
       }}
     >
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-dark/60"></div>
+      <div className="absolute inset-0 bg-dark/70"></div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-light px-4 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center text-light px-4 max-w-6xl mx-auto">
         {/* Logo */}
-        <header className="mb-8">
-          <h1 className="text-2xl md:text-3xl font-display font-semibold tracking-wide text-light">
+        <header className="mb-6">
+          <h1 className="text-3xl md:text-4xl font-display font-bold tracking-super-wide text-light">
             ONBONGO
           </h1>
         </header>
 
         {/* Subtitle */}
-        <p className="text-sm md:text-base mb-10 text-light/90 max-w-3xl mx-auto font-normal leading-relaxed">
-          Aproveite a oportunidade de vender uma das maiores marcas do Brasil e
-          do mundo.
+        <p className="text-base md:text-lg mb-8 text-light/85 max-w-4xl mx-auto font-medium leading-relaxed tracking-wide">
+          Aproveite a oportunidade. Vender uma das maiores marcas do Brasil e do mundo.
         </p>
 
-        {/* Main heading */}
-        <h2 className="font-display font-bold mb-8 leading-tight">
-          <div className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-2 text-light">
+        {/* Main heading - Tipografia melhorada */}
+        <h2 className="font-display font-black mb-6 leading-none tracking-tight">
+          <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-1 text-light drop-shadow-lg">
             SEJA UM
           </div>
-          <div className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-2 text-light">
+          <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-1 text-light drop-shadow-lg">
             LOJISTA OFICIAL
           </div>
-          <div className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-accent">
+          <div 
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-accent drop-shadow-2xl"
+            style={{
+              textShadow: '0 4px 8px rgba(255, 107, 53, 0.3), 0 8px 16px rgba(0, 0, 0, 0.5)'
+            }}
+          >
             ONBONGO
           </div>
         </h2>
 
         {/* Description */}
-        <p className="text-base md:text-lg mb-10 text-light/90 max-w-2xl mx-auto leading-relaxed font-normal">
+        <p className="text-lg md:text-xl mb-10 text-light/90 max-w-3xl mx-auto leading-relaxed font-medium tracking-wide">
           Cadastre-se agora e tenha acesso à nossa plataforma digital com
           <br className="hidden md:block" />
           preços exclusivos para lojistas.
         </p>
 
-        {/* CTA Button - otimizado para performance */}
+        {/* CTA Button - melhorado */}
         <button
-          className="hero-button bg-accent hover:bg-accent/90 text-light font-bold px-8 py-4 rounded-lg text-base md:text-lg transition-all duration-300 mb-12 tracking-wide hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent/50"
+          className="hero-button bg-accent hover:bg-accent/90 text-light font-bold px-10 py-5 rounded-xl text-lg md:text-xl transition-all duration-300 mb-12 tracking-wide hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent/50 shadow-2xl"
           type="button"
           aria-label="Começar cadastro como lojista ONBONGO"
+          style={{
+            boxShadow: '0 8px 24px rgba(255, 107, 53, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2)'
+          }}
         >
           Começar Agora! →
         </button>
 
         {/* Bottom text */}
         <footer>
-          <p className="text-xs md:text-sm text-muted tracking-extra-wide font-medium uppercase">
-            Marca Líder em Streetwear
+          <p className="text-sm md:text-base text-light/60 tracking-super-wide font-bold uppercase">
+            MARCA LÍDER EM STREETWEAR
           </p>
         </footer>
       </div>
