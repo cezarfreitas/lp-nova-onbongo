@@ -3,6 +3,7 @@ import Gallery from "@/components/Gallery";
 import CadastroSection from "@/components/CadastroSection";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import TrackingScripts from "@/components/TrackingScripts";
 
 export default function Index() {
   return (
