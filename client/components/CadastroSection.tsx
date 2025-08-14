@@ -115,6 +115,11 @@ export default function CadastroSection() {
       ...prev,
       tipoCadastro: tipo,
     }));
+
+    // Avançar automaticamente para a próxima etapa
+    setTimeout(() => {
+      setCurrentStep(3);
+    }, 300); // Pequeno delay para mostrar a seleção
   };
 
   const handleNextStep = () => {
@@ -515,7 +520,7 @@ export default function CadastroSection() {
                       // Para Consumidores: Cupom
                       <>
                         <div className="text-center py-2">
-                          <div className="text-3xl mb-2">����</div>
+                          <div className="text-3xl mb-2">🎁</div>
                           <h4 className="text-light font-bold text-base mb-2">
                             Cadastro não disponível
                           </h4>
