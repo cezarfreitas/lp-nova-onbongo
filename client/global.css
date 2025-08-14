@@ -70,6 +70,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-display: swap;
+    font-weight: 900;
   }
 
   /* Performance: otimizar imagens */
@@ -99,6 +100,30 @@
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
+  /* Tipografia melhorada para Hero */
+  .text-hero-shadow {
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.8),
+      0 4px 8px rgba(0, 0, 0, 0.6),
+      0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-accent-glow {
+    text-shadow: 
+      0 0 10px rgba(255, 107, 53, 0.5),
+      0 4px 8px rgba(0, 0, 0, 0.8),
+      0 8px 16px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Tipografia ultra-bold para títulos */
+  .font-black {
+    font-weight: 900;
+  }
+
+  .font-ultra-black {
+    font-weight: 950;
+  }
+
   /* Performance: GPU acceleration para elementos animados */
   .hero-button {
     transform: translateZ(0);
@@ -115,6 +140,15 @@
   /* Animação fade-in para elementos dinâmicos */
   .animate-fade-in {
     animation: fadeIn 0.3s ease-in-out;
+  }
+
+  /* Text stroke para maior contraste */
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-stroke-heavy {
+    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.5);
   }
 
   /* Performance: reduce motion para acessibilidade */
@@ -147,5 +181,14 @@
 @media (min-width: 768px) {
   .hero-content {
     contain: layout style paint;
+  }
+}
+
+/* Melhorias específicas para a tipografia da Hero */
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: clamp(4rem, 8vw, 12rem);
+    line-height: 0.85;
+    font-weight: 900;
   }
 }
