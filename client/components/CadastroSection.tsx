@@ -154,7 +154,7 @@ export default function CadastroSection() {
         setFormData({
           nomeCompleto: "",
           whatsapp: "",
-          tipoCadastro: "lojista",
+          tipoCadastro: "" as any,
           cnpj: "",
         });
         setCurrentStep(1);
