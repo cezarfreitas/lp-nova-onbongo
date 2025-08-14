@@ -68,6 +68,7 @@ export function createServer() {
   // Rotas da aplicação
   app.use("/api/leads", leadsRouter);
   app.use("/api/admin", adminRouter);
+  app.use("/api/tracking", trackingRouter);
 
   return app;
 }
