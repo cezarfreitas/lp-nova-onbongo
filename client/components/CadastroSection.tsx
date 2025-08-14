@@ -27,7 +27,31 @@ export default function CadastroSection() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [browserId, setBrowserId] = useState('');
+  const [sessionId, setSessionId] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
+
+  // Gerar IDs únicos para tracking
+  useEffect(() => {
+    // Browser ID persistente
+    let savedBrowserId = localStorage.getItem('browser_id');
+    if (!savedBrowserId) {
+      savedBrowserId = `br_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem('browser_id', savedBrowserId);
+    }
+    setBrowserId(savedBrowserId);
+
+    // Session ID para esta sessão
+    let savedSessionId = sessionStorage.getItem('session_id');
+    if (!savedSessionId) {
+      savedSessionId = `ss_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      sessionStorage.setItem('session_id', savedSessionId);
+    }
+    setSessionId(savedSessionId);
+
+    // Track form start
+    conversionEvents.formStart();
+  }, []);
 
   // Auto-focus no primeiro campo ao mudar de etapa
   useEffect(() => {
