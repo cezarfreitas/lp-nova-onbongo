@@ -198,7 +198,7 @@ export default function CadastroSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Se for consumidor, não precisa validar CNPJ
     if (formData.tipoCadastro === "lojista" && !validateStep3()) {
       return;
@@ -207,25 +207,82 @@ export default function CadastroSection() {
     setIsLoading(true);
 
     try {
-      // Animação de sucesso
-      setIsSuccess(true);
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Dados do formulário:", formData);
-      setIsSubmitted(true);
+      // Coletar dados de tracking
+      const trackingData = {
+        utm_source: new URLSearchParams(window.location.search).get('utm_source'),
+        utm_medium: new URLSearchParams(window.location.search).get('utm_medium'),
+        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign'),
+        utm_content: new URLSearchParams(window.location.search).get('utm_content'),
+        utm_term: new URLSearchParams(window.location.search).get('utm_term'),
+        referrer: document.referrer,
+        browser_id: browserId,
+        session_id: sessionId
+      };
 
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setIsSuccess(false);
-        setFormData({
-          nomeCompleto: "",
-          whatsapp: "",
-          tipoCadastro: "" as any,
-          cnpj: "",
-        });
-        setCurrentStep(1);
-      }, 4000);
-    } catch (error) {
-      console.error("Erro ao enviar formulário:", error);
+      // Preparar payload para API
+      const payload = {
+        nome_completo: formData.nomeCompleto,
+        whatsapp: formData.whatsapp.replace(/\D/g, ''), // Apenas números
+        tipo_cadastro: formData.tipoCadastro,
+        cnpj: formData.cnpj ? formData.cnpj.replace(/\D/g, '') : undefined,
+        tracking: trackingData
+      };
+
+      // Enviar para API
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Track conversão com base no tipo
+        if (formData.tipoCadastro === 'lojista') {
+          conversionEvents.leadGenerated('lojista', 50);
+        } else {
+          conversionEvents.couponGenerated();
+        }
+
+        // Animação de sucesso
+        setIsSuccess(true);
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+
+        console.log("✅ Lead criado com sucesso:", result.data);
+        setIsSubmitted(true);
+
+        // Reset form após sucesso
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setIsSuccess(false);
+          setFormData({
+            nomeCompleto: "",
+            whatsapp: "",
+            tipoCadastro: "" as any,
+            cnpj: "",
+          });
+          setCurrentStep(1);
+
+          // Track form restart
+          conversionEvents.formStart();
+        }, 4000);
+      } else {
+        throw new Error(result.error || 'Erro ao enviar formulário');
+      }
+    } catch (error: any) {
+      console.error("❌ Erro ao enviar formulário:", error);
+
+      // Track erro
+      trackEvent.all('form_error', {
+        event_category: 'error',
+        error_message: error.message,
+        step: currentStep
+      });
+
+      alert('Erro ao enviar formulário. Tente novamente.');
     } finally {
       setIsLoading(false);
     }
