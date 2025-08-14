@@ -18,9 +18,14 @@ const Hero = memo(function Hero() {
       <div className="relative z-10 text-center text-light px-4 max-w-6xl mx-auto">
         {/* Logo */}
         <header className="mb-6">
-          <h1 className="text-3xl md:text-4xl font-display font-bold tracking-super-wide text-light">
-            ONBONGO
-          </h1>
+          <div className="flex justify-center">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fa5dd6bf9de864106927a6256e91b91e8?format=webp&width=800"
+              alt="ONBONGO Logo"
+              className="h-12 md:h-16 lg:h-20 w-auto drop-shadow-lg"
+              loading="eager"
+            />
+          </div>
         </header>
 
         {/* Subtitle */}
