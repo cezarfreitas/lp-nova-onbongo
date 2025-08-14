@@ -25,7 +25,8 @@ const Hero = memo(function Hero() {
 
         {/* Subtitle */}
         <p className="text-base md:text-lg mb-8 text-light/85 max-w-4xl mx-auto font-medium leading-relaxed tracking-wide">
-          Aproveite a oportunidade. Vender uma das maiores marcas do Brasil e do mundo.
+          Aproveite a oportunidade. Vender uma das maiores marcas do Brasil e do
+          mundo.
         </p>
 
         {/* Main heading - Tipografia melhorada */}
@@ -36,10 +37,11 @@ const Hero = memo(function Hero() {
           <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-1 text-light drop-shadow-lg">
             LOJISTA OFICIAL
           </div>
-          <div 
+          <div
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-accent drop-shadow-2xl"
             style={{
-              textShadow: '0 4px 8px rgba(255, 107, 53, 0.3), 0 8px 16px rgba(0, 0, 0, 0.5)'
+              textShadow:
+                "0 4px 8px rgba(255, 107, 53, 0.3), 0 8px 16px rgba(0, 0, 0, 0.5)",
             }}
           >
             ONBONGO
@@ -59,7 +61,8 @@ const Hero = memo(function Hero() {
           type="button"
           aria-label="Começar cadastro como lojista ONBONGO"
           style={{
-            boxShadow: '0 8px 24px rgba(255, 107, 53, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2)'
+            boxShadow:
+              "0 8px 24px rgba(255, 107, 53, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2)",
           }}
         >
           Começar Agora! →

@@ -102,14 +102,14 @@
 
   /* Tipografia melhorada para Hero */
   .text-hero-shadow {
-    text-shadow: 
+    text-shadow:
       0 2px 4px rgba(0, 0, 0, 0.8),
       0 4px 8px rgba(0, 0, 0, 0.6),
       0 8px 16px rgba(0, 0, 0, 0.4);
   }
 
   .text-accent-glow {
-    text-shadow: 
+    text-shadow:
       0 0 10px rgba(255, 107, 53, 0.5),
       0 4px 8px rgba(0, 0, 0, 0.8),
       0 8px 16px rgba(0, 0, 0, 0.6);
