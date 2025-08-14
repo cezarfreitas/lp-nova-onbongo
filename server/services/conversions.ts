@@ -47,7 +47,7 @@ class ConversionsService {
 
   async sendMetaConversion(lead: Lead): Promise<{ success: boolean; error?: string; response?: any }> {
     try {
-      const config = this.getConfig();
+      const config = await this.getConfig();
       
       if (!config.meta_pixel_id || !config.meta_access_token) {
         throw new Error('Meta Pixel ID ou Access Token não configurados');
