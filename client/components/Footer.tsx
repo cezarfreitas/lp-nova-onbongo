@@ -83,35 +83,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Links adicionais */}
-        <div className="mt-6 pt-6 border-t border-light/20">
-          <div className="flex flex-wrap justify-center gap-6 text-sm">
-            <a 
-              href="/termos" 
-              className="text-light/70 hover:text-accent transition-colors duration-300"
-            >
-              Termos de Uso
-            </a>
-            <a 
-              href="/privacidade" 
-              className="text-light/70 hover:text-accent transition-colors duration-300"
-            >
-              Política de Privacidade
-            </a>
-            <a 
-              href="/faq" 
-              className="text-light/70 hover:text-accent transition-colors duration-300"
-            >
-              FAQ
-            </a>
-            <a 
-              href="/contato" 
-              className="text-light/70 hover:text-accent transition-colors duration-300"
-            >
-              Contato
-            </a>
-          </div>
-        </div>
       </div>
     </footer>
   );
