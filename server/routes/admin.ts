@@ -142,9 +142,9 @@ router.get('/me', authenticateToken, async (req: any, res) => {
 });
 
 // GET /api/admin/settings - Listar todas as configurações
-router.get('/settings', authenticateToken, (req, res) => {
+router.get('/settings', authenticateToken, async (req, res) => {
   try {
-    const settings = statements.getAllSettings.all() as Setting[];
+    const settings = await statements.getAllSettings.all() as Setting[];
 
     res.json({
       success: true,
