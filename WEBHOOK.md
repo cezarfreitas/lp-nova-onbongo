@@ -161,11 +161,13 @@ echo json_encode([
 ## Testando o Webhook
 
 ### 1. Webhook.site (Teste Simples)
+Configure na plataforma:
 ```bash
 VITE_WEBHOOK_URL=https://webhook.site/seu-id-unico
 ```
 
 ### 2. RequestBin
+Configure na plataforma:
 ```bash
 VITE_WEBHOOK_URL=https://requestbin.com/seu-endpoint
 ```
@@ -175,7 +177,7 @@ VITE_WEBHOOK_URL=https://requestbin.com/seu-endpoint
 # Terminal 1
 ngrok http 3000
 
-# Terminal 2 (.env.local)
+# Na plataforma de desenvolvimento
 VITE_WEBHOOK_URL=https://abc123.ngrok.io/webhook/leads
 ```
 
