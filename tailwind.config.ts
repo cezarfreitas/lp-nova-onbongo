@@ -6,7 +6,7 @@ export default {
     extend: {
       fontFamily: {
         'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        'display': ['Bebas Neue', 'Impact', 'sans-serif'],
+        'display': ['Oswald', 'Impact', 'sans-serif'],
       },
       colors: {
         background: "hsl(var(--background))",
