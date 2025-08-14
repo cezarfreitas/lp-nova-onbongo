@@ -5,6 +5,7 @@ import { handleDemo } from "./routes/demo";
 import { initDatabase } from "./database/index.js";
 import leadsRouter from "./routes/leads.js";
 import adminRouter from "./routes/admin.js";
+import trackingRouter from "./routes/tracking.js";
 
 export function createServer() {
   const app = express();
