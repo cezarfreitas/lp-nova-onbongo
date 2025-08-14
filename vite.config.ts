@@ -31,13 +31,13 @@ function expressPlugin(): Plugin {
     apply: "serve", // Only apply during development (serve mode)
     configureServer(server) {
       // Only initialize server during dev mode
-      import("./server/index.ts").then(({ createServer }) => {
+      try {
         const app = createServer();
         server.middlewares.use(app);
         console.log("✅ Express server initialized in Vite dev mode");
-      }).catch(err => {
+      } catch (err: any) {
         console.warn("Failed to initialize Express server:", err.message);
-      });
+      }
     },
   };
 }
