@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from "react";
 
 const Hero = memo(function Hero() {
   return (
@@ -50,7 +50,7 @@ const Hero = memo(function Hero() {
         </p>
 
         {/* CTA Button - otimizado para performance */}
-        <button 
+        <button
           className="hero-button bg-accent hover:bg-accent/90 text-light font-bold px-8 py-4 rounded-lg text-base md:text-lg transition-all duration-300 mb-12 tracking-wide hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent/50"
           type="button"
           aria-label="Começar cadastro como lojista ONBONGO"
