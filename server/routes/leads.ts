@@ -151,10 +151,10 @@ router.get('/', async (req, res) => {
 });
 
 // GET /api/leads/:id - Buscar lead por ID
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    
+
     if (isNaN(id)) {
       return res.status(400).json({
         success: false,
@@ -162,7 +162,7 @@ router.get('/:id', (req, res) => {
       } as ApiResponse);
     }
 
-    const lead = statements.getLeadById.get(id) as Lead;
+    const lead = await statements.getLeadById.get(id) as Lead;
 
     if (!lead) {
       return res.status(404).json({
