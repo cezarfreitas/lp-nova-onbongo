@@ -174,7 +174,7 @@ export default function CadastroSection() {
 
   if (isSubmitted) {
     return (
-      <section className="min-h-screen bg-dark py-12 px-4 flex items-center justify-center">
+      <section className="bg-dark py-16 px-4 flex items-center justify-center">
         <div className="text-center text-light max-w-sm">
           <div className="text-5xl mb-4">🎉</div>
           <h2 className="font-display text-2xl font-bold text-accent mb-3">
