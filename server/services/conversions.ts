@@ -175,7 +175,7 @@ class ConversionsService {
 
   async sendTikTokConversion(lead: Lead): Promise<{ success: boolean; error?: string; response?: any }> {
     try {
-      const config = this.getConfig();
+      const config = await this.getConfig();
       
       if (!config.tiktok_pixel_id || !config.tiktok_access_token) {
         throw new Error('TikTok Pixel ID ou Access Token não configurados');
