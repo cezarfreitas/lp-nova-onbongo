@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { conversionEvents, trackEvent } from './TrackingScripts';
 
 interface FormData {
   nomeCompleto: string;
