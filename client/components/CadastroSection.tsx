@@ -178,6 +178,7 @@ export default function CadastroSection() {
   const handleNextStep = () => {
     if (currentStep === 1 && validateStep1()) {
       setCurrentStep(2);
+      conversionEvents.formStep(2);
     }
   };
 
