@@ -434,26 +434,14 @@ export default function CadastroSection() {
                       </div>
                     </div>
 
-                    {/* Botões de Navegação */}
-                    <div className="flex gap-3 mt-6">
+                    {/* Botão Voltar apenas */}
+                    <div className="flex justify-center mt-6">
                       <button
                         type="button"
                         onClick={handlePrevStep}
-                        className="flex-1 bg-dark/50 hover:bg-dark/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
+                        className="bg-dark/50 hover:bg-dark/70 text-light font-medium py-3 px-6 rounded-xl transition-all duration-300 text-sm"
                       >
                         ← Voltar
-                      </button>
-                      <button
-                        type="button"
-                        onClick={handleNextStep}
-                        disabled={!formData.tipoCadastro}
-                        className={`flex-2 font-bold py-3 px-4 rounded-xl transition-all duration-300 focus:outline-none text-sm ${
-                          formData.tipoCadastro
-                            ? "bg-dark hover:bg-dark/90 text-light hover:scale-105 focus:ring-2 focus:ring-light"
-                            : "bg-dark/50 text-light/50 cursor-not-allowed"
-                        }`}
-                      >
-                        Avançar para Finalizar →
                       </button>
                     </div>
                   </div>
@@ -496,7 +484,7 @@ export default function CadastroSection() {
                             onClick={handlePrevStep}
                             className="flex-1 bg-dark/50 hover:bg-dark/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                           >
-                            ← Voltar
+                            �� Voltar
                           </button>
                           <button
                             type="submit"
