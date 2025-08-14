@@ -45,6 +45,7 @@ export default {
       letterSpacing: {
         "extra-wide": "0.2em",
         "super-wide": "0.3em",
+        "ultra-wide": "0.4em",
       },
       animation: {
         "fade-in": "fadeIn 0.3s ease-in-out",
@@ -55,6 +56,14 @@ export default {
           "100%": { opacity: "1" },
         },
       },
+      fontWeight: {
+        'black': '900',
+      },
+      dropShadow: {
+        'text': '0 2px 4px rgba(0, 0, 0, 0.8)',
+        'text-lg': '0 4px 8px rgba(0, 0, 0, 0.8)',
+        'text-xl': '0 8px 16px rgba(0, 0, 0, 0.8)',
+      }
     },
   },
   plugins: [],
