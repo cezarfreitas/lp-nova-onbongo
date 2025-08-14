@@ -7,11 +7,11 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "server/node-build.ts"),
       name: "server",
-      fileName: "production",
+      fileName: "node-build",
       formats: ["es"],
     },
     outDir: "dist/server",
-    target: "node22",
+    target: "node20",
     ssr: true,
     rollupOptions: {
       external: [
@@ -29,9 +29,12 @@ export default defineConfig({
         "buffer",
         "querystring",
         "child_process",
+        "dotenv",
+        "dotenv/config",
         // External dependencies that should not be bundled
         "express",
         "cors",
+        "zod",
       ],
       output: {
         format: "es",
