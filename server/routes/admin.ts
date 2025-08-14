@@ -83,7 +83,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Atualizar último login
-    statements.updateLastLogin.run(user.id);
+    await statements.updateLastLogin.run(user.id!);
 
     // Gerar token JWT
     const token = jwt.sign(
