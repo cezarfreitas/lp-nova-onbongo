@@ -4,13 +4,25 @@ Este documento explica como configurar o webhook para receber os dados dos leads
 
 ## Configuração
 
-### 1. Variável de Ambiente
+### 1. Variáveis de Ambiente na Plataforma
 
-Adicione a URL do seu webhook no arquivo `.env.production` ou `.env.local`:
+Configure as variáveis de ambiente diretamente na sua plataforma de deploy:
 
+**Variáveis Necessárias:**
 ```bash
 VITE_WEBHOOK_URL=https://sua-api.com/webhook/leads
+VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+VITE_META_PIXEL_ID=123456789012345
+VITE_META_ACCESS_TOKEN=seu_token_aqui
+VITE_META_TEST_EVENT_CODE=TEST12345
 ```
+
+**Plataformas de Deploy:**
+- **Fly.io**: Dashboard > Environment Variables
+- **Vercel**: Project Settings > Environment Variables
+- **Netlify**: Site Settings > Environment Variables
+- **Railway**: Project > Variables tab
+- **Heroku**: Settings > Config Vars
 
 ### 2. Formato dos Dados Enviados
 
