@@ -213,31 +213,10 @@ export default function CadastroSection() {
               <span className="text-light">ONBONGO</span>
             </h2>
 
-            <p className="text-light/80 text-base mb-8 leading-relaxed">
+            <p className="text-light/80 text-base leading-relaxed">
               Junte-se aos melhores lojistas do Brasil e tenha acesso exclusivo
               aos produtos da marca líder em streetwear.
             </p>
-
-            <div className="space-y-6">
-              {beneficios.map((beneficio, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-3 transform hover:translate-x-1 transition-transform duration-300"
-                >
-                  <div className="bg-accent rounded-lg p-2 text-xl flex-shrink-0">
-                    {beneficio.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-light font-bold text-lg mb-1">
-                      {beneficio.titulo}
-                    </h3>
-                    <p className="text-light/70 text-sm leading-relaxed">
-                      {beneficio.descricao}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Lado Direito - Formulário */}
