@@ -441,7 +441,12 @@ export default function CadastroSection() {
                       <button
                         type="button"
                         onClick={handleNextStep}
-                        className="flex-2 bg-dark hover:bg-dark/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm"
+                        disabled={!formData.tipoCadastro}
+                        className={`flex-2 font-bold py-3 px-4 rounded-xl transition-all duration-300 focus:outline-none text-sm ${
+                          formData.tipoCadastro
+                            ? "bg-dark hover:bg-dark/90 text-light hover:scale-105 focus:ring-2 focus:ring-light"
+                            : "bg-dark/50 text-light/50 cursor-not-allowed"
+                        }`}
                       >
                         Avançar para Finalizar →
                       </button>
@@ -510,7 +515,7 @@ export default function CadastroSection() {
                       // Para Consumidores: Cupom
                       <>
                         <div className="text-center py-2">
-                          <div className="text-3xl mb-2">🎁</div>
+                          <div className="text-3xl mb-2">����</div>
                           <h4 className="text-light font-bold text-base mb-2">
                             Cadastro não disponível
                           </h4>
