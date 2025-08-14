@@ -68,7 +68,7 @@ class WebhookService {
 
   async sendWebhook(lead: Lead): Promise<{ success: boolean; error?: string; response?: any }> {
     try {
-      const config = this.getConfig();
+      const config = await this.getConfig();
       
       if (!config.endpoint) {
         console.log('⚠️ Webhook endpoint não configurado, pulando envio');
