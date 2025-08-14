@@ -264,13 +264,13 @@ export default function CadastroSection() {
                 <h3 className="text-light font-bold text-xl mb-1">
                   {currentStep === 1 ? 'Cadastre-se Agora' :
                    currentStep === 2 ? 'Tipo de Cadastro' :
-                   'Finalizar Cadastro'}
+                   formData.tipoCadastro === 'lojista' ? 'Finalizar Cadastro' : 'Cadastro Exclusivo'}
                 </h3>
                 <p className="text-light/90 text-sm">
                   {currentStep === 1 ? 'Comece sua jornada como lojista oficial' :
                    currentStep === 2 ? 'Escolha o tipo de cadastro desejado' :
                    formData.tipoCadastro === 'lojista' ? 'Dados da sua empresa' :
-                   'Parabéns! Você ganhou um desconto'}
+                   'Para lojistas com CNPJ'}
                 </p>
                 <div className="flex justify-center gap-2 mt-3">
                   {[1, 2, 3].map((step) => (
@@ -526,12 +526,11 @@ export default function CadastroSection() {
                       // Para Consumidores: Cupom
                       <>
                         <div className="text-center py-4">
-                          <div className="text-4xl mb-3 animate-pulse">🎁</div>
-                          <h4 className="text-light font-bold text-lg mb-2">
-                            Desconto Exclusivo!
+                          <h4 className="text-light font-bold text-lg mb-3">
+                            Cadastro exclusivo para lojistas
                           </h4>
                           <p className="text-light/90 text-sm mb-4 leading-relaxed">
-                            Como você é consumidor, preparamos um
+                            Como você é consumidor da marca, preparamos um
                             <strong className="text-accent"> desconto especial de 10%</strong> para suas compras!
                           </p>
 
