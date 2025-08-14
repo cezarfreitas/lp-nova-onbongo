@@ -41,9 +41,9 @@ export default function TrackingScripts() {
     // Meta Pixel
     if (META_PIXEL_ID) {
       // Facebook Pixel Code
-      !function(f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
+      !(function (f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
         if (f.fbq) return;
-        n = f.fbq = function() {
+        n = f.fbq = function () {
           n.callMethod
             ? n.callMethod.apply(n, arguments)
             : n.queue.push(arguments);
@@ -58,17 +58,27 @@ export default function TrackingScripts() {
         t.src = v;
         s = b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t, s);
-      }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
 
       window.fbq("init", META_PIXEL_ID);
-      
+
       // Add test event code if provided
       if (META_TEST_EVENT_CODE) {
-        window.fbq("init", META_PIXEL_ID, {}, {
-          testEventCode: META_TEST_EVENT_CODE
-        });
+        window.fbq(
+          "init",
+          META_PIXEL_ID,
+          {},
+          {
+            testEventCode: META_TEST_EVENT_CODE,
+          },
+        );
       }
-      
+
       window.fbq("track", "PageView");
 
       console.log("✅ Meta Pixel initialized:", META_PIXEL_ID);
@@ -88,8 +98,8 @@ export default function TrackingScripts() {
           currency: "BRL",
           custom_parameters: {
             lead_type: leadData.tipoCadastro,
-            has_cnpj: leadData.cnpj ? "yes" : "no"
-          }
+            has_cnpj: leadData.cnpj ? "yes" : "no",
+          },
         });
       }
 
@@ -99,7 +109,7 @@ export default function TrackingScripts() {
           content_name: "ONBONGO B2B Registration",
           content_category: leadData.tipoCadastro || "unknown",
           value: leadData.tipoCadastro === "lojista" ? 100 : 10,
-          currency: "BRL"
+          currency: "BRL",
         });
 
         // Send to Conversions API
@@ -119,7 +129,7 @@ export default function TrackingScripts() {
           event_category: "Form",
           event_label: stepName,
           step_number: step,
-          form_name: "ONBONGO_B2B_Registration"
+          form_name: "ONBONGO_B2B_Registration",
         });
       }
 
@@ -127,7 +137,7 @@ export default function TrackingScripts() {
       if (META_PIXEL_ID && window.fbq) {
         window.fbq("track", "CompleteRegistration", {
           content_name: `Registration Step ${step}`,
-          status: stepName
+          status: stepName,
         });
       }
     };
@@ -137,37 +147,42 @@ export default function TrackingScripts() {
   const sendToConversionsAPI = async (leadData: any) => {
     try {
       const eventData = {
-        data: [{
-          event_name: "Lead",
-          event_time: Math.floor(Date.now() / 1000),
-          action_source: "website",
-          event_source_url: window.location.href,
-          user_data: {
-            em: leadData.email ? hashString(leadData.email) : undefined,
-            ph: leadData.whatsapp ? hashString(leadData.whatsapp) : undefined,
-            client_ip_address: await getClientIP(),
-            client_user_agent: navigator.userAgent,
-            fbc: getCookie("_fbc"),
-            fbp: getCookie("_fbp")
+        data: [
+          {
+            event_name: "Lead",
+            event_time: Math.floor(Date.now() / 1000),
+            action_source: "website",
+            event_source_url: window.location.href,
+            user_data: {
+              em: leadData.email ? hashString(leadData.email) : undefined,
+              ph: leadData.whatsapp ? hashString(leadData.whatsapp) : undefined,
+              client_ip_address: await getClientIP(),
+              client_user_agent: navigator.userAgent,
+              fbc: getCookie("_fbc"),
+              fbp: getCookie("_fbp"),
+            },
+            custom_data: {
+              content_name: "ONBONGO B2B Registration",
+              content_category: leadData.tipoCadastro,
+              value: leadData.tipoCadastro === "lojista" ? 100 : 10,
+              currency: "BRL",
+            },
           },
-          custom_data: {
-            content_name: "ONBONGO B2B Registration",
-            content_category: leadData.tipoCadastro,
-            value: leadData.tipoCadastro === "lojista" ? 100 : 10,
-            currency: "BRL"
-          }
-        }],
-        test_event_code: META_TEST_EVENT_CODE
+        ],
+        test_event_code: META_TEST_EVENT_CODE,
       };
 
-      const response = await fetch(`https://graph.facebook.com/v18.0/${META_PIXEL_ID}/events`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${META_ACCESS_TOKEN}`
+      const response = await fetch(
+        `https://graph.facebook.com/v18.0/${META_PIXEL_ID}/events`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${META_ACCESS_TOKEN}`,
+          },
+          body: JSON.stringify(eventData),
         },
-        body: JSON.stringify(eventData)
-      });
+      );
 
       if (response.ok) {
         console.log("✅ Conversions API event sent successfully");
@@ -185,7 +200,7 @@ export default function TrackingScripts() {
     const data = encoder.encode(str.toLowerCase().trim());
     const hashBuffer = await crypto.subtle.digest("SHA-256", data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
   };
 
   const getCookie = (name: string): string | undefined => {

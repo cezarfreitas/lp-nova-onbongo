@@ -203,7 +203,7 @@ export default function CadastroSection() {
       const webhookSuccess = await sendToWebhook(leadData, {
         retries: 3,
         timeout: 10000,
-        retryDelay: 1000
+        retryDelay: 1000,
       });
 
       if (webhookSuccess) {
