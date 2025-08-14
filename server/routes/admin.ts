@@ -114,9 +114,9 @@ router.post('/login', async (req, res) => {
 });
 
 // GET /api/admin/me - Verificar token e dados do usuário
-router.get('/me', authenticateToken, (req: any, res) => {
+router.get('/me', authenticateToken, async (req: any, res) => {
   try {
-    const user = statements.getAdminByUsername.get(req.user.username) as AdminUser;
+    const user = await statements.getAdminByUsername.get(req.user.username) as AdminUser;
     
     if (!user) {
       return res.status(404).json({
