@@ -145,6 +145,11 @@ export default function CadastroSection() {
       tipoCadastro: tipo,
     }));
 
+    // Track user type selection
+    if ((window as any).trackFormStep) {
+      (window as any).trackFormStep(2, `type_selected_${tipo}`);
+    }
+
     // Avançar automaticamente para a próxima etapa
     setTimeout(() => {
       setCurrentStep(3);
@@ -154,6 +159,11 @@ export default function CadastroSection() {
   const handleNextStep = () => {
     if (currentStep === 1 && validateStep1()) {
       setCurrentStep(2);
+
+      // Track form step completion
+      if ((window as any).trackFormStep) {
+        (window as any).trackFormStep(1, "basic_info_completed");
+      }
     }
   };
 
@@ -187,12 +197,19 @@ export default function CadastroSection() {
       // Simular envio (sem API real)
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      console.log("✅ Dados do formulário:", {
+      const leadData = {
         nome: formData.nomeCompleto,
         whatsapp: formData.whatsapp,
-        tipo: formData.tipoCadastro,
+        tipoCadastro: formData.tipoCadastro,
         cnpj: formData.cnpj || "N/A",
-      });
+      };
+
+      console.log("✅ Dados do formulário:", leadData);
+
+      // Track successful lead conversion
+      if ((window as any).trackLead) {
+        (window as any).trackLead(leadData);
+      }
 
       setIsSubmitted(true);
 
