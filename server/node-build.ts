@@ -10,9 +10,11 @@ const __dirname = import.meta.dirname;
 const distPath = path.join(__dirname, "../spa");
 
 // Serve static files with proper configuration
-app.use(express.static(distPath, {
-  maxAge: process.env.NODE_ENV === 'production' ? '1y' : 0
-}));
+app.use(
+  express.static(distPath, {
+    maxAge: process.env.NODE_ENV === "production" ? "1y" : 0,
+  }),
+);
 
 // Handle React Router - serve index.html for all non-API routes
 app.get("*", (req, res) => {
