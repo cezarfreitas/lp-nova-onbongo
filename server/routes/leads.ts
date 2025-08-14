@@ -189,7 +189,8 @@ router.get('/:id', async (req, res) => {
 const processConversions = async (lead: Lead) => {
   try {
     // Buscar configurações de conversão
-    const autoSend = statements.getSetting.get('auto_send_conversions')?.value === 'true';
+    const autoSendResult = await statements.getSetting.get('auto_send_conversions');
+    const autoSend = autoSendResult?.value === 'true';
 
     if (!autoSend) {
       console.log(`⏭️ Auto-envio de conversões desabilitado para lead ${lead.id}`);
