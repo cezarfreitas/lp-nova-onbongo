@@ -234,56 +234,16 @@ router.post('/settings/bulk', authenticateToken, async (req, res) => {
 });
 
 // GET /api/admin/dashboard - Estatísticas do dashboard
-router.get('/dashboard', authenticateToken, (req, res) => {
+router.get('/dashboard', authenticateToken, async (req, res) => {
   try {
-    // Buscar estatísticas básicas
-    const totalLeads = statements.db.prepare('SELECT COUNT(*) as count FROM leads').get() as any;
-    const leadsHoje = statements.db.prepare(`
-      SELECT COUNT(*) as count FROM leads 
-      WHERE DATE(created_at) = DATE('now')
-    `).get() as any;
-    
-    const leadsPorTipo = statements.db.prepare(`
-      SELECT tipo_cadastro, COUNT(*) as count 
-      FROM leads 
-      GROUP BY tipo_cadastro
-    `).all() as any[];
-
-    const leadsUltimos7Dias = statements.db.prepare(`
-      SELECT DATE(created_at) as date, COUNT(*) as count 
-      FROM leads 
-      WHERE created_at >= DATE('now', '-7 days') 
-      GROUP BY DATE(created_at) 
-      ORDER BY date
-    `).all() as any[];
-
-    const conversionRate = statements.db.prepare(`
-      SELECT 
-        (SELECT COUNT(*) FROM leads WHERE tipo_cadastro = 'lojista') * 100.0 / 
-        (SELECT COUNT(*) FROM leads) as rate
-    `).get() as any;
-
-    const webhookStats = statements.db.prepare(`
-      SELECT 
-        COUNT(*) as total,
-        SUM(CASE WHEN webhook_sent = 1 THEN 1 ELSE 0 END) as sent,
-        SUM(CASE WHEN conversion_sent = 1 THEN 1 ELSE 0 END) as conversions_sent
-      FROM leads
-    `).get() as any;
+    // Usar método do JSON storage
+    const stats = await (statements as any).getDashboardStats();
 
     const dashboard = {
-      stats: {
-        totalLeads: totalLeads.count || 0,
-        leadsHoje: leadsHoje.count || 0,
-        conversionRate: parseFloat((conversionRate?.rate || 0).toFixed(2)),
-        webhookSuccessRate: webhookStats.total > 0 ? 
-          parseFloat(((webhookStats.sent / webhookStats.total) * 100).toFixed(2)) : 0,
-        conversionsSuccessRate: webhookStats.total > 0 ? 
-          parseFloat(((webhookStats.conversions_sent / webhookStats.total) * 100).toFixed(2)) : 0
-      },
+      stats: stats,
       charts: {
-        leadsPorTipo: leadsPorTipo,
-        leadsUltimos7Dias: leadsUltimos7Dias
+        leadsPorTipo: [],
+        leadsUltimos7Dias: []
       }
     };
 
