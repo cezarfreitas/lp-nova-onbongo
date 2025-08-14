@@ -5,6 +5,7 @@
 This application is ready for deployment on Easypanel using Docker.
 
 ### Prerequisites
+
 - Easypanel account
 - Docker support enabled
 
@@ -18,6 +19,7 @@ This application is ready for deployment on Easypanel using Docker.
    - Choose "Docker" as the source type
 
 3. **Configure the service:**
+
    ```
    Source Type: Git Repository
    Repository URL: [your-git-repo-url]
@@ -27,6 +29,7 @@ This application is ready for deployment on Easypanel using Docker.
    ```
 
 4. **Environment Variables:**
+
    ```
    NODE_ENV=production
    PORT=3000
@@ -61,6 +64,7 @@ Visit `http://localhost:3000` to test the application.
 ### Health Check
 
 The application includes a health check endpoint:
+
 - **Endpoint**: `/api/ping`
 - **Expected Response**: `{"message": "ONBONGO API is running!"}`
 
@@ -79,6 +83,7 @@ The application includes a health check endpoint:
 3. **Health check fails**: Ensure the `/api/ping` endpoint is accessible
 
 ### File Structure
+
 ```
 /app
 ├── dist/
@@ -90,10 +95,10 @@ The application includes a health check endpoint:
 
 ## 🔧 Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `NODE_ENV` | Environment mode | `production` |
-| `PORT` | Server port | `3000` |
-| `PING_MESSAGE` | Health check message | `ping` |
+| Variable       | Description          | Default      |
+| -------------- | -------------------- | ------------ |
+| `NODE_ENV`     | Environment mode     | `production` |
+| `PORT`         | Server port          | `3000`       |
+| `PING_MESSAGE` | Health check message | `ping`       |
 
 Add additional environment variables as needed for your production setup.

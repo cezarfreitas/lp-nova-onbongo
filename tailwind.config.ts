@@ -5,16 +5,16 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        'display': ['Oswald', 'Impact', 'sans-serif'],
+        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+        display: ["Oswald", "Impact", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         orange: {
-          500: '#ff6b35',
-          600: '#e55a2e',
-        }
+          500: "#ff6b35",
+          600: "#e55a2e",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -22,9 +22,9 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       letterSpacing: {
-        'extra-wide': '0.2em',
-        'super-wide': '0.3em',
-      }
+        "extra-wide": "0.2em",
+        "super-wide": "0.3em",
+      },
     },
   },
   plugins: [],
