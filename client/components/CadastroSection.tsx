@@ -1,23 +1,23 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function CadastroSection() {
   const [formData, setFormData] = useState({
-    nomeCompleto: '',
-    whatsapp: '',
-    tipoCadastro: 'lojista'
+    nomeCompleto: "",
+    whatsapp: "",
+    tipoCadastro: "lojista",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Dados do formulário:', formData);
+    console.log("Dados do formulário:", formData);
     // Aqui você pode adicionar a lógica de envio
   };
 
@@ -25,23 +25,27 @@ export default function CadastroSection() {
     {
       icon: "🌍",
       titulo: "Marca Internacional",
-      descricao: "Reconhecida uma marca de streetwear reconhecida mundialmente com mais de 30 anos de história."
+      descricao:
+        "Reconhecida uma marca de streetwear reconhecida mundialmente com mais de 30 anos de história.",
     },
     {
       icon: "📦",
       titulo: "Pronta Entrega",
-      descricao: "Mais de 100.000 itens disponíveis para envio imediato em todo o Brasil."
+      descricao:
+        "Mais de 100.000 itens disponíveis para envio imediato em todo o Brasil.",
     },
     {
       icon: "💻",
       titulo: "Plataforma Digital",
-      descricao: "Acesse nosso catálogo digital 24/7 com preços exclusivos para lojistas."
+      descricao:
+        "Acesse nosso catálogo digital 24/7 com preços exclusivos para lojistas.",
     },
     {
       icon: "🎯",
       titulo: "Suporte Completo",
-      descricao: "Treinamento, materiais de marketing e suporte comercial especializado."
-    }
+      descricao:
+        "Treinamento, materiais de marketing e suporte comercial especializado.",
+    },
   ];
 
   return (
@@ -51,14 +55,16 @@ export default function CadastroSection() {
           {/* Lado Esquerdo - Benefícios */}
           <div className="text-light">
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              <span className="text-light">SEJA UM</span><br />
-              <span className="text-accent">LOJISTA OFICIAL</span><br />
+              <span className="text-light">SEJA UM</span>
+              <br />
+              <span className="text-accent">LOJISTA OFICIAL</span>
+              <br />
               <span className="text-light">ONBONGO</span>
             </h2>
-            
+
             <p className="text-light/80 text-lg mb-12 leading-relaxed">
-              Junte-se aos melhores lojistas do Brasil e tenha acesso exclusivo aos 
-              produtos da marca líder em streetwear.
+              Junte-se aos melhores lojistas do Brasil e tenha acesso exclusivo
+              aos produtos da marca líder em streetwear.
             </p>
 
             <div className="space-y-8">
@@ -93,8 +99,8 @@ export default function CadastroSection() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Nome Completo */}
                 <div>
-                  <label 
-                    htmlFor="nomeCompleto" 
+                  <label
+                    htmlFor="nomeCompleto"
                     className="block text-light font-medium mb-2"
                   >
                     Nome Completo *
@@ -113,8 +119,8 @@ export default function CadastroSection() {
 
                 {/* WhatsApp */}
                 <div>
-                  <label 
-                    htmlFor="whatsapp" 
+                  <label
+                    htmlFor="whatsapp"
                     className="block text-light font-medium mb-2"
                   >
                     WhatsApp *
@@ -142,28 +148,36 @@ export default function CadastroSection() {
                         type="radio"
                         name="tipoCadastro"
                         value="lojista"
-                        checked={formData.tipoCadastro === 'lojista'}
+                        checked={formData.tipoCadastro === "lojista"}
                         onChange={handleInputChange}
                         className="mr-3 w-4 h-4 text-dark"
                       />
                       <div>
-                        <div className="text-light font-medium">Sou Lojista</div>
-                        <div className="text-light/70 text-sm">Tenho CNPJ e quero revender</div>
+                        <div className="text-light font-medium">
+                          Sou Lojista
+                        </div>
+                        <div className="text-light/70 text-sm">
+                          Tenho CNPJ e quero revender
+                        </div>
                       </div>
                     </label>
-                    
+
                     <label className="flex items-center">
                       <input
                         type="radio"
                         name="tipoCadastro"
                         value="consumidor"
-                        checked={formData.tipoCadastro === 'consumidor'}
+                        checked={formData.tipoCadastro === "consumidor"}
                         onChange={handleInputChange}
                         className="mr-3 w-4 h-4 text-dark"
                       />
                       <div>
-                        <div className="text-light font-medium">Sou Consumidor</div>
-                        <div className="text-light/70 text-sm">Quero comprar para uso próprio</div>
+                        <div className="text-light font-medium">
+                          Sou Consumidor
+                        </div>
+                        <div className="text-light/70 text-sm">
+                          Quero comprar para uso próprio
+                        </div>
                       </div>
                     </label>
                   </div>
