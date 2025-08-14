@@ -113,17 +113,17 @@ router.post('/', async (req, res) => {
 });
 
 // GET /api/leads - Listar leads com paginação
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 20;
     const offset = (page - 1) * limit;
 
-    const leads = statements.getLeads.all(limit, offset) as Lead[];
-    
+    const leads = await statements.getLeads.all(limit, offset) as Lead[];
+
     // Contar total de leads
     const totalQuery = statements.db?.prepare('SELECT COUNT(*) as count FROM leads');
-    const total = (totalQuery?.get() as any)?.count || 0;
+    const total = (await totalQuery?.get() as any)?.count || 0;
     const totalPages = Math.ceil(total / limit);
 
     const response: PaginatedResponse<Lead> = {
