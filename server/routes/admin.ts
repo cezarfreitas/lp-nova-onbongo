@@ -63,7 +63,7 @@ router.post('/login', async (req, res) => {
     const { username, password } = validation.data;
     
     // Buscar usuário no banco
-    const user = statements.getAdminByUsername.get(username) as AdminUser;
+    const user = await statements.getAdminByUsername.get(username) as AdminUser;
     
     if (!user) {
       return res.status(401).json({
