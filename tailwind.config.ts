@@ -7,6 +7,10 @@ export default {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        orange: {
+          500: '#ff6b35',
+          600: '#e55a2e',
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
