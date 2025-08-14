@@ -137,9 +137,21 @@
     transition: none !important;
   }
 
-  /* Animação fade-in para elementos dinâmicos */
+  /* Animações para elementos dinâmicos */
   .animate-fade-in {
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
   }
 
   /* Text stroke para maior contraste */
