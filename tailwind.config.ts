@@ -7,20 +7,20 @@ export default {
       fontFamily: {
         sans: [
           "Inter",
-          "Inter-fallback", 
-          "system-ui", 
-          "-apple-system", 
+          "Inter-fallback",
+          "system-ui",
+          "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
           "Roboto",
-          "sans-serif"
+          "sans-serif",
         ],
         display: [
-          "Oswald", 
+          "Oswald",
           "Oswald-fallback",
-          "Impact", 
+          "Impact",
           "Arial Black",
-          "sans-serif"
+          "sans-serif",
         ],
       },
       colors: {
@@ -41,12 +41,12 @@ export default {
         "super-wide": "0.3em",
       },
       animation: {
-        'fade-in': 'fadeIn 0.3s ease-in-out',
+        "fade-in": "fadeIn 0.3s ease-in-out",
       },
       keyframes: {
         fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
     },

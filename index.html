@@ -9,37 +9,51 @@
     <!-- Preconect para Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- Preload fontes críticas para evitar FOUT -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+
     <!-- Fallback para quando JavaScript estiver desabilitado -->
     <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
     </noscript>
 
     <!-- CSS crítico inline para evitar FOUT -->
     <style>
       /* CSS crítico para evitar mudança de layout */
       body {
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
         font-display: swap;
         margin: 0;
         padding: 0;
         background-color: #000;
         color: #fff;
       }
-      
+
       /* Esconder conteúdo até as fontes carregarem */
       .font-loading body {
         visibility: hidden;
       }
-      
+
       /* Mostrar conteúdo quando as fontes estiverem prontas */
       .fonts-loaded body {
         visibility: visible;
       }
-      
+
       /* Loading state para Hero */
       #root {
         min-height: 100vh;
@@ -49,22 +63,22 @@
 
     <!-- Font loading script -->
     <script>
-      document.documentElement.classList.add('font-loading');
-      
+      document.documentElement.classList.add("font-loading");
+
       // Detectar quando as fontes carregaram
-      if ('fonts' in document) {
+      if ("fonts" in document) {
         Promise.all([
-          document.fonts.load('400 16px Inter'),
-          document.fonts.load('700 16px Oswald')
+          document.fonts.load("400 16px Inter"),
+          document.fonts.load("700 16px Oswald"),
         ]).then(() => {
-          document.documentElement.classList.remove('font-loading');
-          document.documentElement.classList.add('fonts-loaded');
+          document.documentElement.classList.remove("font-loading");
+          document.documentElement.classList.add("fonts-loaded");
         });
       } else {
         // Fallback para navegadores antigos
         setTimeout(() => {
-          document.documentElement.classList.remove('font-loading');
-          document.documentElement.classList.add('fonts-loaded');
+          document.documentElement.classList.remove("font-loading");
+          document.documentElement.classList.add("fonts-loaded");
         }, 3000);
       }
     </script>

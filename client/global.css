@@ -4,14 +4,14 @@
 
 /* Definir fontes locais com font-display */
 @font-face {
-  font-family: 'Inter-fallback';
-  src: local('Inter'), local('system-ui'), local('-apple-system');
+  font-family: "Inter-fallback";
+  src: local("Inter"), local("system-ui"), local("-apple-system");
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Oswald-fallback';
-  src: local('Oswald'), local('Impact'), local('Arial Black');
+  font-family: "Oswald-fallback";
+  src: local("Oswald"), local("Impact"), local("Arial Black");
   font-display: swap;
 }
 
@@ -60,12 +60,7 @@
   h4,
   h5,
   h6 {
-    font-family: 
-      "Oswald",
-      "Oswald-fallback", 
-      Impact,
-      "Arial Black",
-      sans-serif;
+    font-family: "Oswald", "Oswald-fallback", Impact, "Arial Black", sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
