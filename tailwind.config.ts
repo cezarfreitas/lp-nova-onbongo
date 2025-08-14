@@ -5,8 +5,23 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
-        display: ["Oswald", "Impact", "sans-serif"],
+        sans: [
+          "Inter",
+          "Inter-fallback", 
+          "system-ui", 
+          "-apple-system", 
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif"
+        ],
+        display: [
+          "Oswald", 
+          "Oswald-fallback",
+          "Impact", 
+          "Arial Black",
+          "sans-serif"
+        ],
       },
       colors: {
         background: "hsl(var(--background))",
@@ -24,6 +39,15 @@ export default {
       letterSpacing: {
         "extra-wide": "0.2em",
         "super-wide": "0.3em",
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.3s ease-in-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
     },
   },
