@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { conversionEvents, trackEvent } from './TrackingScripts';
 
 interface FormData {
   nomeCompleto: string;
@@ -26,32 +25,7 @@ export default function CadastroSection() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [browserId, setBrowserId] = useState('');
-  const [sessionId, setSessionId] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
-
-  // Gerar IDs únicos para tracking
-  useEffect(() => {
-    // Browser ID persistente
-    let savedBrowserId = localStorage.getItem('browser_id');
-    if (!savedBrowserId) {
-      savedBrowserId = `br_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      localStorage.setItem('browser_id', savedBrowserId);
-    }
-    setBrowserId(savedBrowserId);
-
-    // Session ID para esta sessão
-    let savedSessionId = sessionStorage.getItem('session_id');
-    if (!savedSessionId) {
-      savedSessionId = `ss_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      sessionStorage.setItem('session_id', savedSessionId);
-    }
-    setSessionId(savedSessionId);
-
-    // Track form start
-    conversionEvents.formStart();
-  }, []);
 
   // Auto-focus no primeiro campo ao mudar de etapa
   useEffect(() => {
@@ -168,25 +142,16 @@ export default function CadastroSection() {
       ...prev,
       tipoCadastro: tipo,
     }));
-
-    // Track tipo selecionado
-    trackEvent.all('lead_type_selected', {
-      event_category: 'engagement',
-      lead_type: tipo,
-      step: 2
-    });
-
+    
     // Avançar automaticamente para a próxima etapa
     setTimeout(() => {
       setCurrentStep(3);
-      conversionEvents.formStep(3);
     }, 300); // Pequeno delay para mostrar a seleção
   };
 
   const handleNextStep = () => {
     if (currentStep === 1 && validateStep1()) {
       setCurrentStep(2);
-      conversionEvents.formStep(2);
     }
   };
 
@@ -198,13 +163,13 @@ export default function CadastroSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     // Validar se o tipo de cadastro foi selecionado
     if (!formData.tipoCadastro || (formData.tipoCadastro !== "lojista" && formData.tipoCadastro !== "consumidor")) {
       alert('Por favor, selecione o tipo de cadastro');
       return;
     }
-
+    
     // Se for lojista, validar CNPJ
     if (formData.tipoCadastro === "lojista" && !validateStep3()) {
       return;
@@ -213,83 +178,32 @@ export default function CadastroSection() {
     setIsLoading(true);
 
     try {
-      // Coletar dados de tracking
-      const trackingData = {
-        utm_source: new URLSearchParams(window.location.search).get('utm_source'),
-        utm_medium: new URLSearchParams(window.location.search).get('utm_medium'),
-        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign'),
-        utm_content: new URLSearchParams(window.location.search).get('utm_content'),
-        utm_term: new URLSearchParams(window.location.search).get('utm_term'),
-        referrer: document.referrer,
-        browser_id: browserId,
-        session_id: sessionId
-      };
-
-      // Preparar payload para API
-      const payload = {
-        nome_completo: formData.nomeCompleto,
-        whatsapp: formData.whatsapp.replace(/\D/g, ''), // Apenas números
-        tipo_cadastro: formData.tipoCadastro,
-        cnpj: formData.cnpj ? formData.cnpj.replace(/\D/g, '') : undefined,
-        tracking: trackingData
-      };
-
-      console.log('📤 Enviando payload:', JSON.stringify(payload, null, 2));
-
-      // Enviar para API
-      const response = await fetch('/api/leads', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
+      // Simular envio (sem API real)
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      
+      console.log("✅ Dados do formulário:", {
+        nome: formData.nomeCompleto,
+        whatsapp: formData.whatsapp,
+        tipo: formData.tipoCadastro,
+        cnpj: formData.cnpj || 'N/A'
       });
+      
+      setIsSubmitted(true);
 
-      const result = await response.json();
-
-      if (result.success) {
-        // Track conversão com base no tipo
-        if (formData.tipoCadastro === 'lojista') {
-          conversionEvents.leadGenerated('lojista', 50);
-        } else {
-          conversionEvents.couponGenerated();
-        }
-
-        // Animação de sucesso
-        setIsSuccess(true);
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-
-        console.log("✅ Lead criado com sucesso:", result.data);
-        setIsSubmitted(true);
-
-        // Reset form após sucesso
-        setTimeout(() => {
-          setIsSubmitted(false);
-          setIsSuccess(false);
-          setFormData({
-            nomeCompleto: "",
-            whatsapp: "",
-            tipoCadastro: "" as any,
-            cnpj: "",
-          });
-          setCurrentStep(1);
-
-          // Track form restart
-          conversionEvents.formStart();
-        }, 4000);
-      } else {
-        throw new Error(result.error || 'Erro ao enviar formulário');
-      }
+      // Reset form após sucesso
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          nomeCompleto: "",
+          whatsapp: "",
+          tipoCadastro: "" as any,
+          cnpj: "",
+        });
+        setCurrentStep(1);
+      }, 4000);
+      
     } catch (error: any) {
       console.error("❌ Erro ao enviar formulário:", error);
-
-      // Track erro
-      trackEvent.all('form_error', {
-        event_category: 'error',
-        error_message: error.message,
-        step: currentStep
-      });
-
       alert('Erro ao enviar formulário. Tente novamente.');
     } finally {
       setIsLoading(false);
@@ -305,14 +219,14 @@ export default function CadastroSection() {
             {formData.tipoCadastro === "lojista" ? "Cadastro Realizado!" : "Cupom Gerado!"}
           </h2>
           <p className="text-dark/80 mb-4 text-sm leading-relaxed">
-            {formData.tipoCadastro === "lojista"
+            {formData.tipoCadastro === "lojista" 
               ? "Nossa equipe entrará em contato via WhatsApp em breve para finalizar sua parceria."
               : "Seu cupom de desconto foi gerado com sucesso!"
             }
           </p>
           <div className="bg-dark/10 p-4 rounded-xl border border-dark/20">
             <p className="text-dark/70 text-xs font-medium">
-              {formData.tipoCadastro === "lojista"
+              {formData.tipoCadastro === "lojista" 
                 ? "⏱️ Resposta em até 2 horas úteis"
                 : "🎁 Use o código: ONBONGO10"
               }
@@ -353,16 +267,17 @@ export default function CadastroSection() {
             <div className="bg-dark rounded-2xl p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl relative overflow-hidden">
               {/* Indicador de progresso */}
               <div className="absolute top-0 left-0 w-full h-1 bg-accent/20">
-                <div
+                <div 
                   className="h-full bg-accent transition-all duration-500 ease-out"
                   style={{ width: `${(currentStep / 3) * 100}%` }}
                 ></div>
               </div>
+
               {/* Header do formulário */}
               <div className="text-center mb-6 pt-2">
                 <h3 className="text-light font-bold text-xl mb-1">
-                  {currentStep === 1 ? 'Cadastre-se Agora' :
-                   currentStep === 2 ? 'Tipo de Cadastro' :
+                  {currentStep === 1 ? 'Cadastre-se Agora' : 
+                   currentStep === 2 ? 'Tipo de Cadastro' : 
                    formData.tipoCadastro === 'lojista' ? 'Finalizar Cadastro' : 'Cadastro Exclusivo'}
                 </h3>
                 <p className="text-light/90 text-sm">
@@ -444,14 +359,7 @@ export default function CadastroSection() {
                       disabled={!formData.nomeCompleto.trim() || !formData.whatsapp.trim()}
                       className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 disabled:cursor-not-allowed text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 disabled:hover:scale-100 focus:outline-none focus:ring-2 focus:ring-light text-sm mt-6 flex items-center justify-center gap-2"
                     >
-                      {isSuccess ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-light"></div>
-                          Processando...
-                        </>
-                      ) : (
-                        'Próximo →'
-                      )}
+                      Próximo →
                     </button>
                   </div>
                 )}
@@ -583,9 +491,9 @@ export default function CadastroSection() {
                             name="cnpj"
                             value={formData.cnpj}
                             onChange={handleInputChange}
-                        placeholder="00.000.000/0001-00"
-                        className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm transition-all duration-200 hover:shadow-md"
-                        autoComplete="organization"
+                            placeholder="00.000.000/0001-00"
+                            className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm transition-all duration-200 hover:shadow-md"
+                            autoComplete="organization"
                           />
                           {errors.cnpj && (
                             <p className="text-red-300 text-xs mt-1">
@@ -632,7 +540,7 @@ export default function CadastroSection() {
                             Como você é consumidor da marca, preparamos um
                             <strong className="text-accent"> desconto especial de 10%</strong> para suas compras!
                           </p>
-
+                          
                           <div className="bg-gradient-to-r from-accent/20 to-accent/30 p-4 rounded-xl mb-4 border border-accent/20">
                             <p className="text-light/80 text-xs mb-2 font-medium">SEU CÓDIGO DE DESCONTO:</p>
                             <div className="bg-light text-dark px-4 py-3 rounded-lg font-mono text-lg font-bold tracking-widest shadow-inner">
