@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
     if (!isValidPassword) {
       return res.status(401).json({
         success: false,
-        error: 'Credenciais inválidas'
+        error: 'Credenciais inv��lidas'
       } as ApiResponse);
     }
 
@@ -161,10 +161,10 @@ router.get('/settings', authenticateToken, async (req, res) => {
 });
 
 // POST /api/admin/settings - Atualizar configuração
-router.post('/settings', authenticateToken, (req, res) => {
+router.post('/settings', authenticateToken, async (req, res) => {
   try {
     const validation = settingSchema.safeParse(req.body);
-    
+
     if (!validation.success) {
       return res.status(400).json({
         success: false,
@@ -173,9 +173,9 @@ router.post('/settings', authenticateToken, (req, res) => {
     }
 
     const { key, value } = validation.data;
-    
+
     // Atualizar configuração
-    statements.setSetting.run(key, value);
+    await statements.setSetting.run(key, value);
 
     res.json({
       success: true,
