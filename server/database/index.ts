@@ -1,6 +1,6 @@
-import Database from 'better-sqlite3';
-import { join } from 'path';
-import { existsSync, mkdirSync } from 'fs';
+// Usar JSON storage como alternativa mais compatível
+export { statements, initDatabase } from './adapter.js';
+export { default as db } from './json-storage.js';
 
 // Criar diretório data se não existir
 const dataDir = join(process.cwd(), 'data');
