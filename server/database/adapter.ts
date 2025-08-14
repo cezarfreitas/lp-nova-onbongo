@@ -170,6 +170,11 @@ export const statements = {
         return null;
       }
     })
+  },
+
+  // Dashboard stats
+  getDashboardStats: async () => {
+    return await jsonStorage.getDashboardStats();
   }
 };
 
