@@ -157,7 +157,7 @@ class WebhookService {
 
   async testWebhook(): Promise<{ success: boolean; error?: string; response?: any }> {
     try {
-      const config = this.getConfig();
+      const config = await this.getConfig();
       
       if (!config.endpoint) {
         return { success: false, error: 'Endpoint do webhook não configurado' };
@@ -180,7 +180,7 @@ class WebhookService {
         }
       };
 
-      console.log(`🧪 Testando webhook: ${config.endpoint}`);
+      console.log(`��� Testando webhook: ${config.endpoint}`);
 
       const response = await axios({
         method: config.method as any,
