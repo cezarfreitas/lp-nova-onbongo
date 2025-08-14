@@ -210,8 +210,10 @@ const processConversions = async (lead: Lead) => {
 const processWebhook = async (lead: Lead) => {
   try {
     // Buscar configurações de webhook
-    const autoSend = statements.getSetting.get('auto_send_webhook')?.value === 'true';
-    const endpoint = statements.getSetting.get('webhook_endpoint')?.value;
+    const autoSendResult = await statements.getSetting.get('auto_send_webhook');
+    const autoSend = autoSendResult?.value === 'true';
+    const endpointResult = await statements.getSetting.get('webhook_endpoint');
+    const endpoint = endpointResult?.value;
 
     if (!autoSend) {
       console.log(`⏭️ Auto-envio de webhook desabilitado para lead ${lead.id}`);
@@ -223,7 +225,7 @@ const processWebhook = async (lead: Lead) => {
       return;
     }
 
-    console.log(`📤 Processando webhook para lead ${lead.id}`);
+    console.log(`�� Processando webhook para lead ${lead.id}`);
 
     await webhookService.sendWebhook(lead);
 
