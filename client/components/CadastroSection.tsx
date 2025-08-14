@@ -200,7 +200,7 @@ export default function CadastroSection() {
   }
 
   return (
-    <section className="min-h-screen bg-dark py-12 px-4">
+    <section className="bg-dark py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Lado Esquerdo - Benefícios */}
