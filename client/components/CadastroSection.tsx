@@ -171,28 +171,6 @@ export default function CadastroSection() {
     }
   };
 
-  const beneficios = [
-    {
-      icon: "🌍",
-      titulo: "Marca Internacional",
-      descricao: "Streetwear reconhecido mundialmente com +30 anos.",
-    },
-    {
-      icon: "📦",
-      titulo: "Pronta Entrega",
-      descricao: "+100.000 itens disponíveis para envio imediato.",
-    },
-    {
-      icon: "💻",
-      titulo: "Plataforma Digital",
-      descricao: "Catálogo 24/7 com preços exclusivos para lojistas.",
-    },
-    {
-      icon: "🎯",
-      titulo: "Suporte Completo",
-      descricao: "Treinamento, marketing e suporte especializado.",
-    },
-  ];
 
   if (isSubmitted) {
     return (
@@ -484,7 +462,7 @@ export default function CadastroSection() {
                             onClick={handlePrevStep}
                             className="flex-1 bg-dark/50 hover:bg-dark/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                           >
-                            �� Voltar
+                            ← Voltar
                           </button>
                           <button
                             type="submit"
