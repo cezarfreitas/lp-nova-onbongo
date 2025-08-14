@@ -216,45 +216,10 @@ export default function CadastroSection() {
                 </p>
               </div>
 
-              {/* Indicador de progresso */}
-              <div className="flex justify-center mb-6">
-                <div className="flex items-center space-x-3">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
-                      currentStep >= 1
-                        ? "bg-dark text-light"
-                        : "bg-dark/30 text-light/50"
-                    }`}
-                  >
-                    1
-                  </div>
-                  <div
-                    className={`w-8 h-1 transition-all duration-300 ${
-                      currentStep >= 2 ? "bg-dark" : "bg-dark/30"
-                    }`}
-                  ></div>
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
-                      currentStep >= 2
-                        ? "bg-dark text-light"
-                        : "bg-dark/30 text-light/50"
-                    }`}
-                  >
-                    2
-                  </div>
-                </div>
-              </div>
-
               <form onSubmit={handleSubmit}>
                 {/* Etapa 1: Dados Básicos */}
                 {currentStep === 1 && (
                   <div className="space-y-4 animate-fade-in">
-                    <div className="text-center mb-4">
-                      <h4 className="text-light font-medium text-sm">
-                        Etapa 1 de 2: Seus Dados
-                      </h4>
-                    </div>
-
                     {/* Nome Completo */}
                     <div>
                       <label
@@ -318,16 +283,10 @@ export default function CadastroSection() {
                 {/* Etapa 2: Tipo de Cadastro */}
                 {currentStep === 2 && (
                   <div className="space-y-4 animate-fade-in">
-                    <div className="text-center mb-4">
-                      <h4 className="text-light font-medium text-sm">
-                        Etapa 2 de 2: Tipo de Cadastro
-                      </h4>
-                    </div>
-
                     {/* Tipo de Cadastro */}
                     <div>
                       <label className="block text-light font-medium mb-3 text-sm">
-                        Como você quer se cadastrar? *
+                        Tipo de Cadastro *
                       </label>
                       <div className="space-y-2">
                         <label className="block cursor-pointer">
