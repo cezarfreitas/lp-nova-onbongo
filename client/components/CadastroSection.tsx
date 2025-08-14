@@ -195,40 +195,21 @@ export default function CadastroSection() {
     setIsLoading(true);
 
     try {
-      const leadData = {
-        nome: formData.nomeCompleto,
-        whatsapp: formData.whatsapp,
-        tipoCadastro: formData.tipoCadastro,
-        cnpj: formData.cnpj || "N/A",
-        timestamp: new Date().toISOString(),
-        source: "ONBONGO_B2B_Landing",
-        url: window.location.href
-      };
+      const leadData = formatLeadDataForWebhook(formData);
 
       console.log("✅ Dados do formulário:", leadData);
 
-      // Send to webhook if configured
-      const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
-      if (webhookUrl) {
-        try {
-          const response = await fetch(webhookUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(leadData)
-          });
+      // Send to webhook with retry logic
+      const webhookSuccess = await sendToWebhook(leadData, {
+        retries: 3,
+        timeout: 10000,
+        retryDelay: 1000
+      });
 
-          if (response.ok) {
-            console.log("✅ Dados enviados para webhook com sucesso");
-          } else {
-            console.error("❌ Erro ao enviar para webhook:", response.status, response.statusText);
-          }
-        } catch (webhookError) {
-          console.error("❌ Erro de conexão com webhook:", webhookError);
-        }
+      if (webhookSuccess) {
+        console.log("✅ Lead enviado com sucesso para webhook");
       } else {
-        console.log("⚠️ Webhook não configurado (VITE_WEBHOOK_URL)");
+        console.warn("⚠️ Falha ao enviar para webhook, mas continuando...");
       }
 
       // Track successful lead conversion
