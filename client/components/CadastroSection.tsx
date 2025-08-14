@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface FormData {
   nomeCompleto: string;
@@ -25,6 +25,23 @@ export default function CadastroSection() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Auto-focus no primeiro campo ao mudar de etapa
+  useEffect(() => {
+    if (currentStep === 1) {
+      const firstInput = document.querySelector('#nomeCompleto') as HTMLInputElement;
+      if (firstInput) {
+        setTimeout(() => firstInput.focus(), 100);
+      }
+    } else if (currentStep === 3 && formData.tipoCadastro === 'lojista') {
+      const cnpjInput = document.querySelector('#cnpj') as HTMLInputElement;
+      if (cnpjInput) {
+        setTimeout(() => cnpjInput.focus(), 100);
+      }
+    }
+  }, [currentStep, formData.tipoCadastro]);
 
   // Máscara para WhatsApp
   const formatWhatsApp = (value: string): string => {
@@ -102,11 +119,22 @@ export default function CadastroSection() {
       [name]: formattedValue,
     }));
 
+    // Limpar erro em tempo real
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({
         ...prev,
         [name]: undefined,
       }));
+    }
+  };
+
+  // Manipular tecla Enter para avançar etapas
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (currentStep === 1 && validateStep1()) {
+        setCurrentStep(2);
+      }
     }
   };
 
@@ -145,12 +173,15 @@ export default function CadastroSection() {
     setIsLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Animação de sucesso
+      setIsSuccess(true);
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       console.log("Dados do formulário:", formData);
       setIsSubmitted(true);
 
       setTimeout(() => {
         setIsSubmitted(false);
+        setIsSuccess(false);
         setFormData({
           nomeCompleto: "",
           whatsapp: "",
@@ -158,7 +189,7 @@ export default function CadastroSection() {
           cnpj: "",
         });
         setCurrentStep(1);
-      }, 3000);
+      }, 4000);
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
     } finally {
@@ -169,24 +200,29 @@ export default function CadastroSection() {
   if (isSubmitted) {
     return (
       <section className="bg-accent py-16 px-4 flex items-center justify-center">
-        <div className="text-center text-dark max-w-sm">
-          <div className="text-5xl mb-4">🎉</div>
+        <div className="text-center text-dark max-w-sm animate-fade-in">
+          <div className="text-5xl mb-4 animate-bounce">🎉</div>
           <h2 className="font-display text-2xl font-bold text-dark mb-3">
             {formData.tipoCadastro === "lojista" ? "Cadastro Realizado!" : "Cupom Gerado!"}
           </h2>
-          <p className="text-dark/80 mb-4 text-sm">
-            {formData.tipoCadastro === "lojista" 
-              ? "Nossa equipe entrará em contato via WhatsApp em breve."
-              : "Seu cupom de 10% foi gerado com sucesso!"
+          <p className="text-dark/80 mb-4 text-sm leading-relaxed">
+            {formData.tipoCadastro === "lojista"
+              ? "Nossa equipe entrará em contato via WhatsApp em breve para finalizar sua parceria."
+              : "Seu cupom de desconto foi gerado com sucesso!"
             }
           </p>
-          <div className="bg-dark/20 p-3 rounded-lg">
-            <p className="text-dark/70 text-xs">
-              {formData.tipoCadastro === "lojista" 
+          <div className="bg-dark/10 p-4 rounded-xl border border-dark/20">
+            <p className="text-dark/70 text-xs font-medium">
+              {formData.tipoCadastro === "lojista"
                 ? "⏱️ Resposta em até 2 horas úteis"
                 : "🎁 Use o código: ONBONGO10"
               }
             </p>
+            {formData.tipoCadastro === "consumidor" && (
+              <p className="text-dark/60 text-xs mt-1">
+                Válido por 30 dias no site oficial
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -215,18 +251,40 @@ export default function CadastroSection() {
 
           {/* Lado Direito - Formulário */}
           <div className="lg:pl-6">
-            <div className="bg-dark rounded-2xl p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl">
+            <div className="bg-dark rounded-2xl p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl relative overflow-hidden">
+              {/* Indicador de progresso */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-accent/20">
+                <div
+                  className="h-full bg-accent transition-all duration-500 ease-out"
+                  style={{ width: `${(currentStep / 3) * 100}%` }}
+                ></div>
+              </div>
               {/* Header do formulário */}
-              <div className="text-center mb-6">
+              <div className="text-center mb-6 pt-2">
                 <h3 className="text-light font-bold text-xl mb-1">
-                  Cadastre-se Agora
+                  {currentStep === 1 ? 'Cadastre-se Agora' :
+                   currentStep === 2 ? 'Tipo de Cadastro' :
+                   'Finalizar Cadastro'}
                 </h3>
                 <p className="text-light/90 text-sm">
-                  Comece sua jornada como lojista oficial Onbongo
+                  {currentStep === 1 ? 'Comece sua jornada como lojista oficial' :
+                   currentStep === 2 ? 'Escolha o tipo de cadastro desejado' :
+                   formData.tipoCadastro === 'lojista' ? 'Dados da sua empresa' :
+                   'Parabéns! Você ganhou um desconto'}
                 </p>
+                <div className="flex justify-center gap-2 mt-3">
+                  {[1, 2, 3].map((step) => (
+                    <div
+                      key={step}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        step <= currentStep ? 'bg-accent' : 'bg-accent/30'
+                      }`}
+                    ></div>
+                  ))}
+                </div>
               </div>
 
-              <form onSubmit={handleSubmit}>
+              <form ref={formRef} onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
                 {/* Etapa 1: Dados Básicos */}
                 {currentStep === 1 && (
                   <div className="space-y-4 animate-fade-in">
@@ -245,8 +303,8 @@ export default function CadastroSection() {
                         value={formData.nomeCompleto}
                         onChange={handleInputChange}
                         placeholder="Seu nome completo"
-                        className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
-                        autoFocus
+                        className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm transition-all duration-200 hover:shadow-md"
+                        autoComplete="name"
                       />
                       {errors.nomeCompleto && (
                         <p className="text-red-300 text-xs mt-1">
@@ -270,7 +328,8 @@ export default function CadastroSection() {
                         value={formData.whatsapp}
                         onChange={handleInputChange}
                         placeholder="(11) 99999-9999"
-                        className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
+                        className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm transition-all duration-200 hover:shadow-md"
+                        autoComplete="tel"
                       />
                       {errors.whatsapp && (
                         <p className="text-red-300 text-xs mt-1">
@@ -283,9 +342,17 @@ export default function CadastroSection() {
                     <button
                       type="button"
                       onClick={handleNextStep}
-                      className="w-full bg-accent hover:bg-accent/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm mt-6"
+                      disabled={!formData.nomeCompleto.trim() || !formData.whatsapp.trim()}
+                      className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 disabled:cursor-not-allowed text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 disabled:hover:scale-100 focus:outline-none focus:ring-2 focus:ring-light text-sm mt-6 flex items-center justify-center gap-2"
                     >
-                      Próximo →
+                      {isSuccess ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-light"></div>
+                          Processando...
+                        </>
+                      ) : (
+                        'Próximo →'
+                      )}
                     </button>
                   </div>
                 )}
@@ -417,9 +484,9 @@ export default function CadastroSection() {
                             name="cnpj"
                             value={formData.cnpj}
                             onChange={handleInputChange}
-                            placeholder="00.000.000/0001-00"
-                            className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
-                            autoFocus
+                        placeholder="00.000.000/0001-00"
+                        className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm transition-all duration-200 hover:shadow-md"
+                        autoComplete="organization"
                           />
                           {errors.cnpj && (
                             <p className="text-red-300 text-xs mt-1">
@@ -458,19 +525,24 @@ export default function CadastroSection() {
                     ) : (
                       // Para Consumidores: Cupom
                       <>
-                        <div className="text-center py-2">
-                          <div className="text-3xl mb-2">🎁</div>
-                          <h4 className="text-light font-bold text-base mb-2">
-                            Cadastro não disponível
+                        <div className="text-center py-4">
+                          <div className="text-4xl mb-3 animate-pulse">🎁</div>
+                          <h4 className="text-light font-bold text-lg mb-2">
+                            Desconto Exclusivo!
                           </h4>
-                          <p className="text-light/80 text-xs mb-3">
-                            <strong>Ganhe 10% OFF no site oficial!</strong>
+                          <p className="text-light/90 text-sm mb-4 leading-relaxed">
+                            Como você é consumidor, preparamos um
+                            <strong className="text-accent"> desconto especial de 10%</strong> para suas compras!
                           </p>
-                          
-                          <div className="bg-accent/30 p-3 rounded-xl mb-3">
-                            <div className="bg-light text-dark px-2 py-2 rounded-lg font-mono text-sm font-bold">
+
+                          <div className="bg-gradient-to-r from-accent/20 to-accent/30 p-4 rounded-xl mb-4 border border-accent/20">
+                            <p className="text-light/80 text-xs mb-2 font-medium">SEU CÓDIGO DE DESCONTO:</p>
+                            <div className="bg-light text-dark px-4 py-3 rounded-lg font-mono text-lg font-bold tracking-widest shadow-inner">
                               ONBONGO10
                             </div>
+                            <p className="text-light/70 text-xs mt-2">
+                              💾 Salve este código para usar no checkout
+                            </p>
                           </div>
                         </div>
 
@@ -489,9 +561,9 @@ export default function CadastroSection() {
                               window.open('https://www.onbongo.com.br', '_blank');
                               handleSubmit(new Event('submit') as any);
                             }}
-                            className="flex-2 bg-accent hover:bg-accent/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm"
+                            className="flex-2 bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm shadow-lg"
                           >
-                            🛒 Ir para Site Oficial
+                            🛒 Usar Desconto Agora
                           </button>
                         </div>
                       </>
