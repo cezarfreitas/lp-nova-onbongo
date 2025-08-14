@@ -44,9 +44,12 @@ const getClientIP = (req: any): string => {
 // POST /api/leads - Criar novo lead
 router.post('/', async (req, res) => {
   try {
+    console.log('📩 Payload recebido:', JSON.stringify(req.body, null, 2));
+
     const validation = leadSchema.safeParse(req.body);
-    
+
     if (!validation.success) {
+      console.log('❌ Validação falhou:', JSON.stringify(validation.error.errors, null, 2));
       return res.status(400).json({
         success: false,
         error: 'Dados inválidos',
