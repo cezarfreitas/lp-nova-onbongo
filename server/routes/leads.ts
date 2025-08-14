@@ -71,7 +71,7 @@ router.post('/', async (req, res) => {
     const session_id = tracking?.session_id || crypto.randomUUID();
 
     // Inserir lead no banco
-    const result = statements.insertLead.run(
+    const result = await statements.insertLead.run(
       nome_completo,
       whatsapp,
       tipo_cadastro,
@@ -89,7 +89,7 @@ router.post('/', async (req, res) => {
     );
 
     const leadId = result.lastInsertRowid as number;
-    const newLead = statements.getLeadById.get(leadId) as Lead;
+    const newLead = await statements.getLeadById.get(leadId) as Lead;
 
     // Processar conversões e webhooks assíncronos
     setImmediate(() => {
