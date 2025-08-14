@@ -21,7 +21,7 @@ export function createServer() {
     cors({
       origin:
         process.env.NODE_ENV === "production"
-          ? ["https://lojista.onbongo.com.br", "https://www.onbongo.com.br"]
+          ? ["http://b2b.onbongo.com.br", "https://www.onbongo.com.br"]
           : true,
       credentials: true,
     }),
