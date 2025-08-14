@@ -112,6 +112,11 @@
     transition: none !important;
   }
 
+  /* Animação fade-in para elementos dinâmicos */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
   /* Performance: reduce motion para acessibilidade */
   @media (prefers-reduced-motion: reduce) {
     *,
