@@ -4,11 +4,13 @@ interface FormData {
   nomeCompleto: string;
   whatsapp: string;
   tipoCadastro: "lojista" | "consumidor";
+  cnpj: string;
 }
 
 interface FormErrors {
   nomeCompleto?: string;
   whatsapp?: string;
+  cnpj?: string;
 }
 
 export default function CadastroSection() {
@@ -17,6 +19,7 @@ export default function CadastroSection() {
     nomeCompleto: "",
     whatsapp: "",
     tipoCadastro: "lojista",
+    cnpj: "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -28,6 +31,18 @@ export default function CadastroSection() {
     const numbers = value.replace(/\D/g, "");
     if (numbers.length <= 11) {
       return numbers.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+    }
+    return value;
+  };
+
+  // Máscara para CNPJ
+  const formatCNPJ = (value: string): string => {
+    const numbers = value.replace(/\D/g, "");
+    if (numbers.length <= 14) {
+      return numbers.replace(
+        /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
+        "$1.$2.$3/$4-$5"
+      );
     }
     return value;
   };
@@ -53,12 +68,33 @@ export default function CadastroSection() {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Validações para etapa 3 (CNPJ)
+  const validateStep3 = (): boolean => {
+    if (formData.tipoCadastro === "consumidor") {
+      return true; // Não precisa validar nada para consumidor
+    }
+
+    const newErrors: FormErrors = {};
+    const cnpjNumbers = formData.cnpj.replace(/\D/g, "");
+    
+    if (!cnpjNumbers) {
+      newErrors.cnpj = "CNPJ é obrigatório";
+    } else if (cnpjNumbers.length !== 14) {
+      newErrors.cnpj = "CNPJ deve ter 14 dígitos";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     let formattedValue = value;
 
     if (name === "whatsapp") {
       formattedValue = formatWhatsApp(value);
+    } else if (name === "cnpj") {
+      formattedValue = formatCNPJ(value);
     }
 
     setFormData((prev) => ({
@@ -84,6 +120,9 @@ export default function CadastroSection() {
   const handleNextStep = () => {
     if (currentStep === 1 && validateStep1()) {
       setCurrentStep(2);
+    } else if (currentStep === 2) {
+      // Sempre avança da etapa 2 para 3, independente do tipo
+      setCurrentStep(3);
     }
   };
 
@@ -95,6 +134,12 @@ export default function CadastroSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Se for consumidor, não precisa validar CNPJ
+    if (formData.tipoCadastro === "lojista" && !validateStep3()) {
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -108,6 +153,7 @@ export default function CadastroSection() {
           nomeCompleto: "",
           whatsapp: "",
           tipoCadastro: "lojista",
+          cnpj: "",
         });
         setCurrentStep(1);
       }, 3000);
@@ -147,14 +193,20 @@ export default function CadastroSection() {
         <div className="text-center text-light max-w-sm">
           <div className="text-5xl mb-4">🎉</div>
           <h2 className="font-display text-2xl font-bold text-accent mb-3">
-            Cadastro Realizado!
+            {formData.tipoCadastro === "lojista" ? "Cadastro Realizado!" : "Cupom Gerado!"}
           </h2>
           <p className="text-light/80 mb-4 text-sm">
-            Nossa equipe entrará em contato via WhatsApp em breve.
+            {formData.tipoCadastro === "lojista" 
+              ? "Nossa equipe entrará em contato via WhatsApp em breve."
+              : "Seu cupom de 10% foi gerado com sucesso!"
+            }
           </p>
           <div className="bg-accent/20 p-3 rounded-lg">
             <p className="text-light/70 text-xs">
-              ⏱️ Resposta em até 2 horas úteis
+              {formData.tipoCadastro === "lojista" 
+                ? "⏱️ Resposta em até 2 horas úteis"
+                : "🎁 Use o código: ONBONGO10"
+              }
             </p>
           </div>
         </div>
@@ -385,22 +437,122 @@ export default function CadastroSection() {
                         ← Voltar
                       </button>
                       <button
-                        type="submit"
-                        disabled={isLoading}
-                        className="flex-2 bg-dark hover:bg-dark/90 disabled:bg-dark/50 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 text-sm"
+                        type="button"
+                        onClick={handleNextStep}
+                        className="flex-2 bg-dark hover:bg-dark/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm"
                       >
-                        {isLoading ? (
-                          <>
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-light"></div>
-                            Enviando...
-                          </>
-                        ) : (
-                          <>
-                            ✓ Finalizar Cadastro!
-                          </>
-                        )}
+                        Próximo →
                       </button>
                     </div>
+                  </div>
+                )}
+
+                {/* Etapa 3: CNPJ ou Cupom */}
+                {currentStep === 3 && (
+                  <div className="space-y-4 animate-fade-in">
+                    {formData.tipoCadastro === "lojista" ? (
+                      // Para Lojistas: Campo CNPJ
+                      <>
+                        <div>
+                          <label
+                            htmlFor="cnpj"
+                            className="block text-light font-medium mb-2 text-sm"
+                          >
+                            CNPJ *
+                          </label>
+                          <input
+                            type="text"
+                            id="cnpj"
+                            name="cnpj"
+                            value={formData.cnpj}
+                            onChange={handleInputChange}
+                            placeholder="00.000.000/0001-00"
+                            className="w-full px-3 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-dark text-sm"
+                            autoFocus
+                          />
+                          {errors.cnpj && (
+                            <p className="text-red-200 text-xs mt-1">
+                              {errors.cnpj}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Botões de Navegação */}
+                        <div className="flex gap-3 mt-6">
+                          <button
+                            type="button"
+                            onClick={handlePrevStep}
+                            className="flex-1 bg-dark/50 hover:bg-dark/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
+                          >
+                            ← Voltar
+                          </button>
+                          <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="flex-2 bg-dark hover:bg-dark/90 disabled:bg-dark/50 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 text-sm"
+                          >
+                            {isLoading ? (
+                              <>
+                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-light"></div>
+                                Enviando...
+                              </>
+                            ) : (
+                              <>
+                                ✓ Finalizar Cadastro!
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      // Para Consumidores: Cupom
+                      <>
+                        <div className="text-center py-4">
+                          <div className="text-4xl mb-4">🎁</div>
+                          <h4 className="text-light font-bold text-lg mb-3">
+                            Ops! Cadastro Lojista não disponível
+                          </h4>
+                          <p className="text-light/80 text-sm mb-4 leading-relaxed">
+                            Como consumidor, você não pode se cadastrar como lojista.
+                            <br />
+                            <strong>Mas temos algo especial para você!</strong>
+                          </p>
+                          
+                          <div className="bg-dark/30 p-4 rounded-xl mb-4">
+                            <h5 className="text-accent font-bold text-base mb-2">
+                              🎉 Cupom de 10% OFF
+                            </h5>
+                            <p className="text-light/80 text-sm mb-3">
+                              Ganhe 10% de desconto no site oficial da ONBONGO
+                            </p>
+                            <div className="bg-light text-dark px-3 py-2 rounded-lg font-mono text-sm font-bold">
+                              ONBONGO10
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Botões de Navegação */}
+                        <div className="flex gap-3 mt-6">
+                          <button
+                            type="button"
+                            onClick={handlePrevStep}
+                            className="flex-1 bg-dark/50 hover:bg-dark/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
+                          >
+                            ← Voltar
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              window.open('https://www.onbongo.com.br', '_blank');
+                              handleSubmit(new Event('submit') as any);
+                            }}
+                            className="flex-2 bg-dark hover:bg-dark/90 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm"
+                          >
+                            🛒 Ir para Site Oficial
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
               </form>
