@@ -15,38 +15,38 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
         {/* Logo */}
-        <div className="mb-12">
-          <h2 className="text-2xl md:text-3xl font-display font-normal tracking-super-wide text-white">
+        <div className="mb-8">
+          <h2 className="text-2xl md:text-3xl font-display font-semibold tracking-wide text-white">
             ONBONGO
           </h2>
         </div>
 
         {/* Subtitle */}
-        <p className="text-sm md:text-base lg:text-lg mb-12 text-white/80 max-w-3xl mx-auto font-light tracking-wide leading-relaxed">
-          Aproveite a oportunidade. Vender uma das maiores marcas do Brasil e do mundo.
+        <p className="text-sm md:text-base mb-10 text-white/90 max-w-3xl mx-auto font-normal leading-relaxed">
+          Aproveite a oportunidade de vender uma das maiores marcas do Brasil e do mundo.
         </p>
 
         {/* Main heading */}
-        <h1 className="font-display font-normal mb-8 leading-none tracking-wide">
-          <div className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-3 text-white">SEJA UM</div>
-          <div className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-3 text-white">LOJISTA OFICIAL</div>
-          <div className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-orange-500 drop-shadow-lg">ONBONGO</div>
+        <h1 className="font-display font-bold mb-8 leading-tight">
+          <div className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-2 text-white">SEJA UM</div>
+          <div className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-2 text-white">LOJISTA OFICIAL</div>
+          <div className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-orange-500">ONBONGO</div>
         </h1>
 
         {/* Description */}
-        <p className="text-base md:text-lg lg:text-xl mb-12 text-white/85 max-w-3xl mx-auto leading-relaxed font-normal tracking-wide">
+        <p className="text-base md:text-lg mb-10 text-white/90 max-w-2xl mx-auto leading-relaxed font-normal">
           Cadastre-se agora e tenha acesso à nossa plataforma digital com<br className="hidden md:block" />
           preços exclusivos para lojistas.
         </p>
 
         {/* CTA Button */}
-        <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-10 py-5 rounded-lg text-lg md:text-xl transition-all duration-300 mb-16 tracking-wide hover:scale-105 hover:shadow-xl shadow-orange-500/20">
-          Começar Agora →
+        <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-lg text-base md:text-lg transition-all duration-300 mb-12 tracking-wide hover:scale-105">
+          Começar Agora! →
         </button>
 
         {/* Bottom text */}
         <p className="text-xs md:text-sm text-white/60 tracking-extra-wide font-medium uppercase">
-          Marcas Líder em Streetwear
+          Marca Líder em Streetwear
         </p>
       </div>
     </section>
