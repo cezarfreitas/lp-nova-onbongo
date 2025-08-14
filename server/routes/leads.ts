@@ -185,40 +185,49 @@ router.get('/:id', (req, res) => {
   }
 });
 
-// Função para processar conversões (será implementada posteriormente)
+// Função para processar conversões
 const processConversions = async (lead: Lead) => {
   try {
     // Buscar configurações de conversão
     const autoSend = statements.getSetting.get('auto_send_conversions')?.value === 'true';
-    
-    if (!autoSend) return;
 
-    console.log(`Processing conversions for lead ${lead.id}`);
-    
-    // Aqui implementaremos o envio para Meta, GA4, TikTok
-    // Por enquanto, apenas log
-    
+    if (!autoSend) {
+      console.log(`⏭️ Auto-envio de conversões desabilitado para lead ${lead.id}`);
+      return;
+    }
+
+    console.log(`📊 Processando conversões para lead ${lead.id}`);
+
+    await conversionsService.sendAllConversions(lead);
+
   } catch (error) {
-    console.error('Erro ao processar conversões:', error);
+    console.error('❌ Erro ao processar conversões:', error);
   }
 };
 
-// Função para processar webhook (será implementada posteriormente)
+// Função para processar webhook
 const processWebhook = async (lead: Lead) => {
   try {
     // Buscar configurações de webhook
     const autoSend = statements.getSetting.get('auto_send_webhook')?.value === 'true';
     const endpoint = statements.getSetting.get('webhook_endpoint')?.value;
-    
-    if (!autoSend || !endpoint) return;
 
-    console.log(`Processing webhook for lead ${lead.id} to ${endpoint}`);
-    
-    // Aqui implementaremos o envio do webhook
-    // Por enquanto, apenas log
-    
+    if (!autoSend) {
+      console.log(`⏭️ Auto-envio de webhook desabilitado para lead ${lead.id}`);
+      return;
+    }
+
+    if (!endpoint) {
+      console.log(`⚠️ Endpoint do webhook não configurado para lead ${lead.id}`);
+      return;
+    }
+
+    console.log(`📤 Processando webhook para lead ${lead.id}`);
+
+    await webhookService.sendWebhook(lead);
+
   } catch (error) {
-    console.error('Erro ao processar webhook:', error);
+    console.error('❌ Erro ao processar webhook:', error);
   }
 };
 
