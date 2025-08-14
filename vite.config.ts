@@ -30,10 +30,13 @@ function expressPlugin(): Plugin {
     name: "express-plugin",
     apply: "serve", // Only apply during development (serve mode)
     configureServer(server) {
-      const app = createServer();
-
-      // Add Express app as middleware to Vite dev server
-      server.middlewares.use(app);
+      // Only initialize server during dev mode
+      import("./server/index.js").then(({ createServer }) => {
+        const app = createServer();
+        server.middlewares.use(app);
+      }).catch(err => {
+        console.warn("Failed to initialize Express server:", err.message);
+      });
     },
   };
 }
