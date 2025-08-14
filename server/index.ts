@@ -9,6 +9,14 @@ import adminRouter from "./routes/admin.js";
 export function createServer() {
   const app = express();
 
+  // Inicializar banco de dados
+  try {
+    initDatabase();
+    console.log('✅ Banco de dados inicializado com sucesso');
+  } catch (error) {
+    console.error('❌ Erro ao inicializar banco de dados:', error);
+  }
+
   // Cache headers para assets estáticos
   app.use((req, res, next) => {
     if (
