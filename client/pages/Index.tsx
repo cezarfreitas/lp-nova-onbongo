@@ -9,10 +9,10 @@ export default function Index() {
       <SEO />
       <main className="min-h-screen">
         <Hero />
-        <Gallery />
         <div id="cadastro-section">
           <CadastroSection />
         </div>
+        <Gallery />
       </main>
     </>
   );
