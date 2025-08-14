@@ -3,11 +3,15 @@ import { statements } from '../database/index.js';
 import { Lead, WebhookConfig } from '../types/index.js';
 
 class WebhookService {
-  private getConfig(): WebhookConfig {
-    const endpoint = statements.getSetting.get('webhook_endpoint')?.value;
-    const method = statements.getSetting.get('webhook_method')?.value || 'POST';
-    const headersJson = statements.getSetting.get('webhook_headers')?.value || '{}';
-    const authToken = statements.getSetting.get('webhook_auth_token')?.value;
+  private async getConfig(): Promise<WebhookConfig> {
+    const endpointResult = await statements.getSetting.get('webhook_endpoint');
+    const endpoint = endpointResult?.value;
+    const methodResult = await statements.getSetting.get('webhook_method');
+    const method = methodResult?.value || 'POST';
+    const headersResult = await statements.getSetting.get('webhook_headers');
+    const headersJson = headersResult?.value || '{}';
+    const authTokenResult = await statements.getSetting.get('webhook_auth_token');
+    const authToken = authTokenResult?.value;
 
     let headers: Record<string, string> = {
       'Content-Type': 'application/json'
