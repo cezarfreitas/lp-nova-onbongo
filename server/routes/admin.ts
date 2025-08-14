@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
     if (!isValidPassword) {
       return res.status(401).json({
         success: false,
-        error: 'Credenciais inv��lidas'
+        error: 'Credenciais inválidas'
       } as ApiResponse);
     }
 
@@ -192,10 +192,10 @@ router.post('/settings', authenticateToken, async (req, res) => {
 });
 
 // POST /api/admin/settings/bulk - Atualizar múltiplas configurações
-router.post('/settings/bulk', authenticateToken, (req, res) => {
+router.post('/settings/bulk', authenticateToken, async (req, res) => {
   try {
     const settings = req.body.settings;
-    
+
     if (!Array.isArray(settings)) {
       return res.status(400).json({
         success: false,
@@ -216,7 +216,7 @@ router.post('/settings/bulk', authenticateToken, (req, res) => {
 
     // Atualizar todas as configurações
     for (const setting of settings) {
-      statements.setSetting.run(setting.key, setting.value);
+      await statements.setSetting.run(setting.key, setting.value);
     }
 
     res.json({
