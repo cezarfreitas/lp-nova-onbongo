@@ -2,25 +2,19 @@ import { useState } from "react";
 
 interface FormData {
   nomeCompleto: string;
-  email: string;
   whatsapp: string;
-  cnpj: string;
   tipoCadastro: "lojista" | "consumidor";
 }
 
 interface FormErrors {
   nomeCompleto?: string;
-  email?: string;
   whatsapp?: string;
-  cnpj?: string;
 }
 
 export default function CadastroSection() {
   const [formData, setFormData] = useState<FormData>({
     nomeCompleto: "",
-    email: "",
     whatsapp: "",
-    cnpj: "",
     tipoCadastro: "lojista",
   });
 
@@ -37,18 +31,6 @@ export default function CadastroSection() {
     return value;
   };
 
-  // Máscara para CNPJ
-  const formatCNPJ = (value: string): string => {
-    const numbers = value.replace(/\D/g, "");
-    if (numbers.length <= 14) {
-      return numbers.replace(
-        /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
-        "$1.$2.$3/$4-$5"
-      );
-    }
-    return value;
-  };
-
   // Validações
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -60,30 +42,12 @@ export default function CadastroSection() {
       newErrors.nomeCompleto = "Nome deve ter pelo menos 3 caracteres";
     }
 
-    // Email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim()) {
-      newErrors.email = "E-mail é obrigatório";
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "E-mail inválido";
-    }
-
     // WhatsApp
     const whatsappNumbers = formData.whatsapp.replace(/\D/g, "");
     if (!whatsappNumbers) {
       newErrors.whatsapp = "WhatsApp é obrigatório";
     } else if (whatsappNumbers.length !== 11) {
       newErrors.whatsapp = "WhatsApp deve ter 11 dígitos";
-    }
-
-    // CNPJ (só para lojistas)
-    if (formData.tipoCadastro === "lojista") {
-      const cnpjNumbers = formData.cnpj.replace(/\D/g, "");
-      if (!cnpjNumbers) {
-        newErrors.cnpj = "CNPJ é obrigatório para lojistas";
-      } else if (cnpjNumbers.length !== 14) {
-        newErrors.cnpj = "CNPJ deve ter 14 dígitos";
-      }
     }
 
     setErrors(newErrors);
@@ -94,11 +58,9 @@ export default function CadastroSection() {
     const { name, value } = e.target;
     let formattedValue = value;
 
-    // Aplicar máscaras
+    // Aplicar máscara para WhatsApp
     if (name === "whatsapp") {
       formattedValue = formatWhatsApp(value);
-    } else if (name === "cnpj") {
-      formattedValue = formatCNPJ(value);
     }
 
     setFormData((prev) => ({
@@ -119,16 +81,7 @@ export default function CadastroSection() {
     setFormData((prev) => ({
       ...prev,
       tipoCadastro: tipo,
-      cnpj: tipo === "consumidor" ? "" : prev.cnpj, // Limpar CNPJ se for consumidor
     }));
-
-    // Limpar erro de CNPJ se mudar para consumidor
-    if (tipo === "consumidor" && errors.cnpj) {
-      setErrors((prev) => ({
-        ...prev,
-        cnpj: undefined,
-      }));
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -152,9 +105,7 @@ export default function CadastroSection() {
         setIsSubmitted(false);
         setFormData({
           nomeCompleto: "",
-          email: "",
           whatsapp: "",
-          cnpj: "",
           tipoCadastro: "lojista",
         });
       }, 3000);
@@ -257,12 +208,12 @@ export default function CadastroSection() {
 
           {/* Lado Direito - Formulário */}
           <div className="lg:pl-8">
-            <div className="bg-accent rounded-2xl p-8 max-w-md mx-auto lg:mx-0 shadow-2xl">
-              <h3 className="text-light font-bold text-2xl mb-2">
+            <div className="bg-accent rounded-3xl p-8 max-w-md mx-auto lg:mx-0 shadow-2xl">
+              <h3 className="text-light font-bold text-2xl mb-2 text-center">
                 Cadastre-se Agora
               </h3>
-              <p className="text-light/90 text-sm mb-8">
-                Comece sua jornada como lojista oficial ONBONGO
+              <p className="text-light/90 text-center mb-8">
+                Comece sua jornada como lojista oficial Onbongo
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -270,7 +221,7 @@ export default function CadastroSection() {
                 <div>
                   <label
                     htmlFor="nomeCompleto"
-                    className="block text-light font-medium mb-2"
+                    className="block text-light font-medium mb-3"
                   >
                     Nome Completo *
                   </label>
@@ -281,44 +232,13 @@ export default function CadastroSection() {
                     value={formData.nomeCompleto}
                     onChange={handleInputChange}
                     placeholder="Seu nome completo"
-                    className={`w-full px-4 py-3 rounded-lg bg-light text-dark placeholder:text-muted border-2 transition-colors focus:outline-none ${
-                      errors.nomeCompleto
-                        ? "border-red-500 focus:border-red-500"
-                        : "border-transparent focus:border-dark"
-                    }`}
+                    className="w-full px-4 py-4 rounded-2xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-dark text-base"
                     disabled={isLoading}
                   />
                   {errors.nomeCompleto && (
-                    <p className="text-red-200 text-sm mt-1">
+                    <p className="text-red-200 text-sm mt-2">
                       {errors.nomeCompleto}
                     </p>
-                  )}
-                </div>
-
-                {/* E-mail */}
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-light font-medium mb-2"
-                  >
-                    E-mail *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="seu@email.com"
-                    className={`w-full px-4 py-3 rounded-lg bg-light text-dark placeholder:text-muted border-2 transition-colors focus:outline-none ${
-                      errors.email
-                        ? "border-red-500 focus:border-red-500"
-                        : "border-transparent focus:border-dark"
-                    }`}
-                    disabled={isLoading}
-                  />
-                  {errors.email && (
-                    <p className="text-red-200 text-sm mt-1">{errors.email}</p>
                   )}
                 </div>
 
@@ -326,7 +246,7 @@ export default function CadastroSection() {
                 <div>
                   <label
                     htmlFor="whatsapp"
-                    className="block text-light font-medium mb-2"
+                    className="block text-light font-medium mb-3"
                   >
                     WhatsApp *
                   </label>
@@ -337,15 +257,11 @@ export default function CadastroSection() {
                     value={formData.whatsapp}
                     onChange={handleInputChange}
                     placeholder="(11) 99999-9999"
-                    className={`w-full px-4 py-3 rounded-lg bg-light text-dark placeholder:text-muted border-2 transition-colors focus:outline-none ${
-                      errors.whatsapp
-                        ? "border-red-500 focus:border-red-500"
-                        : "border-transparent focus:border-dark"
-                    }`}
+                    className="w-full px-4 py-4 rounded-2xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-dark text-base"
                     disabled={isLoading}
                   />
                   {errors.whatsapp && (
-                    <p className="text-red-200 text-sm mt-1">
+                    <p className="text-red-200 text-sm mt-2">
                       {errors.whatsapp}
                     </p>
                   )}
@@ -357,80 +273,99 @@ export default function CadastroSection() {
                     Tipo de Cadastro *
                   </label>
                   <div className="space-y-3">
-                    <label className="flex items-center cursor-pointer group">
-                      <input
-                        type="radio"
-                        name="tipoCadastro"
-                        value="lojista"
-                        checked={formData.tipoCadastro === "lojista"}
-                        onChange={() => handleTipoChange("lojista")}
-                        className="mr-3 w-4 h-4 text-dark"
-                        disabled={isLoading}
-                      />
-                      <div className="group-hover:bg-light/10 p-2 rounded transition-colors">
-                        <div className="text-light font-medium">Sou Lojista</div>
-                        <div className="text-light/70 text-sm">
-                          Tenho CNPJ e quero revender
+                    <label className="block cursor-pointer">
+                      <div
+                        className={`p-4 rounded-2xl transition-all duration-300 ${
+                          formData.tipoCadastro === "lojista"
+                            ? "bg-dark/30 border-2 border-light/20"
+                            : "bg-dark/20 border-2 border-transparent hover:bg-dark/25"
+                        }`}
+                      >
+                        <div className="flex items-center">
+                          <div className="relative mr-3">
+                            <input
+                              type="radio"
+                              name="tipoCadastro"
+                              value="lojista"
+                              checked={formData.tipoCadastro === "lojista"}
+                              onChange={() => handleTipoChange("lojista")}
+                              className="sr-only"
+                              disabled={isLoading}
+                            />
+                            <div
+                              className={`w-5 h-5 rounded-full border-2 ${
+                                formData.tipoCadastro === "lojista"
+                                  ? "border-light bg-light"
+                                  : "border-light/60"
+                              }`}
+                            >
+                              {formData.tipoCadastro === "lojista" && (
+                                <div className="w-full h-full rounded-full bg-accent scale-50"></div>
+                              )}
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-light font-medium">
+                              Sou Lojista
+                            </div>
+                            <div className="text-light/70 text-sm">
+                              Tenho CNPJ e quero revender
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </label>
 
-                    <label className="flex items-center cursor-pointer group">
-                      <input
-                        type="radio"
-                        name="tipoCadastro"
-                        value="consumidor"
-                        checked={formData.tipoCadastro === "consumidor"}
-                        onChange={() => handleTipoChange("consumidor")}
-                        className="mr-3 w-4 h-4 text-dark"
-                        disabled={isLoading}
-                      />
-                      <div className="group-hover:bg-light/10 p-2 rounded transition-colors">
-                        <div className="text-light font-medium">
-                          Sou Consumidor
-                        </div>
-                        <div className="text-light/70 text-sm">
-                          Quero comprar para uso próprio
+                    <label className="block cursor-pointer">
+                      <div
+                        className={`p-4 rounded-2xl transition-all duration-300 ${
+                          formData.tipoCadastro === "consumidor"
+                            ? "bg-dark/30 border-2 border-light/20"
+                            : "bg-dark/20 border-2 border-transparent hover:bg-dark/25"
+                        }`}
+                      >
+                        <div className="flex items-center">
+                          <div className="relative mr-3">
+                            <input
+                              type="radio"
+                              name="tipoCadastro"
+                              value="consumidor"
+                              checked={formData.tipoCadastro === "consumidor"}
+                              onChange={() => handleTipoChange("consumidor")}
+                              className="sr-only"
+                              disabled={isLoading}
+                            />
+                            <div
+                              className={`w-5 h-5 rounded-full border-2 ${
+                                formData.tipoCadastro === "consumidor"
+                                  ? "border-light bg-light"
+                                  : "border-light/60"
+                              }`}
+                            >
+                              {formData.tipoCadastro === "consumidor" && (
+                                <div className="w-full h-full rounded-full bg-accent scale-50"></div>
+                              )}
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-light font-medium">
+                              Sou Consumidor
+                            </div>
+                            <div className="text-light/70 text-sm">
+                              Quero comprar para uso próprio
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </label>
                   </div>
                 </div>
 
-                {/* CNPJ - só aparece para lojistas */}
-                {formData.tipoCadastro === "lojista" && (
-                  <div className="animate-fade-in">
-                    <label
-                      htmlFor="cnpj"
-                      className="block text-light font-medium mb-2"
-                    >
-                      CNPJ *
-                    </label>
-                    <input
-                      type="text"
-                      id="cnpj"
-                      name="cnpj"
-                      value={formData.cnpj}
-                      onChange={handleInputChange}
-                      placeholder="00.000.000/0001-00"
-                      className={`w-full px-4 py-3 rounded-lg bg-light text-dark placeholder:text-muted border-2 transition-colors focus:outline-none ${
-                        errors.cnpj
-                          ? "border-red-500 focus:border-red-500"
-                          : "border-transparent focus:border-dark"
-                      }`}
-                      disabled={isLoading}
-                    />
-                    {errors.cnpj && (
-                      <p className="text-red-200 text-sm mt-1">{errors.cnpj}</p>
-                    )}
-                  </div>
-                )}
-
                 {/* Botão Submit */}
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-dark hover:bg-dark/90 disabled:bg-dark/50 text-light font-bold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+                  className="w-full bg-dark hover:bg-dark/90 disabled:bg-dark/50 text-light font-bold py-4 px-6 rounded-2xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 text-lg"
                 >
                   {isLoading ? (
                     <>
@@ -439,13 +374,13 @@ export default function CadastroSection() {
                     </>
                   ) : (
                     <>
-                      ⭐ Começar Agora! →
+                      ✓ Começar Agora! →
                     </>
                   )}
                 </button>
 
                 {/* Termos */}
-                <p className="text-light/60 text-xs text-center leading-relaxed">
+                <p className="text-light/70 text-xs text-center leading-relaxed mt-4">
                   Ao se cadastrar, você concorda com nossos{" "}
                   <a href="/termos" className="underline hover:text-light">
                     Termos de Uso
