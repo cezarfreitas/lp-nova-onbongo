@@ -15,6 +15,7 @@ export default function Index() {
         </div>
         <Gallery />
       </main>
+      <Footer />
     </>
   );
 }
