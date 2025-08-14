@@ -6,7 +6,7 @@ Disallow: /_next/
 Disallow: /private/
 
 # Sitemap
-Sitemap: https://lojista.onbongo.com.br/sitemap.xml
+Sitemap: http://b2b.onbongo.com.br/sitemap.xml
 
 # Crawl-delay para bots mais agressivos
 User-agent: Bingbot
