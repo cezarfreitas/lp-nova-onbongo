@@ -27,13 +27,13 @@ export default {
       colors: {
         // 1. Preto - backgrounds, overlay
         dark: "#000000",
-        
+
         // 2. Branco - texto principal, elementos claros
         light: "#ffffff",
-        
+
         // 3. Laranja - accent, CTAs, marca
         accent: "#ff6b35",
-        
+
         // 4. Cinza - texto secundário, elementos muted
         muted: "#6b7280",
       },
