@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Gallery from "@/components/Gallery";
 import CadastroSection from "@/components/CadastroSection";
 import SEO from "@/components/SEO";
 
@@ -8,7 +9,10 @@ export default function Index() {
       <SEO />
       <main className="min-h-screen">
         <Hero />
-        <CadastroSection />
+        <Gallery />
+        <div id="cadastro-section">
+          <CadastroSection />
+        </div>
       </main>
     </>
   );
