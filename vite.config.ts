@@ -30,9 +30,10 @@ function expressPlugin(): Plugin {
     apply: "serve", // Only apply during development (serve mode)
     configureServer(server) {
       // Only initialize server during dev mode
-      import("./server/index.js").then(({ createServer }) => {
+      import("./server/index.ts").then(({ createServer }) => {
         const app = createServer();
         server.middlewares.use(app);
+        console.log("✅ Express server initialized in Vite dev mode");
       }).catch(err => {
         console.warn("Failed to initialize Express server:", err.message);
       });
