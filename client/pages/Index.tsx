@@ -9,6 +9,7 @@ export default function Index() {
   return (
     <>
       <SEO />
+      <TrackingScripts />
       <main className="min-h-screen">
         <Hero />
         <div id="cadastro-section">
