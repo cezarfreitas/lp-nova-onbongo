@@ -199,7 +199,13 @@ export default function CadastroSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Se for consumidor, não precisa validar CNPJ
+    // Validar se o tipo de cadastro foi selecionado
+    if (!formData.tipoCadastro || (formData.tipoCadastro !== "lojista" && formData.tipoCadastro !== "consumidor")) {
+      alert('Por favor, selecione o tipo de cadastro');
+      return;
+    }
+
+    // Se for lojista, validar CNPJ
     if (formData.tipoCadastro === "lojista" && !validateStep3()) {
       return;
     }
