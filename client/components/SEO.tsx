@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 interface SEOProps {
   title?: string;
@@ -15,58 +15,60 @@ export default function SEO({
   keywords = "ONBONGO, lojista oficial, streetwear, marca brasileira, revenda, roupas urbanas, moda masculina, surf wear",
   image = "http://b2b.onbongo.com.br/og-image.jpg",
   url = "http://b2b.onbongo.com.br",
-  type = "website"
+  type = "website",
 }: SEOProps) {
-  
   useEffect(() => {
     // Atualizar title
     document.title = title;
-    
+
     // Atualizar meta tags dinâmicamente
     const updateMetaTag = (name: string, content: string, property = false) => {
-      const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
+      const selector = property
+        ? `meta[property="${name}"]`
+        : `meta[name="${name}"]`;
       let meta = document.querySelector(selector) as HTMLMetaElement;
-      
+
       if (!meta) {
-        meta = document.createElement('meta');
+        meta = document.createElement("meta");
         if (property) {
-          meta.setAttribute('property', name);
+          meta.setAttribute("property", name);
         } else {
-          meta.setAttribute('name', name);
+          meta.setAttribute("name", name);
         }
         document.head.appendChild(meta);
       }
-      
+
       meta.content = content;
     };
-    
+
     // SEO básico
-    updateMetaTag('description', description);
-    updateMetaTag('keywords', keywords);
-    
+    updateMetaTag("description", description);
+    updateMetaTag("keywords", keywords);
+
     // Open Graph
-    updateMetaTag('og:title', title, true);
-    updateMetaTag('og:description', description, true);
-    updateMetaTag('og:image', image, true);
-    updateMetaTag('og:url', url, true);
-    updateMetaTag('og:type', type, true);
-    
+    updateMetaTag("og:title", title, true);
+    updateMetaTag("og:description", description, true);
+    updateMetaTag("og:image", image, true);
+    updateMetaTag("og:url", url, true);
+    updateMetaTag("og:type", type, true);
+
     // Twitter Card
-    updateMetaTag('twitter:title', title);
-    updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', image);
-    updateMetaTag('twitter:url', url);
-    
+    updateMetaTag("twitter:title", title);
+    updateMetaTag("twitter:description", description);
+    updateMetaTag("twitter:image", image);
+    updateMetaTag("twitter:url", url);
+
     // Canonical URL
-    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    let canonical = document.querySelector(
+      'link[rel="canonical"]',
+    ) as HTMLLinkElement;
     if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.rel = 'canonical';
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
       document.head.appendChild(canonical);
     }
     canonical.href = url;
-    
   }, [title, description, keywords, image, url, type]);
-  
+
   return null;
 }

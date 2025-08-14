@@ -57,13 +57,13 @@ export default {
         },
       },
       fontWeight: {
-        'black': '900',
+        black: "900",
       },
       dropShadow: {
-        'text': '0 2px 4px rgba(0, 0, 0, 0.8)',
-        'text-lg': '0 4px 8px rgba(0, 0, 0, 0.8)',
-        'text-xl': '0 8px 16px rgba(0, 0, 0, 0.8)',
-      }
+        text: "0 2px 4px rgba(0, 0, 0, 0.8)",
+        "text-lg": "0 4px 8px rgba(0, 0, 0, 0.8)",
+        "text-xl": "0 8px 16px rgba(0, 0, 0, 0.8)",
+      },
     },
   },
   plugins: [],

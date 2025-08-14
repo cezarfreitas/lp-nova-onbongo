@@ -30,12 +30,14 @@ export default function CadastroSection() {
   // Auto-focus no primeiro campo ao mudar de etapa
   useEffect(() => {
     if (currentStep === 1) {
-      const firstInput = document.querySelector('#nomeCompleto') as HTMLInputElement;
+      const firstInput = document.querySelector(
+        "#nomeCompleto",
+      ) as HTMLInputElement;
       if (firstInput) {
         setTimeout(() => firstInput.focus(), 100);
       }
-    } else if (currentStep === 3 && formData.tipoCadastro === 'lojista') {
-      const cnpjInput = document.querySelector('#cnpj') as HTMLInputElement;
+    } else if (currentStep === 3 && formData.tipoCadastro === "lojista") {
+      const cnpjInput = document.querySelector("#cnpj") as HTMLInputElement;
       if (cnpjInput) {
         setTimeout(() => cnpjInput.focus(), 100);
       }
@@ -57,7 +59,7 @@ export default function CadastroSection() {
     if (numbers.length <= 14) {
       return numbers.replace(
         /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
-        "$1.$2.$3/$4-$5"
+        "$1.$2.$3/$4-$5",
       );
     }
     return value;
@@ -92,7 +94,7 @@ export default function CadastroSection() {
 
     const newErrors: FormErrors = {};
     const cnpjNumbers = formData.cnpj.replace(/\D/g, "");
-    
+
     if (!cnpjNumbers) {
       newErrors.cnpj = "CNPJ é obrigatório";
     } else if (cnpjNumbers.length !== 14) {
@@ -129,7 +131,7 @@ export default function CadastroSection() {
 
   // Manipular tecla Enter para avançar etapas
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       if (currentStep === 1 && validateStep1()) {
         setCurrentStep(2);
@@ -142,7 +144,7 @@ export default function CadastroSection() {
       ...prev,
       tipoCadastro: tipo,
     }));
-    
+
     // Avançar automaticamente para a próxima etapa
     setTimeout(() => {
       setCurrentStep(3);
@@ -163,13 +165,17 @@ export default function CadastroSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validar se o tipo de cadastro foi selecionado
-    if (!formData.tipoCadastro || (formData.tipoCadastro !== "lojista" && formData.tipoCadastro !== "consumidor")) {
-      alert('Por favor, selecione o tipo de cadastro');
+    if (
+      !formData.tipoCadastro ||
+      (formData.tipoCadastro !== "lojista" &&
+        formData.tipoCadastro !== "consumidor")
+    ) {
+      alert("Por favor, selecione o tipo de cadastro");
       return;
     }
-    
+
     // Se for lojista, validar CNPJ
     if (formData.tipoCadastro === "lojista" && !validateStep3()) {
       return;
@@ -180,14 +186,14 @@ export default function CadastroSection() {
     try {
       // Simular envio (sem API real)
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      
+
       console.log("✅ Dados do formulário:", {
         nome: formData.nomeCompleto,
         whatsapp: formData.whatsapp,
         tipo: formData.tipoCadastro,
-        cnpj: formData.cnpj || 'N/A'
+        cnpj: formData.cnpj || "N/A",
       });
-      
+
       setIsSubmitted(true);
 
       // Reset form após sucesso
@@ -201,10 +207,9 @@ export default function CadastroSection() {
         });
         setCurrentStep(1);
       }, 4000);
-      
     } catch (error: any) {
       console.error("❌ Erro ao enviar formulário:", error);
-      alert('Erro ao enviar formulário. Tente novamente.');
+      alert("Erro ao enviar formulário. Tente novamente.");
     } finally {
       setIsLoading(false);
     }
@@ -216,20 +221,20 @@ export default function CadastroSection() {
         <div className="text-center text-dark max-w-sm animate-fade-in">
           <div className="text-5xl mb-4 animate-bounce">🎉</div>
           <h2 className="font-display text-2xl font-bold text-dark mb-3">
-            {formData.tipoCadastro === "lojista" ? "Cadastro Realizado!" : "Cupom Gerado!"}
+            {formData.tipoCadastro === "lojista"
+              ? "Cadastro Realizado!"
+              : "Cupom Gerado!"}
           </h2>
           <p className="text-dark/80 mb-4 text-sm leading-relaxed">
-            {formData.tipoCadastro === "lojista" 
+            {formData.tipoCadastro === "lojista"
               ? "Nossa equipe entrará em contato via WhatsApp em breve para finalizar sua parceria."
-              : "Seu cupom de desconto foi gerado com sucesso!"
-            }
+              : "Seu cupom de desconto foi gerado com sucesso!"}
           </p>
           <div className="bg-dark/10 p-4 rounded-xl border border-dark/20">
             <p className="text-dark/70 text-xs font-medium">
-              {formData.tipoCadastro === "lojista" 
+              {formData.tipoCadastro === "lojista"
                 ? "⏱️ Resposta em até 2 horas úteis"
-                : "🎁 Use o código: ONBONGO10"
-              }
+                : "🎁 Use o código: ONBONGO10"}
             </p>
             {formData.tipoCadastro === "consumidor" && (
               <p className="text-dark/60 text-xs mt-1">
@@ -267,7 +272,7 @@ export default function CadastroSection() {
             <div className="bg-dark rounded-2xl p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl relative overflow-hidden">
               {/* Indicador de progresso */}
               <div className="absolute top-0 left-0 w-full h-1 bg-accent/20">
-                <div 
+                <div
                   className="h-full bg-accent transition-all duration-500 ease-out"
                   style={{ width: `${(currentStep / 3) * 100}%` }}
                 ></div>
@@ -276,29 +281,40 @@ export default function CadastroSection() {
               {/* Header do formulário */}
               <div className="text-center mb-6 pt-2">
                 <h3 className="text-light font-bold text-xl mb-1">
-                  {currentStep === 1 ? 'Cadastre-se Agora' : 
-                   currentStep === 2 ? 'Tipo de Cadastro' : 
-                   formData.tipoCadastro === 'lojista' ? 'Finalizar Cadastro' : 'Cadastro Exclusivo'}
+                  {currentStep === 1
+                    ? "Cadastre-se Agora"
+                    : currentStep === 2
+                      ? "Tipo de Cadastro"
+                      : formData.tipoCadastro === "lojista"
+                        ? "Finalizar Cadastro"
+                        : "Cadastro Exclusivo"}
                 </h3>
                 <p className="text-light/90 text-sm">
-                  {currentStep === 1 ? 'Comece sua jornada como lojista oficial' :
-                   currentStep === 2 ? 'Escolha o tipo de cadastro desejado' :
-                   formData.tipoCadastro === 'lojista' ? 'Dados da sua empresa' :
-                   'Para lojistas com CNPJ'}
+                  {currentStep === 1
+                    ? "Comece sua jornada como lojista oficial"
+                    : currentStep === 2
+                      ? "Escolha o tipo de cadastro desejado"
+                      : formData.tipoCadastro === "lojista"
+                        ? "Dados da sua empresa"
+                        : "Para lojistas com CNPJ"}
                 </p>
                 <div className="flex justify-center gap-2 mt-3">
                   {[1, 2, 3].map((step) => (
                     <div
                       key={step}
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        step <= currentStep ? 'bg-accent' : 'bg-accent/30'
+                        step <= currentStep ? "bg-accent" : "bg-accent/30"
                       }`}
                     ></div>
                   ))}
                 </div>
               </div>
 
-              <form ref={formRef} onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                onKeyPress={handleKeyPress}
+              >
                 {/* Etapa 1: Dados Básicos */}
                 {currentStep === 1 && (
                   <div className="space-y-4 animate-fade-in">
@@ -356,7 +372,10 @@ export default function CadastroSection() {
                     <button
                       type="button"
                       onClick={handleNextStep}
-                      disabled={!formData.nomeCompleto.trim() || !formData.whatsapp.trim()}
+                      disabled={
+                        !formData.nomeCompleto.trim() ||
+                        !formData.whatsapp.trim()
+                      }
                       className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 disabled:cursor-not-allowed text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 disabled:hover:scale-100 focus:outline-none focus:ring-2 focus:ring-light text-sm mt-6 flex items-center justify-center gap-2"
                     >
                       Próximo →
@@ -429,8 +448,12 @@ export default function CadastroSection() {
                                   type="radio"
                                   name="tipoCadastro"
                                   value="consumidor"
-                                  checked={formData.tipoCadastro === "consumidor"}
-                                  onChange={() => handleTipoChange("consumidor")}
+                                  checked={
+                                    formData.tipoCadastro === "consumidor"
+                                  }
+                                  onChange={() =>
+                                    handleTipoChange("consumidor")
+                                  }
                                   className="sr-only"
                                 />
                                 <div
@@ -522,9 +545,7 @@ export default function CadastroSection() {
                                 Enviando...
                               </>
                             ) : (
-                              <>
-                                ✓ Finalizar Cadastro!
-                              </>
+                              <>✓ Finalizar Cadastro!</>
                             )}
                           </button>
                         </div>
@@ -538,11 +559,17 @@ export default function CadastroSection() {
                           </h4>
                           <p className="text-light/90 text-sm mb-4 leading-relaxed">
                             Como você é consumidor da marca, preparamos um
-                            <strong className="text-accent"> desconto especial de 10%</strong> para suas compras!
+                            <strong className="text-accent">
+                              {" "}
+                              desconto especial de 10%
+                            </strong>{" "}
+                            para suas compras!
                           </p>
-                          
+
                           <div className="bg-gradient-to-r from-accent/20 to-accent/30 p-4 rounded-xl mb-4 border border-accent/20">
-                            <p className="text-light/80 text-xs mb-2 font-medium">SEU CÓDIGO DE DESCONTO:</p>
+                            <p className="text-light/80 text-xs mb-2 font-medium">
+                              SEU CÓDIGO DE DESCONTO:
+                            </p>
                             <div className="bg-light text-dark px-4 py-3 rounded-lg font-mono text-lg font-bold tracking-widest shadow-inner">
                               ONBONGO10
                             </div>
@@ -564,8 +591,11 @@ export default function CadastroSection() {
                           <button
                             type="button"
                             onClick={() => {
-                              window.open('https://www.onbongo.com.br', '_blank');
-                              handleSubmit(new Event('submit') as any);
+                              window.open(
+                                "https://www.onbongo.com.br",
+                                "_blank",
+                              );
+                              handleSubmit(new Event("submit") as any);
                             }}
                             className="flex-2 bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm shadow-lg"
                           >
@@ -577,7 +607,6 @@ export default function CadastroSection() {
                   </div>
                 )}
               </form>
-
             </div>
           </div>
         </div>
