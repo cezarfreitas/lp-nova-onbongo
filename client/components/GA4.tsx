@@ -32,7 +32,7 @@ export const useGA4 = () => {
     if (window.gtag) {
       console.log("[GA4] Conversão:", conversionId);
       window.gtag("event", "conversion", {
-        send_to: `G-GSDX6XV3V6/${conversionId}`,
+        send_to: `G-M440PQ5X13/${conversionId}`,
         value: value,
         currency: currency,
       });
