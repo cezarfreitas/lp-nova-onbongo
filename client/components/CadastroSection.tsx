@@ -273,10 +273,6 @@ export default function CadastroSection() {
             <div className="bg-dark rounded-2xl p-4 sm:p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl relative overflow-hidden">
               {/* Indicador de progresso */}
               <div className="absolute top-0 left-0 w-full h-1 bg-accent/20">
-                <div
-                  className="h-full bg-accent transition-all duration-500 ease-out"
-                  style={{ width: `${(currentStep / 3) * 100}%` }}
-                ></div>
               </div>
 
               {/* Header do formulário */}
