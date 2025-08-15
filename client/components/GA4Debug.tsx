@@ -53,7 +53,7 @@ export default function GA4Debug() {
           Testar Evento
         </button>
         <div className="text-[10px] opacity-75">
-          ID: {GA4_CONFIG.measurementId}
+          ID: G-GSDX6XV3V6
         </div>
       </div>
     </div>
