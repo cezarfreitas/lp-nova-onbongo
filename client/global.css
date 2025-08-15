@@ -61,6 +61,18 @@
   /* HTML sem animações para evitar flash */
   html {
     /* scroll-behavior removido para evitar flash */
+    scroll-behavior: auto !important;
+  }
+
+  /* Prevenir scroll automático em todos os elementos */
+  * {
+    scroll-behavior: auto !important;
+  }
+
+  /* Prevenir scroll em elementos de formulário */
+  input, textarea, select, button {
+    scroll-margin: 0 !important;
+    scroll-padding: 0 !important;
   }
 
   /* Enhanced text rendering com fallbacks */
