@@ -112,6 +112,12 @@ export default function GA4Test() {
           Testar Meta Pixel
         </button>
         <button
+          onClick={testarLeadPersonalizado}
+          className="block w-full bg-green-600 hover:bg-green-700 px-2 py-1 rounded text-xs"
+        >
+          🎯 Lead_Onbongo_LP
+        </button>
+        <button
           onClick={verificarRede}
           className="block w-full bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded text-xs"
         >
