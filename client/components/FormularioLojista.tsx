@@ -79,22 +79,55 @@ export default function FormularioLojista() {
 
   const enviarFormulario = async () => {
     if (!validarFormulario()) {
+      // Tracking de erro de validação
+      trackEvent("form_validation_error", {
+        event_category: "form",
+        event_label: "lojista_registration",
+        error_fields: Object.keys(erros).join(","),
+      });
       return;
     }
-    
+
+    // Tracking de início do envio
+    trackEvent("begin_checkout", {
+      event_category: "ecommerce",
+      event_label: "lojista_registration_start",
+      currency: "BRL",
+      value: 1,
+    });
+
     setEnviando(true);
-    
+
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       console.log("Dados enviados:", dados);
+
+      // Tracking de conversão bem-sucedida
+      trackEvent("purchase", {
+        event_category: "ecommerce",
+        event_label: "lojista_registration_complete",
+        currency: "BRL",
+        value: 1,
+        registration_type: dados.tipo,
+      });
+
+      // Tracking de conversão específica
+      trackConversion("lojista_signup", 1);
+
       setSucesso(true);
-      
+
       setTimeout(() => {
         setSucesso(false);
         setDados({ nome: "", telefone: "", tipo: "", documento: "" });
       }, 4000);
     } catch (error) {
+      // Tracking de erro
+      trackEvent("form_submission_error", {
+        event_category: "form",
+        event_label: "lojista_registration_error",
+        error_message: String(error),
+      });
       alert("Erro ao enviar. Tente novamente.");
     } finally {
       setEnviando(false);
