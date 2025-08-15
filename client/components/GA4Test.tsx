@@ -141,6 +141,12 @@ export default function GA4Test() {
           🎯 Lead_Onbongo_LP
         </button>
         <button
+          onClick={testarConversionsAPI}
+          className="block w-full bg-purple-600 hover:bg-purple-700 px-2 py-1 rounded text-xs"
+        >
+          🔄 Conversions API
+        </button>
+        <button
           onClick={verificarRede}
           className="block w-full bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded text-xs"
         >
