@@ -58,7 +58,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
             <div className="text-light/70 text-sm">
-              © 2024 Onbongo. Todos os direitos reservados.
+              © {new Date().getFullYear()} Onbongo. Todos os direitos reservados.
             </div>
 
             {/* Desenvolvido por */}
