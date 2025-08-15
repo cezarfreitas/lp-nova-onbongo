@@ -56,8 +56,6 @@
     font-display: swap;
     /* Performance: prevenir horizontal scroll */
     overflow-x: hidden;
-    /* Garantir que a página sempre comece do topo */
-    scroll-behavior: smooth;
   }
 
   /* Prevenir auto-scroll em elementos focáveis durante o carregamento */
