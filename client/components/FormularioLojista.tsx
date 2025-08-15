@@ -281,7 +281,7 @@ export default function FormularioLojista() {
 
                       <button
                         type="button"
-                        onClick={() => selecionarTipo("consumidor")}
+                        onClick={(e) => selecionarTipo("consumidor", e)}
                         className="w-full p-3 rounded-xl bg-accent/20 hover:bg-accent/25 transition-all duration-300"
                       >
                         <div className="flex items-center text-left">
