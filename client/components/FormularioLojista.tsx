@@ -388,7 +388,7 @@ export default function FormularioLojista() {
                       <div className="flex gap-3 mt-6">
                         <button
                           type="button"
-                          onClick={etapaAnterior}
+                          onClick={(e) => etapaAnterior(e)}
                           className="flex-1 bg-accent hover:bg-accent/90 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                         >
                           ← Voltar
