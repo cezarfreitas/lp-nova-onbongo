@@ -136,9 +136,8 @@ export default function FormularioLojista() {
           nome: dados.nome,
           whatsapp: dados.telefone,
           cnpj: dados.documento,
-          email: "", // Não coletamos email neste formulário
+          email: "",
         });
-        trackingLog("Lead_Onbongo_LP enviado via Pixel + Conversions API");
       }
 
       // Lead padrão via Meta Pixel
@@ -149,7 +148,6 @@ export default function FormularioLojista() {
           value: 100,
           currency: "BRL",
         });
-        trackingLog("Meta Pixel Lead padrão enviado");
       }
 
       // API de Conversões do Meta (Lead padrão)
@@ -159,9 +157,8 @@ export default function FormularioLojista() {
           nome: dados.nome,
           whatsapp: dados.telefone,
           cnpj: dados.documento,
-          email: "", // Não coletamos email neste formulário
+          email: "",
         });
-        trackingLog("Conversions API Lead padrão enviado");
       }
 
       trackConversion("lojista_signup", 1);
