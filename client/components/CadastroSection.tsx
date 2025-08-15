@@ -315,10 +315,8 @@ export default function CadastroSection() {
                 </div>
               </div>
 
-              <form
+              <div
                 ref={formRef}
-                onSubmit={handleSubmit}
-                onReset={(e) => e.preventDefault()}
               >
                 {/* Etapa 1: Dados Básicos */}
                 {currentStep === 1 && (
@@ -542,7 +540,12 @@ export default function CadastroSection() {
                             ← Voltar
                           </button>
                           <button
-                            type="submit"
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              handleSubmit(e as any);
+                            }}
                             disabled={isLoading}
                             className="flex-2 bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 text-sm"
                           >
@@ -626,7 +629,7 @@ export default function CadastroSection() {
                     )}
                   </div>
                 )}
-              </form>
+              </div>
             </div>
           </div>
         </div>
