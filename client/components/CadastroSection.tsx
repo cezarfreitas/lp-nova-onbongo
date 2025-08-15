@@ -27,23 +27,7 @@ export default function CadastroSection() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Auto-focus no primeiro campo ao mudar de etapa (apenas após interação do usuário)
-  useEffect(() => {
-    // Só fazer auto-focus se não for o carregamento inicial da página
-    if (currentStep === 1 && document.hasFocus()) {
-      const firstInput = document.querySelector(
-        "#nomeCompleto",
-      ) as HTMLInputElement;
-      if (firstInput && firstInput.getBoundingClientRect().top < window.innerHeight) {
-        setTimeout(() => firstInput.focus(), 100);
-      }
-    } else if (currentStep === 3 && formData.tipoCadastro === "lojista") {
-      const cnpjInput = document.querySelector("#cnpj") as HTMLInputElement;
-      if (cnpjInput) {
-        setTimeout(() => cnpjInput.focus(), 100);
-      }
-    }
-  }, [currentStep, formData.tipoCadastro]);
+  // Auto-focus removido para evitar problemas de recarregamento
 
   // Máscara para WhatsApp
   const formatWhatsApp = (value: string): string => {
