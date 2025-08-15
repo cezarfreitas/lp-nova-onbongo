@@ -16,27 +16,9 @@ export default function TrackingScripts() {
   const META_TEST_EVENT_CODE = import.meta.env.VITE_META_TEST_EVENT_CODE;
 
   useEffect(() => {
-    // Google Analytics 4
-    if (GA4_ID) {
-      // Create gtag script
-      const gtagScript = document.createElement("script");
-      gtagScript.async = true;
-      gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
-      document.head.appendChild(gtagScript);
-
-      // Initialize dataLayer and gtag
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function gtag() {
-        window.dataLayer.push(arguments);
-      };
-      window.gtag("js", new Date());
-      window.gtag("config", GA4_ID, {
-        page_title: document.title,
-        page_location: window.location.href,
-      });
-
-      console.log("✅ GA4 initialized:", GA4_ID);
-    }
+    // GA4 agora é gerenciado pelo componente GA4.tsx e HTML
+    // Removido para evitar conflito
+    console.log("📊 TrackingScripts carregado - GA4 gerenciado separadamente");
 
     // Meta Pixel
     if (META_PIXEL_ID) {
