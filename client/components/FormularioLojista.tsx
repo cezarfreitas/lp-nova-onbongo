@@ -248,7 +248,7 @@ export default function FormularioLojista() {
 
                   <button
                     type="button"
-                    onClick={proximaEtapa}
+                    onClick={(e) => proximaEtapa(e)}
                     disabled={!dados.nome.trim() || !dados.telefone.trim()}
                     className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 disabled:cursor-not-allowed text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm mt-6"
                   >
