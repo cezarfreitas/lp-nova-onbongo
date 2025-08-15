@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { scrollToFormulario } from "../lib/scroll";
 
 const Hero = memo(function Hero() {
   return (
