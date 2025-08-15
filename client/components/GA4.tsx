@@ -29,7 +29,6 @@ export const useGA4 = () => {
     currency = "BRL",
   ) => {
     if (window.gtag) {
-      console.log("[GA4] Conversão:", conversionId);
       window.gtag("event", "conversion", {
         send_to: `G-M440PQ5X13/${conversionId}`,
         value: value,
