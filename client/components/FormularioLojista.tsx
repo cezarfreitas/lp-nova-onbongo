@@ -341,14 +341,18 @@ export default function FormularioLojista() {
                       <div className="flex gap-3 mt-6">
                         <button
                           type="button"
-                          onClick={etapaAnterior}
+                          onClick={(e) => etapaAnterior(e)}
                           className="flex-1 bg-accent hover:bg-accent/90 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                         >
                           ← Voltar
                         </button>
                         <button
                           type="button"
-                          onClick={enviarFormulario}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            enviarFormulario();
+                          }}
                           disabled={enviando}
                           className="flex-2 bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                         >
