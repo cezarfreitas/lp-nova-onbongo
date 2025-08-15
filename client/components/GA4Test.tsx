@@ -18,7 +18,7 @@ export default function GA4Test() {
       });
 
       console.log("✅ Eventos GA4 enviados!");
-      alert("✅ Eventos enviados para G-GSDX6XV3V6\nVerifique Google Tag Assistant");
+      alert("✅ Eventos enviados para G-M440PQ5X13\nVerifique Google Tag Assistant");
     } else {
       console.error("❌ GA4 não disponível");
       console.error("📊 DataLayer:", window.dataLayer);
