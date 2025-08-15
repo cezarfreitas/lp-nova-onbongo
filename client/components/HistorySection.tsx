@@ -6,8 +6,8 @@ const HistorySection = memo(function HistorySection() {
       <div className="max-w-4xl mx-auto text-center">
         {/* Header */}
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
-          <span className="text-light">NOSSA </span>
-          <span className="text-accent">HISTÓRIA</span>
+          <span className="text-dark">NOSSA </span>
+          <span className="text-light">HISTÓRIA</span>
         </h2>
 
         {/* Content */}
