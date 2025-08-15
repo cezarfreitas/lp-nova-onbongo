@@ -9,8 +9,8 @@
  */
 
 export const GA4_CONFIG = {
-  // Substitua pelo seu Measurement ID do GA4
-  measurementId: "G-XXXXXXXXXX",
+  // Measurement ID do GA4 configurado
+  measurementId: "G-Q8T9ML8Q5C",
   
   // Configurações opcionais
   config: {
