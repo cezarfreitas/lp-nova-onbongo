@@ -15,9 +15,7 @@ export const scrollToFormulario = () => {
       });
     }, 100);
 
-    console.log("🎯 Scroll para formulário executado");
   } else {
-    console.error("❌ Elemento #cadastro-section não encontrado");
     // Fallback: tentar encontrar o formulário
     const formElement = document.querySelector('section.bg-accent');
     if (formElement) {
@@ -26,7 +24,6 @@ export const scrollToFormulario = () => {
         block: "start",
         inline: "nearest"
       });
-      console.log("🎯 Fallback: Scroll para seção do formulário");
     }
   }
 };
