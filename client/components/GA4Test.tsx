@@ -48,7 +48,9 @@ export default function GA4Test() {
       });
 
       console.log("✅ Evento Meta Pixel enviado!");
-      alert("✅ Evento enviado para Meta Pixel: 1052506589717984\nVerifique Facebook Pixel Helper");
+      alert(
+        "✅ Evento enviado para Meta Pixel: 1052506589717984\nVerifique Facebook Pixel Helper",
+      );
     } else {
       console.error("❌ Meta Pixel não disponível");
       alert("❌ Meta Pixel não carregado - verifique o console");
@@ -88,7 +90,8 @@ export default function GA4Test() {
           Teste Rede
         </button>
         <div className="text-[10px] opacity-75">
-          GA4: G-M440PQ5X13<br/>
+          GA4: G-M440PQ5X13
+          <br />
           Meta: 1052506589717984
         </div>
       </div>
