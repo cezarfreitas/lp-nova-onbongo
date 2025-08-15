@@ -153,13 +153,11 @@ export default function TrackingScripts() {
             },
           );
 
-          if (response.ok) {
-            console.log("✅ Conversions API Lead_Onbongo_LP enviado");
-          } else {
-            console.error("❌ Conversions API Lead_Onbongo_LP erro:", await response.text());
+          if (!response.ok) {
+            console.error("Conversions API error:", await response.text());
           }
         } catch (error) {
-          console.error("❌ Conversions API Lead_Onbongo_LP erro:", error);
+          console.error("Conversions API error:", error);
         }
       }
     };
