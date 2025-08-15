@@ -16,10 +16,16 @@ export default function GA4Debug() {
 
   // Verificar se gtag está disponível
   const verificarGA4 = () => {
+    console.log("🔍 Verificando status do GA4...");
+    console.log("📊 DataLayer:", window.dataLayer);
+    console.log("🏷️ gtag function:", typeof window.gtag);
+    console.log("🆔 Measurement ID:", GA4_CONFIG.measurementId);
+    console.log("🌍 URL atual:", window.location.href);
+    console.log("📄 Título da página:", document.title);
+
     if (window.gtag) {
       console.log("✅ GA4 está carregado e funcionando");
-      console.log("📊 DataLayer atual:", window.dataLayer);
-      alert("✅ GA4 funcionando! Verifique o console para mais detalhes.");
+      alert("✅ GA4 funcionando! Verifique o console para detalhes completos.");
     } else {
       console.error("❌ GA4 não está carregado");
       alert("❌ GA4 não está funcionando. Verifique o console.");
