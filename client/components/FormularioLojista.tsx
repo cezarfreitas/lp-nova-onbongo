@@ -62,7 +62,6 @@ export default function FormularioLojista() {
       valorFormatado = mascaraCNPJ(valor);
     }
 
-
     setDados((prev) => ({ ...prev, [campo]: valorFormatado }));
 
     // Tracking GA4 para seleção do tipo

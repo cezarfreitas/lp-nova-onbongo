@@ -16,7 +16,7 @@ export const useGA4 = () => {
       event_label?: string;
       value?: number;
       [key: string]: any;
-    }
+    },
   ) => {
     if (window.gtag) {
       console.log(`[GA4] Evento: ${eventName}`, parameters);
@@ -24,7 +24,11 @@ export const useGA4 = () => {
     }
   };
 
-  const trackConversion = (conversionId: string, value?: number, currency = "BRL") => {
+  const trackConversion = (
+    conversionId: string,
+    value?: number,
+    currency = "BRL",
+  ) => {
     if (window.gtag) {
       console.log("[GA4] Conversão:", conversionId);
       window.gtag("event", "conversion", {

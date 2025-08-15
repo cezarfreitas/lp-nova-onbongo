@@ -1,24 +1,24 @@
 export default function GA4Test() {
   const testarGA4 = () => {
-    console.log('🧪 Testando GA4...');
+    console.log("🧪 Testando GA4...");
 
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'test_click', {
-        event_category: 'test',
-        event_label: 'manual_test'
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "test_click", {
+        event_category: "test",
+        event_label: "manual_test",
       });
 
-      console.log('✅ Evento GA4 enviado!');
-      alert('✅ Evento enviado para G-Q8T9ML8Q5C');
+      console.log("✅ Evento GA4 enviado!");
+      alert("✅ Evento enviado para G-Q8T9ML8Q5C");
     } else {
-      console.error('❌ GA4 não disponível');
-      alert('❌ GA4 não carregado');
+      console.error("❌ GA4 não disponível");
+      alert("❌ GA4 não carregado");
     }
   };
 
   const verificarRede = () => {
-    console.log('🌐 Verificando rede...');
-    alert('🔍 Abra as DevTools > Network para ver requisições GA4');
+    console.log("🌐 Verificando rede...");
+    alert("🔍 Abra as DevTools > Network para ver requisições GA4");
   };
 
   // Só mostrar em desenvolvimento
@@ -42,9 +42,7 @@ export default function GA4Test() {
         >
           Teste Rede
         </button>
-        <div className="text-[10px] opacity-75">
-          G-Q8T9ML8Q5C
-        </div>
+        <div className="text-[10px] opacity-75">G-Q8T9ML8Q5C</div>
       </div>
     </div>
   );
