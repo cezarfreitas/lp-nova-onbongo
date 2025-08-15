@@ -308,7 +308,7 @@ export default function FormularioLojista() {
                   <div className="flex justify-center mt-6">
                     <button
                       type="button"
-                      onClick={etapaAnterior}
+                      onClick={(e) => etapaAnterior(e)}
                       className="bg-accent hover:bg-accent/90 text-light font-medium py-3 px-6 rounded-xl transition-all duration-300 text-sm"
                     >
                       ← Voltar
