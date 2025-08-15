@@ -369,7 +369,7 @@ export default function FormularioLojista() {
                         </button>
                         <button
                           type="button"
-                          onClick={abrirSite}
+                          onClick={(e) => abrirSite(e)}
                           className="flex-2 bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm shadow-lg"
                         >
                           🛒 Usar Desconto Agora
