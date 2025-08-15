@@ -109,6 +109,32 @@ export default function FormularioLojista() {
         registration_type: dados.tipo,
       });
 
+      // Evento personalizado GA4: Lead Onbongo_LP
+      trackEvent("Lead_Onbongo_LP", {
+        event_category: "lead",
+        event_label: "lojista_lead_generated",
+        currency: "BRL",
+        value: 100,
+        lead_type: "lojista",
+        form_name: "onbongo_lp_form",
+        user_name: dados.nome,
+        user_phone: dados.telefone,
+        user_document: dados.documento ? "yes" : "no"
+      });
+
+      // Meta Pixel: Lead Onbongo_LP
+      if (typeof window !== "undefined" && window.fbq) {
+        window.fbq("trackCustom", "Lead_Onbongo_LP", {
+          content_name: "Lojista Lead Generation",
+          content_category: "B2B_Lead",
+          value: 100,
+          currency: "BRL",
+          lead_type: "lojista",
+          form_source: "onbongo_lp"
+        });
+        console.log("📘 Meta Pixel Lead_Onbongo_LP enviado");
+      }
+
       trackConversion("lojista_signup", 1);
 
       setSucesso(true);
