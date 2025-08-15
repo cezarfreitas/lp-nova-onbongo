@@ -70,7 +70,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-accent hover:text-accent/80 transition-colors duration-300 font-medium"
               >
-                GF
+                IDE
               </a>
               {" | "}
               <a
