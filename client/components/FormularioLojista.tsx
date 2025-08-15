@@ -114,7 +114,11 @@ export default function FormularioLojista() {
     }
   };
 
-  const abrirSite = () => {
+  const abrirSite = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     window.open("https://www.onbongo.com.br", "_blank");
     setSucesso(true);
     setTimeout(() => {
