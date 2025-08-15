@@ -37,27 +37,27 @@ const Gallery = memo(function Gallery() {
   ];
 
   return (
-    <section className="py-16 px-4 bg-light">
+    <section className="py-8 sm:py-12 md:py-16 px-4 bg-light">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-3 sm:mb-4">
             <span className="text-dark">NOSSA</span>{" "}
             <span className="text-accent">GALERIA</span>
           </h2>
-          <p className="text-muted text-lg max-w-2xl mx-auto">
+          <p className="text-muted text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-2">
             Conheça o estilo único da ONBONGO através das nossas peças mais
             icônicas
           </p>
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
           {images.map((image, index) => (
             <div
               key={index}
-              className={`relative overflow-hidden rounded-2xl group cursor-pointer transition-all duration-500 hover:scale-105 ${
-                index === 0 || index === 3 ? "md:col-span-2 md:row-span-2" : ""
+              className={`relative overflow-hidden rounded-lg sm:rounded-2xl group cursor-pointer transition-all duration-500 hover:scale-105 ${
+                index === 0 || index === 3 ? "col-span-2 md:row-span-2" : ""
               }`}
             >
               <div className="aspect-square md:aspect-auto md:h-full">
@@ -83,20 +83,18 @@ const Gallery = memo(function Gallery() {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-16">
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-dark mb-4">
+        <div className="text-center mt-8 sm:mt-12 md:mt-16">
+          <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-dark mb-3 sm:mb-4">
             FAÇA PARTE DESSA HISTÓRIA
           </h3>
-          <p className="text-muted mb-6 max-w-xl mx-auto">
+          <p className="text-muted text-sm sm:text-base mb-4 sm:mb-6 max-w-xl mx-auto px-2">
             Torne-se um lojista oficial e leve o streetwear autêntico da ONBONGO
             para seus clientes
           </p>
           <button
-            className="bg-accent hover:bg-accent/90 text-light font-bold px-8 py-4 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-lg"
+            className="bg-accent hover:bg-accent/90 text-light font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg transition-all duration-300 hover:scale-105 shadow-lg"
             onClick={() => {
-              document.querySelector("#cadastro-section")?.scrollIntoView({
-                behavior: "smooth",
-              });
+              // Scroll removido para evitar comportamento indesejado
             }}
           >
             Começar Cadastro →
