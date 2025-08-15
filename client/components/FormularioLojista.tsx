@@ -155,6 +155,18 @@ export default function FormularioLojista() {
         console.error("🔍 Verificar se script foi carregado no HTML");
       }
 
+      // API de Conversões do Meta (server-side)
+      if (typeof (window as any).trackLead === "function") {
+        (window as any).trackLead({
+          tipoCadastro: "lojista",
+          nome: dados.nome,
+          whatsapp: dados.telefone,
+          cnpj: dados.documento,
+          email: "", // Não coletamos email neste formulário
+        });
+        trackingLog("Conversions API Lead enviado");
+      }
+
       trackConversion("lojista_signup", 1);
 
       setSucesso(true);
