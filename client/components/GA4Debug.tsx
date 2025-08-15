@@ -18,7 +18,7 @@ export default function GA4Debug() {
     console.log("🔍 Verificando status do GA4...");
     console.log("📊 DataLayer:", window.dataLayer);
     console.log("🏷️ gtag function:", typeof window.gtag);
-    console.log("🆔 Measurement ID:", GA4_CONFIG.measurementId);
+    console.log("🆔 Measurement ID:", "G-GSDX6XV3V6");
     console.log("🌍 URL atual:", window.location.href);
     console.log("📄 Título da página:", document.title);
 
