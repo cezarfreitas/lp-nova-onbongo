@@ -1,25 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function FormularioLojista() {
-  // Prevenir scroll automático
-  useEffect(() => {
-    const preventScroll = (e: Event) => {
-      if (e.target instanceof HTMLElement && e.target.closest('#formulario-container')) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    };
-
-    // Salvar posição atual do scroll
-    const currentScrollPos = window.pageYOffset;
-
-    // Adicionar listeners para prevenir scroll
-    document.addEventListener('scroll', preventScroll, { passive: false });
-
-    return () => {
-      document.removeEventListener('scroll', preventScroll);
-    };
-  }, [etapa]);
   const [etapa, setEtapa] = useState(1);
   const [dados, setDados] = useState({
     nome: "",
