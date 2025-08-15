@@ -270,7 +270,7 @@ export default function CadastroSection() {
 
           {/* Lado Direito - Formulário */}
           <div className="lg:pl-6">
-            <div className="bg-dark rounded-2xl p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl relative overflow-hidden">
+            <div className="bg-dark rounded-2xl p-4 sm:p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl relative overflow-hidden">
               {/* Indicador de progresso */}
               <div className="absolute top-0 left-0 w-full h-1 bg-accent/20">
                 <div
@@ -280,8 +280,8 @@ export default function CadastroSection() {
               </div>
 
               {/* Header do formulário */}
-              <div className="text-center mb-6 pt-2">
-                <h3 className="text-light font-bold text-xl mb-1">
+              <div className="text-center mb-4 sm:mb-6 pt-2">
+                <h3 className="text-light font-bold text-lg sm:text-xl mb-1">
                   {currentStep === 1
                     ? "Cadastre-se Agora"
                     : currentStep === 2
@@ -290,7 +290,7 @@ export default function CadastroSection() {
                         ? "Finalizar Cadastro"
                         : "Cadastro Exclusivo"}
                 </h3>
-                <p className="text-light/90 text-sm">
+                <p className="text-light/90 text-xs sm:text-sm leading-relaxed">
                   {currentStep === 1
                     ? "Comece sua jornada como lojista oficial"
                     : currentStep === 2
@@ -299,7 +299,7 @@ export default function CadastroSection() {
                         ? "Dados da sua empresa"
                         : "Para lojistas com CNPJ"}
                 </p>
-                <div className="flex justify-center gap-2 mt-3">
+                <div className="flex justify-center gap-2 mt-2 sm:mt-3">
                   {[1, 2, 3].map((step) => (
                     <div
                       key={step}
