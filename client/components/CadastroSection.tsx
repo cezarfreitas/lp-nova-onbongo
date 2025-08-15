@@ -354,6 +354,7 @@ export default function CadastroSection() {
                         name="whatsapp"
                         value={formData.whatsapp}
                         onChange={handleInputChange}
+                        onKeyDown={handleKeyPress}
                         placeholder="(11) 99999-9999"
                         className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm transition-all duration-200 hover:shadow-md"
                         autoComplete="tel"
