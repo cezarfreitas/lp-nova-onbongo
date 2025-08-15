@@ -138,7 +138,18 @@ export default function FormularioLojista() {
           lead_type: "lojista",
           form_source: "onbongo_lp",
         });
-        console.log("📘 Meta Pixel Lead_Onbongo_LP enviado");
+
+        // Também enviar Lead padrão
+        window.fbq("track", "Lead", {
+          content_name: "Onbongo Lojista Lead",
+          content_category: "B2B",
+          value: 100,
+          currency: "BRL"
+        });
+
+        console.log("📘 Meta Pixel Lead_Onbongo_LP e Lead enviados");
+      } else {
+        console.error("❌ Meta Pixel fbq não disponível");
       }
 
       trackConversion("lojista_signup", 1);
