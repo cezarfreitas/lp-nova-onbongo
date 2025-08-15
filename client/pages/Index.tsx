@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Hero from "@/components/Hero";
 import Gallery from "@/components/Gallery";
 import CadastroSection from "@/components/CadastroSection";
@@ -5,6 +6,11 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 
 export default function Index() {
+  // Garantir que a página sempre carregue do topo
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <SEO />
