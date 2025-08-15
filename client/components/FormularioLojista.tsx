@@ -114,19 +114,29 @@ export default function FormularioLojista() {
       e.nativeEvent?.stopImmediatePropagation();
     }
 
-    // Prevenir qualquer scroll automático
+    // Salvar posição atual do scroll
     const currentScrollPos = window.pageYOffset;
+
+    // Bloquear qualquer tentativa de scroll durante a transição
+    const blockScroll = () => {
+      window.scrollTo(0, currentScrollPos);
+    };
+
+    // Adicionar bloqueio temporário
+    window.addEventListener('scroll', blockScroll);
+    document.addEventListener('scroll', blockScroll);
 
     if (etapa > 1) {
       setEtapa(etapa - 1);
     }
 
-    // Garantir que a posição de scroll não muda
+    // Remover bloqueio após transição completa
     setTimeout(() => {
-      if (window.pageYOffset !== currentScrollPos) {
-        window.scrollTo(0, currentScrollPos);
-      }
-    }, 0);
+      window.removeEventListener('scroll', blockScroll);
+      document.removeEventListener('scroll', blockScroll);
+      // Forçar posição final se necessário
+      window.scrollTo(0, currentScrollPos);
+    }, 150);
   };
 
   const selecionarTipo = (tipoSelecionado: string, e?: React.MouseEvent) => {
