@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useGA4 } from "./GA4";
+import { isMetaPixelLoaded, trackingLog } from "../config/tracking";
 
 declare global {
   interface Window {
