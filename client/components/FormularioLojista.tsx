@@ -439,7 +439,32 @@ export default function FormularioLojista() {
                       <div className="flex gap-3 mt-6">
                         <button
                           type="button"
-                          onClick={(e) => etapaAnterior(e)}
+                          onClick={(e) => {
+                            // Proteção extra específica para volta de consumidor
+                            e.preventDefault();
+                            e.stopPropagation();
+                            e.nativeEvent?.preventDefault();
+                            e.nativeEvent?.stopImmediatePropagation();
+
+                            const currentPos = window.pageYOffset;
+
+                            // Bloquear scroll por mais tempo
+                            const blockScroll = () => window.scrollTo(0, currentPos);
+                            window.addEventListener('scroll', blockScroll);
+                            document.addEventListener('scroll', blockScroll);
+
+                            // Chamar função original
+                            if (etapa > 1) {
+                              setEtapa(etapa - 1);
+                            }
+
+                            // Manter bloqueio por mais tempo
+                            setTimeout(() => {
+                              window.removeEventListener('scroll', blockScroll);
+                              document.removeEventListener('scroll', blockScroll);
+                              window.scrollTo(0, currentPos);
+                            }, 400);
+                          }}
                           className="flex-1 bg-accent hover:bg-accent/90 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                         >
                           ← Voltar
