@@ -162,7 +162,11 @@ export default function FormularioLojista() {
   }
 
   return (
-    <section className="bg-accent py-8 sm:py-12 px-4">
+    <section
+      className="bg-accent py-8 sm:py-12 px-4"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+    >
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           {/* Título */}
