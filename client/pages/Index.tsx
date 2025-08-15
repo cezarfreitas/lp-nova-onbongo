@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Hero from "@/components/Hero";
+import HistorySection from "@/components/HistorySection";
 import Gallery from "@/components/Gallery";
 import CadastroSection from "@/components/CadastroSection";
 import Footer from "@/components/Footer";
