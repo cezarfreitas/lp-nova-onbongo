@@ -104,6 +104,75 @@ export default function TrackingScripts() {
       console.log("📊 Lead tracked:", leadData);
     };
 
+    // Lead_Onbongo_LP tracking (Pixel + Conversions API)
+    (window as any).trackLeadOnbongoLP = async (leadData: any) => {
+      // Meta Pixel Custom Event
+      if (META_PIXEL_ID && window.fbq) {
+        window.fbq("trackCustom", "Lead_Onbongo_LP", {
+          content_name: "Lojista Lead Generation",
+          content_category: "B2B_Lead",
+          value: 100,
+          currency: "BRL",
+          lead_type: leadData.tipoCadastro || "lojista",
+          form_source: "onbongo_lp",
+        });
+        console.log("📘 Meta Pixel Lead_Onbongo_LP enviado");
+      }
+
+      // Conversions API Custom Event
+      if (META_ACCESS_TOKEN && META_PIXEL_ID) {
+        try {
+          const eventData = {
+            data: [
+              {
+                event_name: "Lead_Onbongo_LP",
+                event_time: Math.floor(Date.now() / 1000),
+                action_source: "website",
+                event_source_url: window.location.href,
+                user_data: {
+                  em: leadData.email ? await hashString(leadData.email) : undefined,
+                  ph: leadData.whatsapp ? await hashString(leadData.whatsapp) : undefined,
+                  client_ip_address: await getClientIP(),
+                  client_user_agent: navigator.userAgent,
+                  fbc: getCookie("_fbc"),
+                  fbp: getCookie("_fbp"),
+                },
+                custom_data: {
+                  content_name: "Lojista Lead Generation",
+                  content_category: "B2B_Lead",
+                  value: 100,
+                  currency: "BRL",
+                  lead_type: leadData.tipoCadastro || "lojista",
+                  form_source: "onbongo_lp",
+                },
+              },
+            ],
+            test_event_code: META_TEST_EVENT_CODE,
+          };
+
+          const response = await fetch(
+            `https://graph.facebook.com/v18.0/${META_PIXEL_ID}/events`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${META_ACCESS_TOKEN}`,
+              },
+              body: JSON.stringify(eventData),
+            },
+          );
+
+          if (response.ok) {
+            console.log("✅ Conversions API Lead_Onbongo_LP enviado");
+          } else {
+            console.error("❌ Conversions API Lead_Onbongo_LP erro:", await response.text());
+          }
+        } catch (error) {
+          console.error("❌ Conversions API Lead_Onbongo_LP erro:", error);
+        }
+      }
+    };
+
     // Form step tracking
     (window as any).trackFormStep = (step: number, stepName: string) => {
       // GA4 Event - usa o GA4 já carregado
