@@ -593,7 +593,18 @@ export default function CadastroSection() {
                                 "https://www.onbongo.com.br",
                                 "_blank",
                               );
-                              handleSubmit(new Event("submit") as any);
+                              // Simular submissão sem event real para evitar refresh
+                              setIsSubmitted(true);
+                              setTimeout(() => {
+                                setIsSubmitted(false);
+                                setFormData({
+                                  nomeCompleto: "",
+                                  whatsapp: "",
+                                  tipoCadastro: "" as any,
+                                  cnpj: "",
+                                });
+                                setCurrentStep(1);
+                              }, 4000);
                             }}
                             className="flex-2 bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-light text-sm shadow-lg"
                           >
