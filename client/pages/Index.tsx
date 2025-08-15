@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Hero from "@/components/Hero";
 import HistorySection from "@/components/HistorySection";
 import Gallery from "@/components/Gallery";
@@ -7,10 +6,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 
 export default function Index() {
-  // Garantir que a página sempre carregue do topo
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect removido para evitar flash na página
 
   return (
     <>
