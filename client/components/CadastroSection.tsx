@@ -318,6 +318,7 @@ export default function CadastroSection() {
               <form
                 ref={formRef}
                 onSubmit={handleSubmit}
+                onReset={(e) => e.preventDefault()}
               >
                 {/* Etapa 1: Dados Básicos */}
                 {currentStep === 1 && (
