@@ -212,5 +212,23 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/client/App.tsx"></script>
+
+    <!-- Garantir detecção do GA4 -->
+    <script>
+      // Aguardar carregamento completo e enviar evento
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          if (window.gtag) {
+            // Evento adicional para garantir detecção
+            gtag('event', 'page_load_complete', {
+              event_category: 'engagement',
+              page_title: document.title,
+              page_location: window.location.href
+            });
+            console.log('✅ GA4 ativo e detectável: G-Q8T9ML8Q5C');
+          }
+        }, 1000);
+      });
+    </script>
   </body>
 </html>
