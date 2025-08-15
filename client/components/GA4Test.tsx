@@ -9,16 +9,18 @@ export default function GA4Test() {
       window.gtag("event", "test_manual_click", {
         event_category: "test",
         event_label: "manual_test_button",
-        value: 1
+        value: 1,
       });
 
       window.gtag("event", "page_view", {
         page_title: document.title,
-        page_location: window.location.href
+        page_location: window.location.href,
       });
 
       console.log("✅ Eventos GA4 enviados!");
-      alert("✅ Eventos enviados para G-M440PQ5X13\nVerifique Google Tag Assistant");
+      alert(
+        "✅ Eventos enviados para G-M440PQ5X13\nVerifique Google Tag Assistant",
+      );
     } else {
       console.error("❌ GA4 não disponível");
       console.error("📊 DataLayer:", window.dataLayer);
