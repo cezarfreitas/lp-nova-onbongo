@@ -9,8 +9,8 @@
  */
 
 export const GA4_CONFIG = {
-  // Measurement ID do GA4 configurado
-  measurementId: "G-Q8T9ML8Q5C",
+  // Measurement ID do GA4 via variável de ambiente
+  measurementId: import.meta.env.VITE_GA4_MEASUREMENT_ID || "G-Q8T9ML8Q5C",
 
   // Configurações opcionais
   config: {
