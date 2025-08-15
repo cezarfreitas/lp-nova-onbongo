@@ -197,35 +197,9 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-Q8T9ML8Q5C', {
-        page_title: document.title,
-        page_location: window.location.href,
-        debug_mode: true
-      });
+      gtag('config', 'G-Q8T9ML8Q5C');
 
-      // Debug logs
-      console.log('🔍 [GA4 DEBUG] Script carregado');
-      console.log('🆔 [GA4 DEBUG] Measurement ID: G-Q8T9ML8Q5C');
-      console.log('📊 [GA4 DEBUG] DataLayer:', window.dataLayer);
-
-      // Verificar se o script carregou após 3 segundos
-      setTimeout(() => {
-        console.log('⏰ [GA4 DEBUG] Verificação após 3s:');
-        console.log('📊 DataLayer atual:', window.dataLayer);
-        console.log('🏷️ gtag function:', typeof window.gtag);
-
-        if (window.gtag) {
-          // Enviar evento de teste
-          window.gtag('event', 'page_view_test', {
-            page_title: document.title,
-            page_location: window.location.href,
-            test: true
-          });
-          console.log('✅ [GA4 DEBUG] Evento de teste enviado');
-        } else {
-          console.error('❌ [GA4 DEBUG] gtag não disponível');
-        }
-      }, 3000);
+      console.log('✅ GA4 carregado: G-Q8T9ML8Q5C');
     </script>
   </head>
   <body>
