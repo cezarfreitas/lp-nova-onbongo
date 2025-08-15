@@ -82,10 +82,23 @@ export default function FormularioLojista() {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
+      e.nativeEvent?.preventDefault();
+      e.nativeEvent?.stopImmediatePropagation();
     }
+
+    // Prevenir qualquer scroll automático
+    const currentScrollPos = window.pageYOffset;
+
     if (etapa > 1) {
       setEtapa(etapa - 1);
     }
+
+    // Garantir que a posição de scroll não muda
+    setTimeout(() => {
+      if (window.pageYOffset !== currentScrollPos) {
+        window.scrollTo(0, currentScrollPos);
+      }
+    }, 0);
   };
 
   const selecionarTipo = (tipoSelecionado: string, e?: React.MouseEvent) => {
