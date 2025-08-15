@@ -225,13 +225,11 @@ export default function TrackingScripts() {
         },
       );
 
-      if (response.ok) {
-        console.log("✅ Conversions API event sent successfully");
-      } else {
-        console.error("❌ Conversions API error:", await response.text());
+      if (!response.ok) {
+        console.error("Conversions API error:", await response.text());
       }
     } catch (error) {
-      console.error("❌ Conversions API error:", error);
+      console.error("Conversions API error:", error);
     }
   };
 
