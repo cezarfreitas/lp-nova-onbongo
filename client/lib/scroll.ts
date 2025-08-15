@@ -4,17 +4,30 @@
 
 export const scrollToFormulario = () => {
   const formularioElement = document.getElementById("cadastro-section");
-  
+
   if (formularioElement) {
-    formularioElement.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest"
-    });
-    
+    // Aguardar um tick para garantir que o DOM está pronto
+    setTimeout(() => {
+      formularioElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest"
+      });
+    }, 100);
+
     console.log("🎯 Scroll para formulário executado");
   } else {
     console.error("❌ Elemento #cadastro-section não encontrado");
+    // Fallback: tentar encontrar o formulário
+    const formElement = document.querySelector('section.bg-accent');
+    if (formElement) {
+      formElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest"
+      });
+      console.log("🎯 Fallback: Scroll para seção do formulário");
+    }
   }
 };
 
