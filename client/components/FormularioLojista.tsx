@@ -88,7 +88,6 @@ export default function FormularioLojista() {
       return;
     }
 
-    // Tracking de início do envio
     trackEvent("begin_checkout", {
       event_category: "ecommerce",
       event_label: "lojista_registration_start",
@@ -103,7 +102,6 @@ export default function FormularioLojista() {
 
       console.log("Dados enviados:", dados);
 
-      // Tracking de conversão bem-sucedida
       trackEvent("purchase", {
         event_category: "ecommerce",
         event_label: "lojista_registration_complete",
@@ -112,7 +110,6 @@ export default function FormularioLojista() {
         registration_type: dados.tipo,
       });
 
-      // Tracking de conversão específica
       trackConversion("lojista_signup", 1);
 
       setSucesso(true);
