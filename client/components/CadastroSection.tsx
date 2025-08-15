@@ -310,7 +310,6 @@ export default function CadastroSection() {
               <form
                 ref={formRef}
                 onSubmit={handleSubmit}
-                onKeyPress={handleKeyPress}
               >
                 {/* Etapa 1: Dados Básicos */}
                 {currentStep === 1 && (
