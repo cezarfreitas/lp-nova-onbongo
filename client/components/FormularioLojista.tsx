@@ -130,7 +130,7 @@ export default function FormularioLojista() {
       });
 
       // Meta Pixel: Lead Onbongo_LP
-      if (typeof window !== "undefined" && window.fbq) {
+      if (isMetaPixelLoaded()) {
         window.fbq("trackCustom", "Lead_Onbongo_LP", {
           content_name: "Lojista Lead Generation",
           content_category: "B2B_Lead",
@@ -148,9 +148,11 @@ export default function FormularioLojista() {
           currency: "BRL"
         });
 
-        console.log("📘 Meta Pixel Lead_Onbongo_LP e Lead enviados");
+        trackingLog("Meta Pixel Lead_Onbongo_LP e Lead enviados");
       } else {
         console.error("❌ Meta Pixel fbq não disponível");
+        console.error("🔍 window.fbq:", typeof window.fbq);
+        console.error("🔍 Verificar se script foi carregado no HTML");
       }
 
       trackConversion("lojista_signup", 1);
