@@ -597,7 +597,9 @@ export default function CadastroSection() {
                           </button>
                           <button
                             type="button"
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
                               window.open(
                                 "https://www.onbongo.com.br",
                                 "_blank",
