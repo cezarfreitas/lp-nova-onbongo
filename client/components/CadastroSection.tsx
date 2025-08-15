@@ -158,7 +158,11 @@ export default function CadastroSection() {
     }
   };
 
-  const handlePrevStep = () => {
+  const handlePrevStep = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
