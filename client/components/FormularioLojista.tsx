@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useGA4 } from "./GA4";
 
 export default function FormularioLojista() {
+  const { trackEvent, trackConversion } = useGA4();
   const [dados, setDados] = useState({
     nome: "",
     telefone: "",
