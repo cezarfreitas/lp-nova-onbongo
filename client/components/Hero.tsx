@@ -66,9 +66,7 @@ const Hero = memo(function Hero() {
           type="button"
           aria-label="Começar cadastro como lojista ONBONGO"
           onClick={() => {
-            document.querySelector("#cadastro-section")?.scrollIntoView({
-              behavior: "smooth",
-            });
+            // Scroll removido para evitar comportamento indesejado
           }}
           style={{
             boxShadow:
