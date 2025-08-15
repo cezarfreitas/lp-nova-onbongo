@@ -58,9 +58,9 @@
     overflow-x: hidden;
   }
 
-  /* Prevenir auto-scroll em elementos focáveis durante o carregamento */
+  /* HTML sem animações para evitar flash */
   html {
-    scroll-behavior: smooth;
+    /* scroll-behavior removido para evitar flash */
   }
 
   /* Enhanced text rendering com fallbacks */
