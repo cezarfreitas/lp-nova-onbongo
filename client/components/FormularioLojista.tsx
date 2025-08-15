@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useGA4 } from "./GA4";
-
-const GA4_MEASUREMENT_ID = "G-XXXXXXXXXX"; // Mesmo ID do App.tsx
+import { GA4_CONFIG, logGA4Event } from "../config/ga4";
 
 export default function FormularioLojista() {
-  const { trackEvent, trackConversion } = useGA4(GA4_MEASUREMENT_ID);
+  const { trackEvent, trackConversion } = useGA4(GA4_CONFIG.measurementId);
   const [dados, setDados] = useState({
     nome: "",
     telefone: "",
