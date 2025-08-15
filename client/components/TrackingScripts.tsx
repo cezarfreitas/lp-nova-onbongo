@@ -16,7 +16,6 @@ export default function TrackingScripts() {
   const META_TEST_EVENT_CODE = import.meta.env.VITE_META_TEST_EVENT_CODE;
 
   useEffect(() => {
-
     // Meta Pixel
     if (META_PIXEL_ID) {
       // Facebook Pixel Code
@@ -121,8 +120,12 @@ export default function TrackingScripts() {
                 action_source: "website",
                 event_source_url: window.location.href,
                 user_data: {
-                  em: leadData.email ? await hashString(leadData.email) : undefined,
-                  ph: leadData.whatsapp ? await hashString(leadData.whatsapp) : undefined,
+                  em: leadData.email
+                    ? await hashString(leadData.email)
+                    : undefined,
+                  ph: leadData.whatsapp
+                    ? await hashString(leadData.whatsapp)
+                    : undefined,
                   client_ip_address: await getClientIP(),
                   client_user_agent: navigator.userAgent,
                   fbc: getCookie("_fbc"),

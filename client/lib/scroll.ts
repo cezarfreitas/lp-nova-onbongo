@@ -11,18 +11,17 @@ export const scrollToFormulario = () => {
       formularioElement.scrollIntoView({
         behavior: "smooth",
         block: "start",
-        inline: "nearest"
+        inline: "nearest",
       });
     }, 100);
-
   } else {
     // Fallback: tentar encontrar o formulário
-    const formElement = document.querySelector('section.bg-accent');
+    const formElement = document.querySelector("section.bg-accent");
     if (formElement) {
       formElement.scrollIntoView({
         behavior: "smooth",
         block: "start",
-        inline: "nearest"
+        inline: "nearest",
       });
     }
   }
@@ -30,13 +29,12 @@ export const scrollToFormulario = () => {
 
 export const scrollToElement = (elementId: string) => {
   const element = document.getElementById(elementId);
-  
+
   if (element) {
     element.scrollIntoView({
       behavior: "smooth",
       block: "start",
-      inline: "nearest"
+      inline: "nearest",
     });
-    
   }
 };
