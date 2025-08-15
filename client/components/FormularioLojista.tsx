@@ -201,7 +201,6 @@ export default function FormularioLojista() {
         value: 10,
         currency: "BRL",
       });
-      trackingLog("Meta Pixel Lead consumidor enviado");
     }
 
     // API de Conversões para consumidor
@@ -213,7 +212,6 @@ export default function FormularioLojista() {
         cnpj: "",
         email: "",
       });
-      trackingLog("Conversions API Lead consumidor enviado");
     }
 
     window.open("https://www.onbongo.com.br", "_blank");
