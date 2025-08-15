@@ -78,7 +78,6 @@ export default function TrackingScripts() {
             has_cnpj: leadData.cnpj ? "yes" : "no",
           },
         });
-        console.log("📊 GA4 Lead event sent:", leadData);
       }
 
       // Meta Pixel Event
@@ -95,8 +94,6 @@ export default function TrackingScripts() {
           sendToConversionsAPI(leadData);
         }
       }
-
-      console.log("📊 Lead tracked:", leadData);
     };
 
     // Lead_Onbongo_LP tracking (Pixel + Conversions API)
