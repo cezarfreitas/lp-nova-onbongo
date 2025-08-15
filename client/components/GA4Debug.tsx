@@ -1,8 +1,7 @@
 import { useGA4 } from "./GA4";
-import { GA4_CONFIG } from "../config/ga4";
 
 export default function GA4Debug() {
-  const { trackEvent } = useGA4(GA4_CONFIG.measurementId);
+  const { trackEvent } = useGA4();
 
   // Função para testar eventos
   const testarEvento = () => {
