@@ -17,11 +17,11 @@ export default function Index() {
       <SEO />
       <main className="min-h-screen">
         <Hero />
-        <HistorySection />
         <div id="cadastro-section">
           <CadastroSection />
         </div>
         <Gallery />
+        <HistorySection />
       </main>
       <Footer />
     </>
