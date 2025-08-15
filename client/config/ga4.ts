@@ -39,7 +39,7 @@ export const GA4_CONFIG = {
 
 // Função para verificar se o GA4 está configurado
 export const isGA4Configured = () => {
-  return GA4_CONFIG.measurementId !== "G-XXXXXXXXXX";
+  return GA4_CONFIG.measurementId && GA4_CONFIG.measurementId !== "G-XXXXXXXXXX";
 };
 
 // Função para logging em desenvolvimento
