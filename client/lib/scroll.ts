@@ -38,8 +38,5 @@ export const scrollToElement = (elementId: string) => {
       inline: "nearest"
     });
     
-    console.log(`🎯 Scroll para #${elementId} executado`);
-  } else {
-    console.error(`❌ Elemento #${elementId} não encontrado`);
   }
 };
