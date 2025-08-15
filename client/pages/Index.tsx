@@ -22,7 +22,6 @@ export default function Index() {
         <HistorySection />
       </main>
       <Footer />
-      <GA4Test />
     </>
   );
 }
