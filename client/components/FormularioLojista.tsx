@@ -189,7 +189,13 @@ export default function FormularioLojista() {
             <div
               id="formulario-container"
               className="bg-dark rounded-2xl p-4 sm:p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl"
-              style={{ contain: 'layout style paint', isolation: 'isolate' }}
+              style={{
+                contain: 'layout style paint',
+                isolation: 'isolate',
+                overscrollBehavior: 'contain'
+              }}
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="text-center mb-4 sm:mb-6">
