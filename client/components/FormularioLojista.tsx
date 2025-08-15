@@ -64,9 +64,7 @@ export default function FormularioLojista() {
     }
   };
 
-  const enviarFormulario = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const enviarFormulario = async () => {
     if (!validarFormulario()) {
       return;
     }
@@ -155,7 +153,7 @@ export default function FormularioLojista() {
                 </p>
               </div>
 
-              <form onSubmit={enviarFormulario} className="space-y-4">
+              <div className="space-y-4">
                 {/* Nome Completo */}
                 <div>
                   <label className="block text-light font-medium mb-2 text-sm">
@@ -196,7 +194,14 @@ export default function FormularioLojista() {
                     Tipo de Cadastro *
                   </label>
                   <div className="space-y-2">
-                    <label className="block cursor-pointer">
+                    <label 
+                      className="block cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        alterarCampo("tipo", "lojista");
+                      }}
+                    >
                       <div
                         className={`p-3 rounded-xl transition-all duration-300 ${
                           dados.tipo === "lojista"
@@ -205,14 +210,15 @@ export default function FormularioLojista() {
                         }`}
                       >
                         <div className="flex items-center">
-                          <input
-                            type="radio"
-                            name="tipo"
-                            value="lojista"
-                            checked={dados.tipo === "lojista"}
-                            onChange={(e) => alterarCampo("tipo", e.target.value)}
-                            className="mr-3"
-                          />
+                          <div
+                            className={`mr-3 w-4 h-4 rounded-full border-2 border-light/50 flex items-center justify-center ${
+                              dados.tipo === "lojista" ? "bg-accent border-accent" : ""
+                            }`}
+                          >
+                            {dados.tipo === "lojista" && (
+                              <div className="w-2 h-2 bg-light rounded-full"></div>
+                            )}
+                          </div>
                           <div>
                             <div className="text-light font-medium text-sm">Sou Lojista</div>
                             <div className="text-light/70 text-xs">Tenho CNPJ e quero revender</div>
@@ -221,7 +227,14 @@ export default function FormularioLojista() {
                       </div>
                     </label>
 
-                    <label className="block cursor-pointer">
+                    <label 
+                      className="block cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        alterarCampo("tipo", "consumidor");
+                      }}
+                    >
                       <div
                         className={`p-3 rounded-xl transition-all duration-300 ${
                           dados.tipo === "consumidor"
@@ -230,14 +243,15 @@ export default function FormularioLojista() {
                         }`}
                       >
                         <div className="flex items-center">
-                          <input
-                            type="radio"
-                            name="tipo"
-                            value="consumidor"
-                            checked={dados.tipo === "consumidor"}
-                            onChange={(e) => alterarCampo("tipo", e.target.value)}
-                            className="mr-3"
-                          />
+                          <div
+                            className={`mr-3 w-4 h-4 rounded-full border-2 border-light/50 flex items-center justify-center ${
+                              dados.tipo === "consumidor" ? "bg-accent border-accent" : ""
+                            }`}
+                          >
+                            {dados.tipo === "consumidor" && (
+                              <div className="w-2 h-2 bg-light rounded-full"></div>
+                            )}
+                          </div>
                           <div>
                             <div className="text-light font-medium text-sm">Sou Consumidor</div>
                             <div className="text-light/70 text-xs">Quero comprar para uso próprio</div>
@@ -289,8 +303,13 @@ export default function FormularioLojista() {
                 <div className="pt-4">
                   {dados.tipo === "lojista" ? (
                     <button
-                      type="submit"
+                      type="button"
                       disabled={enviando}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        enviarFormulario();
+                      }}
                       className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                     >
                       {enviando ? "Enviando..." : "✓ Finalizar Cadastro!"}
@@ -298,14 +317,18 @@ export default function FormularioLojista() {
                   ) : dados.tipo === "consumidor" ? (
                     <button
                       type="button"
-                      onClick={abrirSite}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        abrirSite();
+                      }}
                       className="w-full bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm shadow-lg"
                     >
                       🛒 Usar Desconto Agora
                     </button>
                   ) : (
                     <button
-                      type="submit"
+                      type="button"
                       disabled={true}
                       className="w-full bg-accent/50 text-light font-bold py-3 px-4 rounded-xl text-sm cursor-not-allowed"
                     >
@@ -313,7 +336,7 @@ export default function FormularioLojista() {
                     </button>
                   )}
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
