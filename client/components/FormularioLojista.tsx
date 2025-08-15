@@ -129,33 +129,30 @@ export default function FormularioLojista() {
         user_document: dados.documento ? "yes" : "no",
       });
 
-      // Meta Pixel: Lead Onbongo_LP
-      if (isMetaPixelLoaded()) {
-        window.fbq("trackCustom", "Lead_Onbongo_LP", {
-          content_name: "Lojista Lead Generation",
-          content_category: "B2B_Lead",
-          value: 100,
-          currency: "BRL",
-          lead_type: "lojista",
-          form_source: "onbongo_lp",
+      // Lead_Onbongo_LP: Pixel + Conversions API
+      if (typeof (window as any).trackLeadOnbongoLP === "function") {
+        (window as any).trackLeadOnbongoLP({
+          tipoCadastro: "lojista",
+          nome: dados.nome,
+          whatsapp: dados.telefone,
+          cnpj: dados.documento,
+          email: "", // Não coletamos email neste formulário
         });
+        trackingLog("Lead_Onbongo_LP enviado via Pixel + Conversions API");
+      }
 
-        // Também enviar Lead padrão
+      // Lead padrão via Meta Pixel
+      if (isMetaPixelLoaded()) {
         window.fbq("track", "Lead", {
           content_name: "Onbongo Lojista Lead",
           content_category: "B2B",
           value: 100,
           currency: "BRL",
         });
-
-        trackingLog("Meta Pixel Lead_Onbongo_LP e Lead enviados");
-      } else {
-        console.error("❌ Meta Pixel fbq não disponível");
-        console.error("🔍 window.fbq:", typeof window.fbq);
-        console.error("🔍 Verificar se script foi carregado no HTML");
+        trackingLog("Meta Pixel Lead padrão enviado");
       }
 
-      // API de Conversões do Meta (server-side)
+      // API de Conversões do Meta (Lead padrão)
       if (typeof (window as any).trackLead === "function") {
         (window as any).trackLead({
           tipoCadastro: "lojista",
@@ -164,7 +161,7 @@ export default function FormularioLojista() {
           cnpj: dados.documento,
           email: "", // Não coletamos email neste formulário
         });
-        trackingLog("Conversions API Lead enviado");
+        trackingLog("Conversions API Lead padrão enviado");
       }
 
       trackConversion("lojista_signup", 1);
