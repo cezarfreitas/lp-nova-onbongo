@@ -16,9 +16,6 @@ export default function TrackingScripts() {
   const META_TEST_EVENT_CODE = import.meta.env.VITE_META_TEST_EVENT_CODE;
 
   useEffect(() => {
-    // GA4 agora é gerenciado pelo componente GA4.tsx e HTML
-    // Removido para evitar conflito
-    console.log("📊 TrackingScripts carregado - GA4 gerenciado separadamente");
 
     // Meta Pixel
     if (META_PIXEL_ID) {
