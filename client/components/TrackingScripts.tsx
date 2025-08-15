@@ -106,14 +106,15 @@ export default function TrackingScripts() {
 
     // Form step tracking
     (window as any).trackFormStep = (step: number, stepName: string) => {
-      // GA4 Event
-      if (GA4_ID && window.gtag) {
+      // GA4 Event - usa o GA4 já carregado
+      if (window.gtag) {
         window.gtag("event", "form_step_completed", {
           event_category: "Form",
           event_label: stepName,
           step_number: step,
           form_name: "ONBONGO_B2B_Registration",
         });
+        console.log("📊 GA4 Form step event sent:", stepName);
       }
 
       // Meta Pixel Event
