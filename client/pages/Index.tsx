@@ -4,6 +4,7 @@ import Gallery from "@/components/Gallery";
 import FormularioLojista from "@/components/FormularioLojista";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import TrackingScripts from "@/components/TrackingScripts";
 
 export default function Index() {
   // useEffect removido para evitar flash na página
@@ -11,6 +12,7 @@ export default function Index() {
   return (
     <>
       <SEO />
+      <TrackingScripts />
       <main className="min-h-screen">
         <Hero />
         <div id="cadastro-section">

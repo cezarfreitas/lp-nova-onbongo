@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      ONBONGO - Seja um Lojista Oficial | Maior Marca de Streetwear do Brasil
+    </title>
+    <meta
+      name="description"
+      content="Torne-se um lojista oficial ONBONGO e venda uma das maiores marcas de streetwear do Brasil. Acesso exclusivo à plataforma digital com preços especiais para lojistas."
+    />
+    <meta
+      name="keywords"
+      content="ONBONGO, lojista oficial, streetwear, marca brasileira, revenda, roupas urbanas, moda masculina, surf wear"
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="ONBONGO - Seja um Lojista Oficial | Maior Marca de Streetwear do Brasil"
+    />
+    <meta
+      property="og:description"
+      content="Torne-se um lojista oficial ONBONGO e venda uma das maiores marcas de streetwear do Brasil. Acesso exclusivo à plataforma digital com preços especiais para lojistas."
+    />
+    <meta
+      property="og:image"
+      content="http://b2b.onbongo.com.br/og-image.jpg"
+    />
+    <meta property="og:url" content="http://b2b.onbongo.com.br" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ONBONGO - Seja um Lojista Oficial" />
+    <meta
+      name="twitter:description"
+      content="Torne-se um lojista oficial ONBONGO e venda uma das maiores marcas de streetwear do Brasil."
+    />
+    <meta
+      name="twitter:image"
+      content="http://b2b.onbongo.com.br/og-image.jpg"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <!-- Logo -->
+        <header class="hero-header">
+          <div class="logo-container">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fa5dd6bf9de864106927a6256e91b91e8?format=webp&width=800"
+              alt="ONBONGO Logo"
+              class="hero-logo"
+            />
+          </div>
+        </header>
+
+        <!-- Subtitle -->
+        <p class="hero-subtitle">
+          Aproveite a oportunidade. Vender uma das maiores marcas do Brasil e do
+          mundo.
+        </p>
+
+        <!-- Main heading -->
+        <h1 class="hero-title">
+          <div class="title-line">SEJA UM</div>
+          <div class="title-line">LOJISTA OFICIAL</div>
+          <div class="title-line title-accent">ONBONGO</div>
+        </h1>
+
+        <!-- Description -->
+        <p class="hero-description">
+          Cadastre-se agora e tenha acesso à nossa plataforma digital com<br
+            class="hidden-mobile"
+          />
+          preços exclusivos para lojistas.
+        </p>
+
+        <!-- CTA Button -->
+        <button class="hero-button" onclick="scrollToCadastro()">
+          Começar Agora! →
+        </button>
+
+        <!-- Bottom text -->
+        <footer class="hero-footer">
+          <p>MARCA LÍDER EM STREETWEAR</p>
+        </footer>
+      </div>
+    </section>
+
+    <!-- Cadastro Section -->
+    <section id="cadastro-section" class="cadastro-section">
+      <div class="container">
+        <div class="cadastro-grid">
+          <!-- Lado Esquerdo - Título -->
+          <div class="cadastro-text">
+            <h2 class="cadastro-title">
+              <span>SEJA UM</span><br />
+              <span class="title-light">LOJISTA OFICIAL</span><br />
+              <span>ONBONGO</span>
+            </h2>
+            <p class="cadastro-description">
+              Junte-se aos melhores lojistas do Brasil e tenha acesso exclusivo
+              aos produtos da marca líder em streetwear.
+            </p>
+          </div>
+
+          <!-- Lado Direito - Formulário -->
+          <div class="cadastro-form-container">
+            <div class="form-card">
+              <!-- Progress Bar -->
+              <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+              </div>
+
+              <!-- Form Header -->
+              <div class="form-header">
+                <h3 id="formTitle">Cadastre-se Agora</h3>
+                <p id="formSubtitle">Comece sua jornada como lojista oficial</p>
+                <div class="step-indicators">
+                  <div class="step-dot active" id="step1"></div>
+                  <div class="step-dot" id="step2"></div>
+                  <div class="step-dot" id="step3"></div>
+                </div>
+              </div>
+
+              <!-- Form -->
+              <form id="cadastroForm">
+                <!-- Etapa 1: Dados Básicos -->
+                <div class="form-step active" id="formStep1">
+                  <div class="input-group">
+                    <label for="nomeCompleto">Nome Completo *</label>
+                    <input
+                      type="text"
+                      id="nomeCompleto"
+                      name="nomeCompleto"
+                      placeholder="Seu nome completo"
+                      required
+                    />
+                    <span class="error-message" id="nomeError"></span>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="whatsapp">WhatsApp *</label>
+                    <input
+                      type="tel"
+                      id="whatsapp"
+                      name="whatsapp"
+                      placeholder="(11) 99999-9999"
+                      required
+                    />
+                    <span class="error-message" id="whatsappError"></span>
+                  </div>
+
+                  <button type="button" class="btn-next" id="btnStep1" disabled>
+                    Próximo →
+                  </button>
+                </div>
+
+                <!-- Etapa 2: Tipo de Cadastro -->
+                <div class="form-step" id="formStep2">
+                  <div class="input-group">
+                    <label>Tipo de Cadastro *</label>
+                    <div class="radio-group">
+                      <label class="radio-option" data-value="lojista">
+                        <input
+                          type="radio"
+                          name="tipoCadastro"
+                          value="lojista"
+                        />
+                        <div class="radio-custom"></div>
+                        <div class="radio-content">
+                          <div class="radio-title">Sou Lojista</div>
+                          <div class="radio-subtitle">
+                            Tenho CNPJ e quero revender
+                          </div>
+                        </div>
+                      </label>
+
+                      <label class="radio-option" data-value="consumidor">
+                        <input
+                          type="radio"
+                          name="tipoCadastro"
+                          value="consumidor"
+                        />
+                        <div class="radio-custom"></div>
+                        <div class="radio-content">
+                          <div class="radio-title">Sou Consumidor</div>
+                          <div class="radio-subtitle">
+                            Quero comprar para uso próprio
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-buttons">
+                    <button
+                      type="button"
+                      class="btn-back"
+                      onclick="previousStep()"
+                    >
+                      ← Voltar
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Etapa 3: CNPJ ou Cupom -->
+                <div class="form-step" id="formStep3">
+                  <!-- Para Lojistas -->
+                  <div
+                    class="step-content"
+                    id="lojistaContent"
+                    style="display: none"
+                  >
+                    <div class="input-group">
+                      <label for="cnpj">CNPJ *</label>
+                      <input
+                        type="text"
+                        id="cnpj"
+                        name="cnpj"
+                        placeholder="00.000.000/0001-00"
+                      />
+                      <span class="error-message" id="cnpjError"></span>
+                    </div>
+
+                    <div class="form-buttons">
+                      <button
+                        type="button"
+                        class="btn-back"
+                        onclick="previousStep()"
+                      >
+                        ← Voltar
+                      </button>
+                      <button type="submit" class="btn-submit" id="btnSubmit">
+                        ✓ Finalizar Cadastro!
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Para Consumidores -->
+                  <div
+                    class="step-content"
+                    id="consumidorContent"
+                    style="display: none"
+                  >
+                    <div class="coupon-content">
+                      <h4>Cadastro exclusivo para lojistas</h4>
+                      <p>
+                        Como você é consumidor da marca, preparamos um
+                        <strong>desconto especial de 10%</strong> para suas
+                        compras!
+                      </p>
+
+                      <div class="coupon-box">
+                        <p class="coupon-label">SEU CÓDIGO DE DESCONTO:</p>
+                        <div class="coupon-code">ONBONGO10</div>
+                        <p class="coupon-note">
+                          💾 Salve este código para usar no checkout
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="form-buttons">
+                      <button
+                        type="button"
+                        class="btn-back"
+                        onclick="previousStep()"
+                      >
+                        ← Voltar
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-submit"
+                        onclick="openSiteAndSubmit()"
+                      >
+                        🛒 Usar Desconto Agora
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+      <div class="container">
+        <div class="gallery-header">
+          <h2>COLEÇÃO EXCLUSIVA</h2>
+          <p>
+            Conheça o estilo único da ONBONGO através das nossas peças mais
+            icônicas
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item large">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Ff5f7b34a24aa40a5b4e6d5b0c3e5b59c?format=webp&width=600"
+              alt="Modelos ONBONGO em ambiente urbano"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fde7c7d8b5d9f4e6f8c2a5e6f7b4c8a3d?format=webp&width=400"
+              alt="Trio de modelos usando streetwear ONBONGO"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fa8e9b6c5d4e3f2a1b9c8d7e6f5a4b3c2?format=webp&width=400"
+              alt="Grupo de amigos com roupas ONBONGO"
+            />
+          </div>
+          <div class="gallery-item large">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fb5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0?format=webp&width=600"
+              alt="Modelo feminino com camiseta amarela ONBONGO"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fc9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4?format=webp&width=400"
+              alt="Trio de modelos com camisetas coloridas ONBONGO"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fd6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1?format=webp&width=400"
+              alt="Modelo masculino com jaqueta ONBONGO"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fe3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8?format=webp&width=400"
+              alt="Modelo masculino com moletom azul ONBONGO"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Ff0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5?format=webp&width=400"
+              alt="Modelo feminino com camiseta vermelha ONBONGO"
+            />
+          </div>
+        </div>
+
+        <div class="gallery-cta">
+          <p>
+            Torne-se um lojista oficial e leve o streetwear autêntico da ONBONGO
+            para seus clientes
+          </p>
+          <button class="gallery-button" onclick="scrollToCadastro()">
+            Quero ser Lojista
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <!-- Logo Principal -->
+        <div class="footer-logo">
+          <h2>ONBONGO</h2>
+
+          <!-- Redes Sociais -->
+          <div class="social-links">
+            <a
+              href="https://instagram.com/onbongo"
+              target="_blank"
+              aria-label="Instagram ONBONGO"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                />
+              </svg>
+            </a>
+
+            <a
+              href="https://facebook.com/onbongo"
+              target="_blank"
+              aria-label="Facebook ONBONGO"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hub Multimarcas -->
+        <div class="footer-hub">
+          <div class="hub-title">
+            hub <span class="hub-accent">MULTIMARCAS</span>
+          </div>
+          <div class="hub-divider"></div>
+          <p class="hub-description">
+            Uma iniciativa da <strong>NTK Grupo Textil</strong> para
+            democratizar o acesso dos lojistas às grandes marcas do mercado.
+            Conectamos empreendedores com as melhores oportunidades de negócio.
+          </p>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+          <div class="footer-copyright">
+            © 2024 Onbongo. Todos os direitos reservados.
+          </div>
+
+          <div class="footer-credits">
+            Desenvolvido com <span class="heart">❤️</span> por
+            <a href="https://gfnegocios.com.br" target="_blank">GF</a> |
+            <a href="https://gfnegocios.com.br" target="_blank"
+              >Negócios Digitais</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-icon">🎉</div>
+        <h2 id="modalTitle">Cadastro Realizado!</h2>
+        <p id="modalMessage">
+          Nossa equipe entrará em contato via WhatsApp em breve para finalizar
+          sua parceria.
+        </p>
+        <div class="modal-info">
+          <p id="modalInfo">⏱️ Resposta em até 2 horas úteis</p>
+        </div>
+        <button class="modal-close" onclick="closeModal()">Fechar</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
