@@ -68,7 +68,7 @@ export default function SEO({
       document.head.appendChild(canonical);
     }
     canonical.href = url;
-  }, [title, description, keywords, image, url, type]);
+  }, []); // Executar apenas uma vez na montagem
 
   return null;
 }
