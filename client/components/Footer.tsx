@@ -3,8 +3,8 @@ export default function Footer() {
     <footer className="bg-dark text-light py-8 sm:py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Seção Principal */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
           {/* Coluna 1: Logo ONBONGO */}
           <div className="text-center lg:text-left">
             <div className="mb-4">
@@ -18,7 +18,7 @@ export default function Footer() {
             <p className="text-light/80 text-sm leading-relaxed max-w-xs mx-auto lg:mx-0">
               Marca líder em streetwear brasileiro, conectando lojistas e consumidores há mais de 30 anos.
             </p>
-            
+
             {/* Redes Sociais */}
             <div className="flex justify-center lg:justify-start gap-3 mt-4">
               <a
@@ -48,34 +48,20 @@ export default function Footer() {
           </div>
 
           {/* Coluna 2: Hub Multimarcas */}
-          <div className="text-center">
+          <div className="text-center lg:text-right">
             <div className="mb-4">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fa1eee00b0d4548c2965ccc0f73cef0a8?format=webp&width=800"
                 alt="Logo Hub Multimarcas"
-                className="h-8 sm:h-10 w-auto mx-auto"
+                className="h-8 sm:h-10 w-auto mx-auto lg:ml-auto lg:mr-0"
                 loading="lazy"
               />
             </div>
-            <p className="text-light/80 text-xs sm:text-sm leading-relaxed">
+            <p className="text-light/80 text-xs sm:text-sm leading-relaxed max-w-xs mx-auto lg:ml-auto lg:mr-0">
               Uma iniciativa da{" "}
               <strong className="text-accent">NTK Grupo Textil</strong> para
               democratizar o acesso dos lojistas às grandes marcas do mercado.
             </p>
-          </div>
-
-          {/* Coluna 3: Informações */}
-          <div className="text-center lg:text-right">
-            <h3 className="font-display text-lg font-bold text-light mb-3">
-              Seja um Lojista
-            </h3>
-            <p className="text-light/80 text-sm leading-relaxed mb-4">
-              Conectamos empreendedores com as melhores oportunidades de negócio no streetwear brasileiro.
-            </p>
-            <div className="text-light/70 text-xs">
-              <p>📧 contato@onbongo.com.br</p>
-              <p>📱 WhatsApp: (11) 99999-9999</p>
-            </div>
           </div>
         </div>
 
