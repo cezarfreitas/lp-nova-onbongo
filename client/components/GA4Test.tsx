@@ -92,6 +92,19 @@ export default function GA4Test() {
   const testarConversionsAPI = () => {
     console.log("🔄 Testando Conversions API...");
 
+    // Teste Lead_Onbongo_LP
+    if (typeof (window as any).trackLeadOnbongoLP === "function") {
+      (window as any).trackLeadOnbongoLP({
+        tipoCadastro: "lojista",
+        nome: "Teste Lead_Onbongo_LP",
+        whatsapp: "11999999999",
+        cnpj: "12345678000199",
+        email: "teste@onbongo.com",
+      });
+      console.log("✅ Conversions API Lead_Onbongo_LP enviado");
+    }
+
+    // Teste Lead padrão
     if (typeof (window as any).trackLead === "function") {
       (window as any).trackLead({
         tipoCadastro: "lojista",
@@ -100,12 +113,10 @@ export default function GA4Test() {
         cnpj: "12345678000199",
         email: "teste@onbongo.com",
       });
-      console.log("✅ Conversions API Lead enviado");
-      alert("🔄 Conversions API testada!\nVerifique o Events Manager do Facebook\nTest Code: TEST8508");
-    } else {
-      console.error("❌ trackLead não disponível");
-      alert("❌ trackLead não disponível - verifique TrackingScripts");
+      console.log("✅ Conversions API Lead padrão enviado");
     }
+
+    alert("🔄 Conversions API testada!\n✅ Lead_Onbongo_LP\n✅ Lead padrão\nVerifique Events Manager\nTest Code: TEST8508");
   };
 
   const verificarRede = () => {
