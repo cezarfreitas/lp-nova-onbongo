@@ -21,16 +21,19 @@ export default function FormularioLojista() {
 
   const mascaraCNPJ = (valor: string) => {
     const numeros = valor.replace(/\D/g, "");
-    return numeros.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+    return numeros.replace(
+      /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
+      "$1.$2.$3/$4-$5",
+    );
   };
 
   const validarFormulario = () => {
     const novosErros: Record<string, string> = {};
-    
+
     if (!dados.nome.trim()) {
       novosErros.nome = "Nome obrigatório";
     }
-    
+
     const tel = dados.telefone.replace(/\D/g, "");
     if (!tel || tel.length !== 11) {
       novosErros.telefone = "Telefone inválido";
@@ -46,7 +49,7 @@ export default function FormularioLojista() {
         novosErros.documento = "CNPJ inválido";
       }
     }
-    
+
     setErros(novosErros);
     return Object.keys(novosErros).length === 0;
   };
@@ -71,10 +74,10 @@ export default function FormularioLojista() {
       trackEvent("select_registration_type", eventData);
     }
 
-    setDados(prev => ({ ...prev, [campo]: valorFormatado }));
+    setDados((prev) => ({ ...prev, [campo]: valorFormatado }));
 
     if (erros[campo]) {
-      setErros(prev => ({ ...prev, [campo]: "" }));
+      setErros((prev) => ({ ...prev, [campo]: "" }));
     }
   };
 
@@ -100,7 +103,7 @@ export default function FormularioLojista() {
     setEnviando(true);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       console.log("Dados enviados:", dados);
 
@@ -248,7 +251,9 @@ export default function FormularioLojista() {
                     className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
                   />
                   {erros.telefone && (
-                    <p className="text-red-300 text-xs mt-1">{erros.telefone}</p>
+                    <p className="text-red-300 text-xs mt-1">
+                      {erros.telefone}
+                    </p>
                   )}
                 </div>
 
@@ -258,7 +263,7 @@ export default function FormularioLojista() {
                     Tipo de Cadastro *
                   </label>
                   <div className="space-y-2">
-                    <label 
+                    <label
                       className="block cursor-pointer"
                       onClick={(e) => {
                         e.preventDefault();
@@ -276,7 +281,9 @@ export default function FormularioLojista() {
                         <div className="flex items-center">
                           <div
                             className={`mr-3 w-4 h-4 rounded-full border-2 border-light/50 flex items-center justify-center ${
-                              dados.tipo === "lojista" ? "bg-accent border-accent" : ""
+                              dados.tipo === "lojista"
+                                ? "bg-accent border-accent"
+                                : ""
                             }`}
                           >
                             {dados.tipo === "lojista" && (
@@ -284,14 +291,18 @@ export default function FormularioLojista() {
                             )}
                           </div>
                           <div>
-                            <div className="text-light font-medium text-sm">Sou Lojista</div>
-                            <div className="text-light/70 text-xs">Tenho CNPJ e quero revender</div>
+                            <div className="text-light font-medium text-sm">
+                              Sou Lojista
+                            </div>
+                            <div className="text-light/70 text-xs">
+                              Tenho CNPJ e quero revender
+                            </div>
                           </div>
                         </div>
                       </div>
                     </label>
 
-                    <label 
+                    <label
                       className="block cursor-pointer"
                       onClick={(e) => {
                         e.preventDefault();
@@ -309,7 +320,9 @@ export default function FormularioLojista() {
                         <div className="flex items-center">
                           <div
                             className={`mr-3 w-4 h-4 rounded-full border-2 border-light/50 flex items-center justify-center ${
-                              dados.tipo === "consumidor" ? "bg-accent border-accent" : ""
+                              dados.tipo === "consumidor"
+                                ? "bg-accent border-accent"
+                                : ""
                             }`}
                           >
                             {dados.tipo === "consumidor" && (
@@ -317,8 +330,12 @@ export default function FormularioLojista() {
                             )}
                           </div>
                           <div>
-                            <div className="text-light font-medium text-sm">Sou Consumidor</div>
-                            <div className="text-light/70 text-xs">Quero comprar para uso próprio</div>
+                            <div className="text-light font-medium text-sm">
+                              Sou Consumidor
+                            </div>
+                            <div className="text-light/70 text-xs">
+                              Quero comprar para uso próprio
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -338,12 +355,16 @@ export default function FormularioLojista() {
                     <input
                       type="text"
                       value={dados.documento}
-                      onChange={(e) => alterarCampo("documento", e.target.value)}
+                      onChange={(e) =>
+                        alterarCampo("documento", e.target.value)
+                      }
                       placeholder="00.000.000/0001-00"
                       className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
                     />
                     {erros.documento && (
-                      <p className="text-red-300 text-xs mt-1">{erros.documento}</p>
+                      <p className="text-red-300 text-xs mt-1">
+                        {erros.documento}
+                      </p>
                     )}
                   </div>
                 )}

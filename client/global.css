@@ -70,7 +70,10 @@
   }
 
   /* Prevenir scroll em elementos de formulário */
-  input, textarea, select, button {
+  input,
+  textarea,
+  select,
+  button {
     scroll-margin: 0 !important;
     scroll-padding: 0 !important;
   }

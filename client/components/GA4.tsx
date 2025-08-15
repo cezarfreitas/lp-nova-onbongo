@@ -20,7 +20,7 @@ export default function GA4({ measurementId }: GA4Props) {
 
     // Inicializa o dataLayer
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function(...args: any[]) {
+    window.gtag = function (...args: any[]) {
       window.dataLayer.push(args);
     };
 
@@ -40,7 +40,9 @@ export default function GA4({ measurementId }: GA4Props) {
     // Cleanup
     return () => {
       // Remove o script quando o componente for desmontado
-      const existingScript = document.querySelector(`script[src*="${measurementId}"]`);
+      const existingScript = document.querySelector(
+        `script[src*="${measurementId}"]`,
+      );
       if (existingScript) {
         existingScript.remove();
       }
@@ -59,7 +61,7 @@ export const useGA4 = (measurementId: string) => {
       event_label?: string;
       value?: number;
       [key: string]: any;
-    }
+    },
   ) => {
     if (window.gtag) {
       window.gtag("event", eventName, {
@@ -78,7 +80,11 @@ export const useGA4 = (measurementId: string) => {
     }
   };
 
-  const trackConversion = (conversionId: string, value?: number, currency = "BRL") => {
+  const trackConversion = (
+    conversionId: string,
+    value?: number,
+    currency = "BRL",
+  ) => {
     if (window.gtag) {
       window.gtag("event", "conversion", {
         send_to: `${measurementId}/${conversionId}`,
