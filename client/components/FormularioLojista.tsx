@@ -54,15 +54,24 @@ export default function FormularioLojista() {
 
   const alterarCampo = (campo: string, valor: string) => {
     let valorFormatado = valor;
-    
+
     if (campo === "telefone") {
       valorFormatado = mascaraTelefone(valor);
     } else if (campo === "documento") {
       valorFormatado = mascaraCNPJ(valor);
     }
-    
+
+    // Tracking GA4 para seleção do tipo
+    if (campo === "tipo") {
+      trackEvent("select_registration_type", {
+        event_category: "engagement",
+        event_label: valor,
+        registration_type: valor,
+      });
+    }
+
     setDados(prev => ({ ...prev, [campo]: valorFormatado }));
-    
+
     if (erros[campo]) {
       setErros(prev => ({ ...prev, [campo]: "" }));
     }
