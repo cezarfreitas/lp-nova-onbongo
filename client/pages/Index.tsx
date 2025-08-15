@@ -5,7 +5,6 @@ import FormularioLojista from "@/components/FormularioLojista";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import TrackingScripts from "@/components/TrackingScripts";
-import GA4Debug from "@/components/GA4Debug";
 
 export default function Index() {
   // useEffect removido para evitar flash na página
