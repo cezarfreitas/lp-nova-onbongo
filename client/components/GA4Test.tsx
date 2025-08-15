@@ -52,7 +52,7 @@ export default function GA4Test() {
         >
           Teste Rede
         </button>
-        <div className="text-[10px] opacity-75">G-Q8T9ML8Q5C</div>
+        <div className="text-[10px] opacity-75">G-GSDX6XV3V6</div>
       </div>
     </div>
   );
