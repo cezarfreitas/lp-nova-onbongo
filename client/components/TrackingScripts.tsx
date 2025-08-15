@@ -172,7 +172,6 @@ export default function TrackingScripts() {
           step_number: step,
           form_name: "ONBONGO_B2B_Registration",
         });
-        console.log("📊 GA4 Form step event sent:", stepName);
       }
 
       // Meta Pixel Event
