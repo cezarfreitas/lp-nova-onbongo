@@ -152,7 +152,11 @@ export default function CadastroSection() {
     }, 300); // Pequeno delay para mostrar a seleção
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (currentStep === 1 && validateStep1()) {
       setCurrentStep(2);
     }
@@ -475,7 +479,7 @@ export default function CadastroSection() {
                                   Sou Consumidor
                                 </div>
                                 <div className="text-light/70 text-xs">
-                                  Quero comprar para uso próprio
+                                  Quero comprar para uso pr��prio
                                 </div>
                               </div>
                             </div>
