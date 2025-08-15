@@ -224,8 +224,9 @@
   }
 }
 
+/* Animação do body removida para evitar flash */
 .fonts-loaded body {
-  animation: fadeIn 0.3s ease-in-out;
+  /* animation removida */
 }
 
 /* Performance: Critical CSS para above-the-fold */
