@@ -71,8 +71,8 @@ export default function TrackingScripts() {
   useEffect(() => {
     // Make tracking functions available globally
     (window as any).trackLead = (leadData: any) => {
-      // GA4 Event
-      if (GA4_ID && window.gtag) {
+      // GA4 Event - usa o GA4 já carregado
+      if (window.gtag) {
         window.gtag("event", "generate_lead", {
           event_category: "Lead",
           event_label: leadData.tipoCadastro || "unknown",
@@ -83,6 +83,7 @@ export default function TrackingScripts() {
             has_cnpj: leadData.cnpj ? "yes" : "no",
           },
         });
+        console.log("📊 GA4 Lead event sent:", leadData);
       }
 
       // Meta Pixel Event
