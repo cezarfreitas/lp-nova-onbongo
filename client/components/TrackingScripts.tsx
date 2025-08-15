@@ -59,8 +59,6 @@ export default function TrackingScripts() {
       }
 
       window.fbq("track", "PageView");
-
-      console.log("✅ Meta Pixel initialized:", META_PIXEL_ID);
     }
   }, [GA4_ID, META_PIXEL_ID, META_ACCESS_TOKEN, META_TEST_EVENT_CODE]);
 
