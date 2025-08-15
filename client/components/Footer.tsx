@@ -63,7 +63,7 @@ export default function Footer() {
 
             {/* Desenvolvido por */}
             <div className="text-light/70 text-sm">
-              Desenvolvido com <span className="text-red-500">❤️</span> por{" "}
+              Desenvolvido com <span className="text-red-500 animate-heartbeat">❤️</span> por{" "}
               <a
                 href="https://gfnegocios.com.br"
                 target="_blank"
