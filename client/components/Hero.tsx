@@ -66,9 +66,7 @@ const Hero = memo(function Hero() {
           className="hero-button bg-accent hover:bg-accent/90 text-light font-bold px-6 sm:px-8 md:px-10 py-4 sm:py-5 rounded-xl text-base sm:text-lg md:text-xl transition-all duration-300 mb-8 sm:mb-12 tracking-wide hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent/50 shadow-2xl"
           type="button"
           aria-label="Começar cadastro como lojista ONBONGO"
-          onClick={() => {
-            // Scroll removido para evitar comportamento indesejado
-          }}
+          onClick={scrollToFormulario}
           style={{
             boxShadow:
               "0 8px 24px rgba(255, 107, 53, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2)",
