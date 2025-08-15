@@ -18,7 +18,7 @@ export default function Index() {
       <main className="min-h-screen">
         <Hero />
         <div id="cadastro-section">
-          <CadastroSection />
+          <FormularioLojista />
         </div>
         <Gallery />
         <HistorySection />
