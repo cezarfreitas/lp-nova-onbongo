@@ -125,15 +125,18 @@ export default function CadastroSection() {
   };
 
   const handleTipoChange = (tipo: "lojista" | "consumidor") => {
+    // Atualizar estado e avançar etapa em uma única operação
     setFormData((prev) => ({
       ...prev,
       tipoCadastro: tipo,
     }));
 
-    // Avançar automaticamente para a próxima etapa
-    setTimeout(() => {
-      setCurrentStep(3);
-    }, 300); // Pequeno delay para mostrar a seleção
+    // Usar requestAnimationFrame para garantir que a atualização visual aconteça primeiro
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        setCurrentStep(3);
+      }, 200);
+    });
   };
 
   const handleNextStep = (e?: React.MouseEvent) => {
