@@ -484,7 +484,7 @@ export default function CadastroSection() {
                       <button
                         type="button"
                         onClick={handlePrevStep}
-                        className="bg-accent/50 hover:bg-accent/70 text-light font-medium py-3 px-6 rounded-xl transition-all duration-300 text-sm"
+                        className="bg-accent hover:bg-accent/90 text-light font-medium py-3 px-6 rounded-xl transition-all duration-300 text-sm"
                       >
                         ← Voltar
                       </button>
@@ -527,7 +527,7 @@ export default function CadastroSection() {
                           <button
                             type="button"
                             onClick={handlePrevStep}
-                            className="flex-1 bg-accent/50 hover:bg-accent/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
+                            className="flex-1 bg-accent hover:bg-accent/90 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                           >
                             ← Voltar
                           </button>
@@ -581,7 +581,7 @@ export default function CadastroSection() {
                           <button
                             type="button"
                             onClick={handlePrevStep}
-                            className="flex-1 bg-accent/50 hover:bg-accent/70 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
+                            className="flex-1 bg-accent hover:bg-accent/90 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
                           >
                             ← Voltar
                           </button>
