@@ -68,7 +68,11 @@ export default function FormularioLojista() {
     }
   };
 
-  const proximaEtapa = () => {
+  const proximaEtapa = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (etapa === 1 && validarEtapa1()) {
       setEtapa(2);
     }
