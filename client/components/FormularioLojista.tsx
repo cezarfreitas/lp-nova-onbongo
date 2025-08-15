@@ -125,7 +125,7 @@ export default function FormularioLojista() {
         form_name: "onbongo_lp_form",
         user_name: dados.nome,
         user_phone: dados.telefone,
-        user_document: dados.documento ? "yes" : "no"
+        user_document: dados.documento ? "yes" : "no",
       });
 
       // Meta Pixel: Lead Onbongo_LP
@@ -136,7 +136,7 @@ export default function FormularioLojista() {
           value: 100,
           currency: "BRL",
           lead_type: "lojista",
-          form_source: "onbongo_lp"
+          form_source: "onbongo_lp",
         });
         console.log("📘 Meta Pixel Lead_Onbongo_LP enviado");
       }
