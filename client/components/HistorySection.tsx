@@ -11,9 +11,9 @@ const HistorySection = memo(function HistorySection() {
         </h2>
 
         {/* Content */}
-        <p className="text-light/90 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 max-w-3xl mx-auto px-2">
-          Desde <strong className="text-accent">1991</strong>, a ONBONGO moldou a cultura do streetwear brasileiro.
-          Nascida das ruas de São Paulo, hoje somos uma das <strong className="text-accent">maiores marcas
+        <p className="text-dark/90 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 max-w-3xl mx-auto px-2">
+          Desde <strong className="text-light">1991</strong>, a ONBONGO moldou a cultura do streetwear brasileiro.
+          Nascida das ruas de São Paulo, hoje somos uma das <strong className="text-light">maiores marcas
           de streetwear do Brasil</strong>, conectando mais de 1000 lojistas em todo o território nacional.
         </p>
 
