@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function FormularioLojista() {
-  const [etapa, setEtapa] = useState(1);
   const [dados, setDados] = useState({
     nome: "",
     telefone: "",
@@ -11,34 +10,6 @@ export default function FormularioLojista() {
   const [erros, setErros] = useState<Record<string, string>>({});
   const [enviando, setEnviando] = useState(false);
   const [sucesso, setSucesso] = useState(false);
-
-  // Prevenir scroll ao mudar de etapa
-  useEffect(() => {
-    const currentScrollPos = window.pageYOffset;
-
-    // Bloquear scroll temporariamente
-    const preventScroll = (e: Event) => {
-      e.preventDefault();
-      e.stopPropagation();
-      window.scrollTo(0, currentScrollPos);
-    };
-
-    // Adicionar listeners para prevenir scroll durante re-render
-    window.addEventListener('scroll', preventScroll, { passive: false });
-    document.addEventListener('scroll', preventScroll, { passive: false });
-
-    // Limpar após um breve período
-    const timeout = setTimeout(() => {
-      window.removeEventListener('scroll', preventScroll);
-      document.removeEventListener('scroll', preventScroll);
-    }, 100);
-
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener('scroll', preventScroll);
-      document.removeEventListener('scroll', preventScroll);
-    };
-  }, [etapa]); // Executa sempre que a etapa muda
 
   const mascaraTelefone = (valor: string) => {
     const numeros = valor.replace(/\D/g, "");
@@ -50,7 +21,7 @@ export default function FormularioLojista() {
     return numeros.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
   };
 
-  const validarEtapa1 = () => {
+  const validarFormulario = () => {
     const novosErros: Record<string, string> = {};
     
     if (!dados.nome.trim()) {
@@ -61,19 +32,16 @@ export default function FormularioLojista() {
     if (!tel || tel.length !== 11) {
       novosErros.telefone = "Telefone inválido";
     }
-    
-    setErros(novosErros);
-    return Object.keys(novosErros).length === 0;
-  };
 
-  const validarEtapa3 = () => {
-    if (dados.tipo === "consumidor") return true;
-    
-    const novosErros: Record<string, string> = {};
-    const doc = dados.documento.replace(/\D/g, "");
-    
-    if (!doc || doc.length !== 14) {
-      novosErros.documento = "CNPJ inválido";
+    if (!dados.tipo) {
+      novosErros.tipo = "Selecione o tipo de cadastro";
+    }
+
+    if (dados.tipo === "lojista") {
+      const doc = dados.documento.replace(/\D/g, "");
+      if (!doc || doc.length !== 14) {
+        novosErros.documento = "CNPJ inválido";
+      }
     }
     
     setErros(novosErros);
@@ -96,60 +64,10 @@ export default function FormularioLojista() {
     }
   };
 
-  const proximaEtapa = (e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    if (etapa === 1 && validarEtapa1()) {
-      setEtapa(2);
-    }
-  };
-
-  const etapaAnterior = (e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.nativeEvent?.preventDefault();
-      e.nativeEvent?.stopImmediatePropagation();
-    }
-
-    // Salvar posição atual do scroll
-    const currentScrollPos = window.pageYOffset;
-
-    // Bloquear qualquer tentativa de scroll durante a transição
-    const blockScroll = () => {
-      window.scrollTo(0, currentScrollPos);
-    };
-
-    // Adicionar bloqueio temporário
-    window.addEventListener('scroll', blockScroll);
-    document.addEventListener('scroll', blockScroll);
-
-    if (etapa > 1) {
-      setEtapa(etapa - 1);
-    }
-
-    // Remover bloqueio após transição completa
-    setTimeout(() => {
-      window.removeEventListener('scroll', blockScroll);
-      document.removeEventListener('scroll', blockScroll);
-      // Forçar posição final se necessário
-      window.scrollTo(0, currentScrollPos);
-    }, 150);
-  };
-
-  const selecionarTipo = (tipoSelecionado: string, e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    setDados(prev => ({ ...prev, tipo: tipoSelecionado }));
-    setTimeout(() => setEtapa(3), 200);
-  };
-
-  const enviarFormulario = async () => {
-    if (dados.tipo === "lojista" && !validarEtapa3()) {
+  const enviarFormulario = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validarFormulario()) {
       return;
     }
     
@@ -164,7 +82,6 @@ export default function FormularioLojista() {
       setTimeout(() => {
         setSucesso(false);
         setDados({ nome: "", telefone: "", tipo: "", documento: "" });
-        setEtapa(1);
       }, 4000);
     } catch (error) {
       alert("Erro ao enviar. Tente novamente.");
@@ -173,17 +90,12 @@ export default function FormularioLojista() {
     }
   };
 
-  const abrirSite = (e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  const abrirSite = () => {
     window.open("https://www.onbongo.com.br", "_blank");
     setSucesso(true);
     setTimeout(() => {
       setSucesso(false);
       setDados({ nome: "", telefone: "", tipo: "", documento: "" });
-      setEtapa(1);
     }, 4000);
   };
 
@@ -213,11 +125,7 @@ export default function FormularioLojista() {
   }
 
   return (
-    <section
-      className="bg-accent py-8 sm:py-12 px-4"
-      onWheel={(e) => e.stopPropagation()}
-      onTouchMove={(e) => e.stopPropagation()}
-    >
+    <section className="bg-accent py-8 sm:py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           {/* Título */}
@@ -237,250 +145,175 @@ export default function FormularioLojista() {
 
           {/* Formulário */}
           <div className="lg:pl-6">
-            <div
-              id="formulario-container"
-              className="bg-dark rounded-2xl p-4 sm:p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl"
-              style={{
-                contain: 'layout style paint',
-                isolation: 'isolate',
-                overscrollBehavior: 'contain'
-              }}
-              onWheel={(e) => e.stopPropagation()}
-              onTouchMove={(e) => e.stopPropagation()}
-            >
-              {/* Header */}
+            <div className="bg-dark rounded-2xl p-4 sm:p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl">
               <div className="text-center mb-4 sm:mb-6">
                 <h3 className="text-light font-bold text-lg sm:text-xl mb-1">
-                  {etapa === 1 ? "Cadastre-se Agora" : 
-                   etapa === 2 ? "Tipo de Cadastro" : 
-                   dados.tipo === "lojista" ? "Finalizar Cadastro" : "Cadastro Exclusivo"}
+                  Cadastre-se Agora
                 </h3>
                 <p className="text-light/90 text-xs sm:text-sm">
-                  {etapa === 1 ? "Comece sua jornada como lojista oficial" :
-                   etapa === 2 ? "Escolha o tipo de cadastro desejado" :
-                   dados.tipo === "lojista" ? "Dados da sua empresa" : "Para lojistas com CNPJ"}
+                  Comece sua jornada como lojista oficial
                 </p>
-                <div className="flex justify-center gap-2 mt-2 sm:mt-3">
-                  {[1, 2, 3].map((num) => (
-                    <div
-                      key={num}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        num <= etapa ? "bg-accent" : "bg-accent/30"
-                      }`}
-                    />
-                  ))}
-                </div>
               </div>
 
-              {/* Etapa 1: Dados básicos */}
-              {etapa === 1 && (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-light font-medium mb-2 text-sm">
-                      Nome Completo *
-                    </label>
-                    <input
-                      type="text"
-                      value={dados.nome}
-                      onChange={(e) => alterarCampo("nome", e.target.value)}
-                      placeholder="Seu nome completo"
-                      className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
-                    />
-                    {erros.nome && (
-                      <p className="text-red-300 text-xs mt-1">{erros.nome}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-light font-medium mb-2 text-sm">
-                      WhatsApp *
-                    </label>
-                    <input
-                      type="tel"
-                      value={dados.telefone}
-                      onChange={(e) => alterarCampo("telefone", e.target.value)}
-                      placeholder="(11) 99999-9999"
-                      className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
-                    />
-                    {erros.telefone && (
-                      <p className="text-red-300 text-xs mt-1">{erros.telefone}</p>
-                    )}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={(e) => proximaEtapa(e)}
-                    disabled={!dados.nome.trim() || !dados.telefone.trim()}
-                    className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 disabled:cursor-not-allowed text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm mt-6"
-                  >
-                    Próximo →
-                  </button>
+              <form onSubmit={enviarFormulario} className="space-y-4">
+                {/* Nome Completo */}
+                <div>
+                  <label className="block text-light font-medium mb-2 text-sm">
+                    Nome Completo *
+                  </label>
+                  <input
+                    type="text"
+                    value={dados.nome}
+                    onChange={(e) => alterarCampo("nome", e.target.value)}
+                    placeholder="Seu nome completo"
+                    className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
+                  />
+                  {erros.nome && (
+                    <p className="text-red-300 text-xs mt-1">{erros.nome}</p>
+                  )}
                 </div>
-              )}
 
-              {/* Etapa 2: Tipo de cadastro */}
-              {etapa === 2 && (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-light font-medium mb-3 text-sm">
-                      Tipo de Cadastro *
-                    </label>
-                    <div className="space-y-2">
-                      <button
-                        type="button"
-                        onClick={(e) => selecionarTipo("lojista", e)}
-                        className="w-full p-3 rounded-xl bg-accent/20 hover:bg-accent/25 transition-all duration-300"
+                {/* WhatsApp */}
+                <div>
+                  <label className="block text-light font-medium mb-2 text-sm">
+                    WhatsApp *
+                  </label>
+                  <input
+                    type="tel"
+                    value={dados.telefone}
+                    onChange={(e) => alterarCampo("telefone", e.target.value)}
+                    placeholder="(11) 99999-9999"
+                    className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
+                  />
+                  {erros.telefone && (
+                    <p className="text-red-300 text-xs mt-1">{erros.telefone}</p>
+                  )}
+                </div>
+
+                {/* Tipo de Cadastro */}
+                <div>
+                  <label className="block text-light font-medium mb-3 text-sm">
+                    Tipo de Cadastro *
+                  </label>
+                  <div className="space-y-2">
+                    <label className="block cursor-pointer">
+                      <div
+                        className={`p-3 rounded-xl transition-all duration-300 ${
+                          dados.tipo === "lojista"
+                            ? "bg-accent/30 border border-light/20"
+                            : "bg-accent/20 border border-transparent hover:bg-accent/25"
+                        }`}
                       >
-                        <div className="flex items-center text-left">
-                          <div className="w-4 h-4 rounded-full border-2 border-light/60 mr-3" />
+                        <div className="flex items-center">
+                          <input
+                            type="radio"
+                            name="tipo"
+                            value="lojista"
+                            checked={dados.tipo === "lojista"}
+                            onChange={(e) => alterarCampo("tipo", e.target.value)}
+                            className="mr-3"
+                          />
                           <div>
                             <div className="text-light font-medium text-sm">Sou Lojista</div>
                             <div className="text-light/70 text-xs">Tenho CNPJ e quero revender</div>
                           </div>
                         </div>
-                      </button>
+                      </div>
+                    </label>
 
-                      <button
-                        type="button"
-                        onClick={(e) => selecionarTipo("consumidor", e)}
-                        className="w-full p-3 rounded-xl bg-accent/20 hover:bg-accent/25 transition-all duration-300"
+                    <label className="block cursor-pointer">
+                      <div
+                        className={`p-3 rounded-xl transition-all duration-300 ${
+                          dados.tipo === "consumidor"
+                            ? "bg-accent/30 border border-light/20"
+                            : "bg-accent/20 border border-transparent hover:bg-accent/25"
+                        }`}
                       >
-                        <div className="flex items-center text-left">
-                          <div className="w-4 h-4 rounded-full border-2 border-light/60 mr-3" />
+                        <div className="flex items-center">
+                          <input
+                            type="radio"
+                            name="tipo"
+                            value="consumidor"
+                            checked={dados.tipo === "consumidor"}
+                            onChange={(e) => alterarCampo("tipo", e.target.value)}
+                            className="mr-3"
+                          />
                           <div>
                             <div className="text-light font-medium text-sm">Sou Consumidor</div>
                             <div className="text-light/70 text-xs">Quero comprar para uso próprio</div>
                           </div>
                         </div>
-                      </button>
-                    </div>
+                      </div>
+                    </label>
                   </div>
-
-                  <div className="flex justify-center mt-6">
-                    <button
-                      type="button"
-                      onClick={(e) => etapaAnterior(e)}
-                      className="bg-accent hover:bg-accent/90 text-light font-medium py-3 px-6 rounded-xl transition-all duration-300 text-sm"
-                    >
-                      ← Voltar
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* Etapa 3: CNPJ ou Cupom */}
-              {etapa === 3 && (
-                <div className="space-y-4">
-                  {dados.tipo === "lojista" ? (
-                    <>
-                      <div>
-                        <label className="block text-light font-medium mb-2 text-sm">
-                          CNPJ *
-                        </label>
-                        <input
-                          type="text"
-                          value={dados.documento}
-                          onChange={(e) => alterarCampo("documento", e.target.value)}
-                          placeholder="00.000.000/0001-00"
-                          className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
-                        />
-                        {erros.documento && (
-                          <p className="text-red-300 text-xs mt-1">{erros.documento}</p>
-                        )}
-                      </div>
-
-                      <div className="flex gap-3 mt-6">
-                        <button
-                          type="button"
-                          onClick={(e) => etapaAnterior(e)}
-                          className="flex-1 bg-accent hover:bg-accent/90 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
-                        >
-                          ← Voltar
-                        </button>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            enviarFormulario();
-                          }}
-                          disabled={enviando}
-                          className="flex-2 bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm"
-                        >
-                          {enviando ? "Enviando..." : "✓ Finalizar Cadastro!"}
-                        </button>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-center py-4">
-                        <h4 className="text-light font-bold text-lg mb-3">
-                          Cadastro exclusivo para lojistas
-                        </h4>
-                        <p className="text-light/90 text-sm mb-4">
-                          Como você é consumidor da marca, preparamos um
-                          <strong className="text-accent"> desconto especial de 10%</strong> 
-                          para suas compras!
-                        </p>
-
-                        <div className="bg-gradient-to-r from-accent/20 to-accent/30 p-4 rounded-xl mb-4 border border-accent/20">
-                          <p className="text-light/80 text-xs mb-2 font-medium">
-                            SEU CÓDIGO DE DESCONTO:
-                          </p>
-                          <div className="bg-light text-dark px-4 py-3 rounded-lg font-mono text-lg font-bold tracking-widest shadow-inner">
-                            ONBONGO10
-                          </div>
-                          <p className="text-light/70 text-xs mt-2">
-                            💾 Salve este código para usar no checkout
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-3 mt-6">
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            // Proteção extra específica para volta de consumidor
-                            e.preventDefault();
-                            e.stopPropagation();
-                            e.nativeEvent?.preventDefault();
-                            e.nativeEvent?.stopImmediatePropagation();
-
-                            const currentPos = window.pageYOffset;
-
-                            // Bloquear scroll por mais tempo
-                            const blockScroll = () => window.scrollTo(0, currentPos);
-                            window.addEventListener('scroll', blockScroll);
-                            document.addEventListener('scroll', blockScroll);
-
-                            // Chamar função original
-                            if (etapa > 1) {
-                              setEtapa(etapa - 1);
-                            }
-
-                            // Manter bloqueio por mais tempo
-                            setTimeout(() => {
-                              window.removeEventListener('scroll', blockScroll);
-                              document.removeEventListener('scroll', blockScroll);
-                              window.scrollTo(0, currentPos);
-                            }, 400);
-                          }}
-                          className="flex-1 bg-accent hover:bg-accent/90 text-light font-medium py-3 px-4 rounded-xl transition-all duration-300 text-sm"
-                        >
-                          ← Voltar
-                        </button>
-                        <button
-                          type="button"
-                          onClick={(e) => abrirSite(e)}
-                          className="flex-2 bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm shadow-lg"
-                        >
-                          🛒 Usar Desconto Agora
-                        </button>
-                      </div>
-                    </>
+                  {erros.tipo && (
+                    <p className="text-red-300 text-xs mt-1">{erros.tipo}</p>
                   )}
                 </div>
-              )}
+
+                {/* CNPJ - Somente se for lojista */}
+                {dados.tipo === "lojista" && (
+                  <div>
+                    <label className="block text-light font-medium mb-2 text-sm">
+                      CNPJ *
+                    </label>
+                    <input
+                      type="text"
+                      value={dados.documento}
+                      onChange={(e) => alterarCampo("documento", e.target.value)}
+                      placeholder="00.000.000/0001-00"
+                      className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm"
+                    />
+                    {erros.documento && (
+                      <p className="text-red-300 text-xs mt-1">{erros.documento}</p>
+                    )}
+                  </div>
+                )}
+
+                {/* Cupom para consumidor */}
+                {dados.tipo === "consumidor" && (
+                  <div className="bg-gradient-to-r from-accent/20 to-accent/30 p-4 rounded-xl border border-accent/20">
+                    <p className="text-light/80 text-xs mb-2 font-medium text-center">
+                      SEU CÓDIGO DE DESCONTO:
+                    </p>
+                    <div className="bg-light text-dark px-4 py-3 rounded-lg font-mono text-lg font-bold tracking-widest shadow-inner text-center">
+                      ONBONGO10
+                    </div>
+                    <p className="text-light/70 text-xs mt-2 text-center">
+                      💾 Salve este código para usar no checkout
+                    </p>
+                  </div>
+                )}
+
+                {/* Botões */}
+                <div className="pt-4">
+                  {dados.tipo === "lojista" ? (
+                    <button
+                      type="submit"
+                      disabled={enviando}
+                      className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm"
+                    >
+                      {enviando ? "Enviando..." : "✓ Finalizar Cadastro!"}
+                    </button>
+                  ) : dados.tipo === "consumidor" ? (
+                    <button
+                      type="button"
+                      onClick={abrirSite}
+                      className="w-full bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-light font-bold py-3 px-4 rounded-xl transition-all duration-300 text-sm shadow-lg"
+                    >
+                      🛒 Usar Desconto Agora
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      disabled={true}
+                      className="w-full bg-accent/50 text-light font-bold py-3 px-4 rounded-xl text-sm cursor-not-allowed"
+                    >
+                      Selecione o tipo de cadastro
+                    </button>
+                  )}
+                </div>
+              </form>
             </div>
           </div>
         </div>
