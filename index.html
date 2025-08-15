@@ -191,19 +191,24 @@
     </script>
 
     <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-Q8T9ML8Q5C"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8T9ML8Q5C"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-Q8T9ML8Q5C");
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Q8T9ML8Q5C', {
+        send_page_view: true,
+        page_title: document.title,
+        page_location: window.location.href
+      });
 
-      console.log("✅ GA4 carregado: G-Q8T9ML8Q5C");
+      // Enviar page_view explícito para garantir detecção
+      gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+
+      console.log('✅ GA4 inicializado: G-Q8T9ML8Q5C');
     </script>
   </head>
   <body>
