@@ -94,9 +94,7 @@ const Gallery = memo(function Gallery() {
           </p>
           <button
             className="bg-accent hover:bg-accent/90 text-light font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg transition-all duration-300 hover:scale-105 shadow-lg"
-            onClick={() => {
-              // Scroll removido para evitar comportamento indesejado
-            }}
+            onClick={scrollToFormulario}
           >
             Começar Cadastro →
           </button>
