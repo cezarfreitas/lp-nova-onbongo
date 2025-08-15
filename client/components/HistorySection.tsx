@@ -44,9 +44,7 @@ const HistorySection = memo(function HistorySection() {
 
         {/* CTA */}
         <button
-          onClick={() => {
-            // Scroll removido para evitar comportamento indesejado
-          }}
+          onClick={scrollToFormulario}
           className="bg-dark hover:bg-dark/90 text-light font-bold px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base transition-all duration-300 hover:scale-105"
         >
           Fazer Parte da História →
