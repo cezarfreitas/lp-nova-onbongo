@@ -19,7 +19,6 @@ export const useGA4 = () => {
     },
   ) => {
     if (window.gtag) {
-      console.log(`[GA4] Evento: ${eventName}`, parameters);
       window.gtag("event", eventName, parameters);
     }
   };
