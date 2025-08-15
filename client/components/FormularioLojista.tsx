@@ -12,6 +12,34 @@ export default function FormularioLojista() {
   const [enviando, setEnviando] = useState(false);
   const [sucesso, setSucesso] = useState(false);
 
+  // Prevenir scroll ao mudar de etapa
+  useEffect(() => {
+    const currentScrollPos = window.pageYOffset;
+
+    // Bloquear scroll temporariamente
+    const preventScroll = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.scrollTo(0, currentScrollPos);
+    };
+
+    // Adicionar listeners para prevenir scroll durante re-render
+    window.addEventListener('scroll', preventScroll, { passive: false });
+    document.addEventListener('scroll', preventScroll, { passive: false });
+
+    // Limpar após um breve período
+    const timeout = setTimeout(() => {
+      window.removeEventListener('scroll', preventScroll);
+      document.removeEventListener('scroll', preventScroll);
+    }, 100);
+
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('scroll', preventScroll);
+      document.removeEventListener('scroll', preventScroll);
+    };
+  }, [etapa]); // Executa sempre que a etapa muda
+
   const mascaraTelefone = (valor: string) => {
     const numeros = valor.replace(/\D/g, "");
     return numeros.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
