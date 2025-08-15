@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useGA4 } from "./GA4";
 
+declare global {
+  interface Window {
+    fbq: (...args: any[]) => void;
+  }
+}
+
 export default function FormularioLojista() {
   const { trackEvent, trackConversion } = useGA4();
   const [dados, setDados] = useState({
