@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    fbq: (...args: any[]) => void;
+  }
+}
+
 export default function GA4Test() {
   const testarGA4 = () => {
     console.log("🧪 Testando GA4...");
@@ -25,6 +31,27 @@ export default function GA4Test() {
       console.error("❌ GA4 não disponível");
       console.error("📊 DataLayer:", window.dataLayer);
       alert("❌ GA4 não carregado - verifique o console");
+    }
+  };
+
+  const testarMetaPixel = () => {
+    console.log("📘 Testando Meta Pixel...");
+    console.log("🔷 fbq disponível:", typeof window.fbq);
+
+    if (typeof window !== "undefined" && window.fbq) {
+      // Enviar evento de teste do Meta Pixel
+      window.fbq("track", "Lead", {
+        content_name: "Test Lead Button",
+        content_category: "test",
+        value: 1,
+        currency: "BRL",
+      });
+
+      console.log("✅ Evento Meta Pixel enviado!");
+      alert("✅ Evento enviado para Meta Pixel: 1052506589717984\nVerifique Facebook Pixel Helper");
+    } else {
+      console.error("❌ Meta Pixel não disponível");
+      alert("❌ Meta Pixel não carregado - verifique o console");
     }
   };
 
