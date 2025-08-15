@@ -39,10 +39,14 @@ export default function Footer() {
         {/* Hub Multimarcas */}
         <div className="text-center mb-8">
           <div className="inline-block">
-            <div className="text-light font-bold text-lg mb-2">
-              hub <span className="text-accent">MULTIMARCAS</span>
+            <div className="mb-4">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F3a038822502b49b39691cbaf44da5f95%2Fa1eee00b0d4548c2965ccc0f73cef0a8?format=webp&width=800"
+                alt="Logo Hub Multimarcas"
+                className="h-8 sm:h-10 md:h-12 w-auto mx-auto"
+                loading="lazy"
+              />
             </div>
-            <div className="h-px bg-accent w-16 mx-auto mb-4"></div>
           </div>
 
           <p className="text-light/80 text-sm max-w-2xl mx-auto leading-relaxed">
