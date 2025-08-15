@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { scrollToFormulario } from "../lib/scroll";
 
 const Gallery = memo(function Gallery() {
   const images = [
