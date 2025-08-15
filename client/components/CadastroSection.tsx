@@ -328,6 +328,7 @@ export default function CadastroSection() {
                         name="nomeCompleto"
                         value={formData.nomeCompleto}
                         onChange={handleInputChange}
+                        onKeyDown={handleKeyPress}
                         placeholder="Seu nome completo"
                         className="w-full px-4 py-3 rounded-xl bg-light text-dark placeholder:text-muted border-none focus:outline-none focus:ring-2 focus:ring-accent text-sm transition-all duration-200 hover:shadow-md"
                         autoComplete="name"
