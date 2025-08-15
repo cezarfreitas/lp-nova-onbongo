@@ -84,7 +84,11 @@ export default function FormularioLojista() {
     }
   };
 
-  const selecionarTipo = (tipoSelecionado: string) => {
+  const selecionarTipo = (tipoSelecionado: string, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setDados(prev => ({ ...prev, tipo: tipoSelecionado }));
     setTimeout(() => setEtapa(3), 200);
   };
