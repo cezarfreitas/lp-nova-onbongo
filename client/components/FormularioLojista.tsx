@@ -65,6 +65,15 @@ export default function FormularioLojista() {
 
     setDados((prev) => ({ ...prev, [campo]: valorFormatado }));
 
+    // Tracking GA4 para seleção do tipo
+    if (campo === "tipo") {
+      trackEvent("select_registration_type", {
+        event_category: "engagement",
+        event_label: valor,
+        registration_type: valor,
+      });
+    }
+
     if (erros[campo]) {
       setErros((prev) => ({ ...prev, [campo]: "" }));
     }
