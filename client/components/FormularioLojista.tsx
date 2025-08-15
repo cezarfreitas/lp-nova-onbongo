@@ -210,6 +210,18 @@ export default function FormularioLojista() {
       trackingLog("Meta Pixel Lead consumidor enviado");
     }
 
+    // API de Conversões para consumidor
+    if (typeof (window as any).trackLead === "function") {
+      (window as any).trackLead({
+        tipoCadastro: "consumidor",
+        nome: dados.nome,
+        whatsapp: dados.telefone,
+        cnpj: "",
+        email: "",
+      });
+      trackingLog("Conversions API Lead consumidor enviado");
+    }
+
     window.open("https://www.onbongo.com.br", "_blank");
     setSucesso(true);
     setTimeout(() => {
