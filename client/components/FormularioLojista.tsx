@@ -119,11 +119,9 @@ export default function FormularioLojista() {
         setDados({ nome: "", telefone: "", tipo: "", documento: "" });
       }, 4000);
     } catch (error) {
-      // Tracking de erro
       trackEvent("form_submission_error", {
         event_category: "form",
         event_label: "lojista_registration_error",
-        error_message: String(error),
       });
       alert("Erro ao enviar. Tente novamente.");
     } finally {
