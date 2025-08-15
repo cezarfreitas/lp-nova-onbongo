@@ -193,7 +193,7 @@ export default function FormularioLojista() {
 
           {/* Formulário */}
           <div className="lg:pl-6">
-            <div className="bg-dark rounded-2xl p-4 sm:p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl">
+            <div id="formulario-container" className="bg-dark rounded-2xl p-4 sm:p-6 max-w-sm mx-auto lg:mx-0 shadow-2xl">
               {/* Header */}
               <div className="text-center mb-4 sm:mb-6">
                 <h3 className="text-light font-bold text-lg sm:text-xl mb-1">
