@@ -17,21 +17,8 @@ export default function GA4Test() {
   };
 
   const verificarRede = () => {
-    fetch('https://www.googletagmanager.com/gtag/js?id=G-Q8T9ML8Q5C')
-      .then(response => {
-        console.log('🌐 [REDE] Status da requisição GA4:', response.status);
-        if (response.ok) {
-          console.log('✅ [REDE] Script GA4 acessível');
-          alert('✅ Script GA4 acessível pela rede');
-        } else {
-          console.error('❌ [REDE] Erro ao acessar script GA4');
-          alert('❌ Erro de rede no script GA4');
-        }
-      })
-      .catch(error => {
-        console.error('❌ [REDE] Erro de conexão:', error);
-        alert('❌ Erro de conexão com Google Analytics');
-      });
+    console.log('🌐 Verificando rede...');
+    alert('🔍 Abra as DevTools > Network para ver requisições GA4');
   };
 
   // Só mostrar em desenvolvimento
