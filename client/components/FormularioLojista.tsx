@@ -81,11 +81,9 @@ export default function FormularioLojista() {
 
   const enviarFormulario = async () => {
     if (!validarFormulario()) {
-      // Tracking de erro de validação
       trackEvent("form_validation_error", {
         event_category: "form",
         event_label: "lojista_registration",
-        error_fields: Object.keys(erros).join(","),
       });
       return;
     }
