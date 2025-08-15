@@ -184,6 +184,17 @@ export default function FormularioLojista() {
       value: 0.5,
     });
 
+    // Meta Pixel para consumidor
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "Lead", {
+        content_name: "Onbongo Consumer Discount",
+        content_category: "B2C",
+        value: 10,
+        currency: "BRL"
+      });
+      console.log("📘 Meta Pixel Lead consumidor enviado");
+    }
+
     window.open("https://www.onbongo.com.br", "_blank");
     setSucesso(true);
     setTimeout(() => {
