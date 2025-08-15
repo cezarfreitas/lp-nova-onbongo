@@ -26,11 +26,9 @@ export const isProduction = () => {
   return import.meta.env.PROD || window.location.hostname.includes("netlify");
 };
 
-// Função para log condicional
+// Função para log condicional (apenas erros em produção)
 export const trackingLog = (message: string, data?: any) => {
-  if (TRACKING_CONFIG.DEBUG_MODE) {
-    console.log(`[Tracking] ${message}`, data);
-  }
+  // Removido para produção
 };
 
 // Verificar se Meta Pixel está carregado
