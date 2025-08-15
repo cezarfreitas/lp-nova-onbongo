@@ -48,13 +48,41 @@ export default function GA4Test() {
       });
 
       console.log("✅ Evento Meta Pixel enviado!");
-      alert(
-        "✅ Evento enviado para Meta Pixel: 1052506589717984\nVerifique Facebook Pixel Helper",
-      );
+      alert("✅ Evento enviado para Meta Pixel: 1052506589717984\nVerifique Facebook Pixel Helper");
     } else {
       console.error("❌ Meta Pixel não disponível");
       alert("❌ Meta Pixel não carregado - verifique o console");
     }
+  };
+
+  const testarLeadPersonalizado = () => {
+    console.log("🎯 Testando Lead_Onbongo_LP...");
+
+    // Teste GA4
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "Lead_Onbongo_LP", {
+        event_category: "lead",
+        event_label: "test_lojista_lead",
+        currency: "BRL",
+        value: 100,
+        lead_type: "test"
+      });
+      console.log("✅ GA4 Lead_Onbongo_LP enviado");
+    }
+
+    // Teste Meta Pixel
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("trackCustom", "Lead_Onbongo_LP", {
+        content_name: "Test Lojista Lead",
+        content_category: "B2B_Lead",
+        value: 100,
+        currency: "BRL",
+        lead_type: "test"
+      });
+      console.log("📘 Meta Pixel Lead_Onbongo_LP enviado");
+    }
+
+    alert("🎯 Evento Lead_Onbongo_LP enviado!\nGA4: G-M440PQ5X13\nMeta: 1052506589717984");
   };
 
   const verificarRede = () => {
@@ -90,8 +118,7 @@ export default function GA4Test() {
           Teste Rede
         </button>
         <div className="text-[10px] opacity-75">
-          GA4: G-M440PQ5X13
-          <br />
+          GA4: G-M440PQ5X13<br/>
           Meta: 1052506589717984
         </div>
       </div>
