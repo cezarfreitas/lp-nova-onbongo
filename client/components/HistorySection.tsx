@@ -2,7 +2,7 @@ import { memo } from "react";
 
 const HistorySection = memo(function HistorySection() {
   return (
-    <section className="py-8 sm:py-12 pb-16 sm:pb-20 md:pb-24 px-4 bg-dark text-light">
+    <section className="py-8 sm:py-12 pb-16 sm:pb-20 md:pb-24 px-4 bg-accent text-dark">
       <div className="max-w-4xl mx-auto text-center">
         {/* Header */}
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
