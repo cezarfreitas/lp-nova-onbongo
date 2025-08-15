@@ -89,6 +89,25 @@ export default function GA4Test() {
     );
   };
 
+  const testarConversionsAPI = () => {
+    console.log("🔄 Testando Conversions API...");
+
+    if (typeof (window as any).trackLead === "function") {
+      (window as any).trackLead({
+        tipoCadastro: "lojista",
+        nome: "Teste API",
+        whatsapp: "11999999999",
+        cnpj: "12345678000199",
+        email: "teste@onbongo.com",
+      });
+      console.log("✅ Conversions API Lead enviado");
+      alert("🔄 Conversions API testada!\nVerifique o Events Manager do Facebook\nTest Code: TEST8508");
+    } else {
+      console.error("❌ trackLead não disponível");
+      alert("❌ trackLead não disponível - verifique TrackingScripts");
+    }
+  };
+
   const verificarRede = () => {
     console.log("🌐 Verificando rede...");
     alert("🔍 Abra as DevTools > Network para ver requisições GA4");
