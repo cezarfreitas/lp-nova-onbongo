@@ -1,23 +1,18 @@
 export default function GA4Test() {
   const testarGA4 = () => {
-    console.log('🧪 [TESTE GA4] Iniciando teste...');
-    console.log('📊 DataLayer:', window.dataLayer);
-    console.log('🏷️ gtag:', typeof window.gtag);
-    
-    if (window.gtag) {
-      // Enviar evento de teste manual
-      window.gtag('event', 'test_button_click', {
+    console.log('🧪 Testando GA4...');
+
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'test_click', {
         event_category: 'test',
-        event_label: 'manual_test',
-        test_id: 'G-Q8T9ML8Q5C',
-        timestamp: Date.now()
+        event_label: 'manual_test'
       });
-      
-      console.log('✅ [TESTE GA4] Evento enviado com sucesso!');
-      alert('✅ Evento GA4 enviado! Verifique o console do navegador.');
+
+      console.log('✅ Evento GA4 enviado!');
+      alert('✅ Evento enviado para G-Q8T9ML8Q5C');
     } else {
-      console.error('❌ [TESTE GA4] gtag não disponível');
-      alert('❌ GA4 não carregado. Verifique o console.');
+      console.error('❌ GA4 não disponível');
+      alert('❌ GA4 não carregado');
     }
   };
 
