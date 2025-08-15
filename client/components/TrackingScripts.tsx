@@ -108,7 +108,6 @@ export default function TrackingScripts() {
           lead_type: leadData.tipoCadastro || "lojista",
           form_source: "onbongo_lp",
         });
-        console.log("📘 Meta Pixel Lead_Onbongo_LP enviado");
       }
 
       // Conversions API Custom Event
