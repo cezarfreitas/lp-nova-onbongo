@@ -130,21 +130,16 @@ export default function FormularioLojista() {
   };
 
   const abrirSite = () => {
-    // Tracking do clique no botão do consumidor
     trackEvent("click", {
       event_category: "engagement",
       event_label: "consumer_discount_button",
-      outbound: true,
-      link_url: "https://www.onbongo.com.br",
     });
 
-    // Tracking de conversão do consumidor
     trackEvent("generate_lead", {
       event_category: "ecommerce",
       event_label: "consumer_discount_generated",
       currency: "BRL",
       value: 0.5,
-      registration_type: "consumidor",
     });
 
     window.open("https://www.onbongo.com.br", "_blank");
