@@ -20,18 +20,18 @@ const HistorySection = memo(function HistorySection() {
         {/* Stats */}
         <div className="grid grid-cols-2 gap-4 sm:gap-8 max-w-md mx-auto mb-6 sm:mb-8">
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-accent mb-1">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-light mb-1">
               30+
             </div>
-            <p className="text-light/70 text-xs sm:text-sm uppercase tracking-wide">
+            <p className="text-dark/70 text-xs sm:text-sm uppercase tracking-wide">
               Anos de História
             </p>
           </div>
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-accent mb-1">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-light mb-1">
               1000+
             </div>
-            <p className="text-light/70 text-xs sm:text-sm uppercase tracking-wide">
+            <p className="text-dark/70 text-xs sm:text-sm uppercase tracking-wide">
               Lojistas Parceiros
             </p>
           </div>
