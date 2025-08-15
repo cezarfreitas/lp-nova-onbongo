@@ -6,13 +6,13 @@
 export const TRACKING_CONFIG = {
   // Google Analytics 4
   GA4_MEASUREMENT_ID: "G-M440PQ5X13",
-  
+
   // Meta Pixel (Facebook)
   META_PIXEL_ID: "1052506589717984",
-  
+
   // URLs de produção
   PRODUCTION_DOMAIN: "lp-nova-onbongo.netlify.app",
-  
+
   // Debug mode baseado no ambiente
   DEBUG_MODE: import.meta.env.DEV,
 };

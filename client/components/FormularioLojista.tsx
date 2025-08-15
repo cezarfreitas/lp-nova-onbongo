@@ -145,7 +145,7 @@ export default function FormularioLojista() {
           content_name: "Onbongo Lojista Lead",
           content_category: "B2B",
           value: 100,
-          currency: "BRL"
+          currency: "BRL",
         });
 
         trackingLog("Meta Pixel Lead_Onbongo_LP e Lead enviados");
@@ -193,7 +193,7 @@ export default function FormularioLojista() {
         content_name: "Onbongo Consumer Discount",
         content_category: "B2C",
         value: 10,
-        currency: "BRL"
+        currency: "BRL",
       });
       trackingLog("Meta Pixel Lead consumidor enviado");
     }
